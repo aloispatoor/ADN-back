@@ -1,0 +1,36 @@
+.button{
+    font-family: walkway_rounded, sans-serif;
+    letter-spacing: 5px;
+    font-size: 1.2em;
+    color: white;
+    background-color: black;
+    padding: 5px 20px;
+    border-radius: 30px;
+    transition: all .5s ease-in;
+}
+.button-large{
+    font-family: walkway_rounded, sans-serif;
+    letter-spacing: 5px;
+    font-size: 2.5em;
+    color: white;
+    background-color: black;
+    padding: 1rem 5rem;
+    border-radius: 30px;
+    transition: all .5s ease-in;
+}
+.button-small{
+    font-family: walkway_rounded, sans-serif;
+    letter-spacing: 5px;
+    font-size: 1em;
+    color: white;
+    background-color: black;
+    padding: 5px 20px;
+    border-radius: 30px;
+    transition: all .3s ease-in;
+}
+
+.button:hover, .button-large:hover{
+    background-color: $orange;
+    box-shadow: 0 100px 100px -100px $yellow inset; 
+    color: $violet;
+}

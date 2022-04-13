@@ -1,0 +1,10 @@
+// RAINBOW
+$red : #FF0018;
+$orange: #ffa52c;
+$yellow: #ffff41;
+$green: #008018;
+$blue: #0000f9;
+$violet: #86007d;
+$grey: #EFEFEF;
+$darkergrey: #282828;
+$rainbow: linear-gradient(90deg, $red 0%, $orange 15%, $yellow 30%, $green 45%, $blue 60%, $violet 100%);

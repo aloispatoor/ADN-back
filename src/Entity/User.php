@@ -32,6 +32,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Article::class)]
     private $articles;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $username;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -149,20 +152,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    // DEFAULT DATETIMES
-    #[ORM\PrePersist]
-    public function defaultCreatedAt(): self
+    public function getUsername(): ?string
     {
-        $this->createdAt = new \DateTime();
-
-        return $this;
+        return $this->username;
     }
-    #[ORM\PrePersist]
-    #[ORM\PreUpdate]
-    public function defaultUpdatedAt(): self
+
+    public function setUsername(string $username): self
     {
-        $this->updatedAt = new \DateTime();
-        
+        $this->username = $username;
+
         return $this;
     }
 }
