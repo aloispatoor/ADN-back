@@ -1,7 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ArticleController!{% endblock %}
+{% block title %}{{ article.title }}{% endblock %}
 
 {% block body %}
-
+    <section>
+        <div>
+            <article>
+                <h1>{{ article.title }}</h1>
+                <p>{{ article.content }}</p>
+            </article>
+        </div>
+        {% for comment in comments %}
+        <div id="comments">
+            <p><a href="{{ path('app_user_profile', {id: user.id} )}}">{{ comment.author }}</a></p>
+            <p>{{ comment.content }}</p>
+            <p>{{ comment.createdAt }}</p>
+        </div>
+        {% endfor %}
+    </section>
 {% endblock %}

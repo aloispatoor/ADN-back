@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Form\ArticleType;
+use App\Repository\ArticleRepository;
+use App\Repository\CommentRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,24 +18,28 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ArticleController extends AbstractController
 {
     #[Route('/', name: 'app_article_index')]
-    public function index(): Response
+    public function index(ArticleRepository $articleRepository): Response
     {
-        return $this->render('article/index.html.twig', [
-            'controller_name' => 'ArticleController',
+        $articles = $articleRepository->findBy([], ['createdAt' => 'DESC']);
+        return $this->render('offers/offers.html.twig', [
+            'articles' => $articles,
         ]);
     }
 
     #[Route('/{id}<\d+>}', name: 'app_article_single')]
-    public function single(Article $article, UserRepository $userRepository): Response
+    public function single(Article $article, UserRepository $userRepository, CommentRepository $commentRepository): Response
     {
         $user = $this->getUser();
+        $comments = $commentRepository->findBy(['author' => $user->getUserIdentifier()], ['createdAt' => 'DESC']);
+
 
         if ($article->getAuthor() === $user) {
             $user = $userRepository->findAll();
         }
         return $this->render('article/single.html.twig', [
             'article' => $article,
-            'user' => $user
+            'user' => $user,
+            'comments' => $comments,
         ]);
     }
 
