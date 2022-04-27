@@ -13,9 +13,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/user')]
 class UserController extends AbstractController
 {
-    #[Route('/', name: 'app_user_index')]
-    #[IsGranted('ROLE_USER', message: 'Vous devez être connecté en tant que membre de l\'association pour accéder à cette page')]
-    public function index(Request $request, EntityManagerInterface $em): Response
+    #[Route('/{id}<\d+>}', name: 'app_user_profile')]
+    // #[IsGranted('ROLE_ADMIN', message: 'Vous devez être connecté en tant que membre de l\'association pour accéder à cette page')]
+    public function profile(Request $request, EntityManagerInterface $em): Response
     {
         $user = $this->getUser();
         $form = $this->createForm(UserType::class, $user);

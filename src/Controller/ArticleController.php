@@ -38,7 +38,7 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/create', name: 'app_article_create')]
-    #[IsGranted('ROLE_USER', message: 'Vous devez être connecté en tant que membre de l\'association pour accéder à cette page')]
+    #[IsGranted('ROLE_ADMIN', message: 'Vous devez être connecté en tant que membre de l\'association pour accéder à cette page')]
     public function create(Request $request, EntityManagerInterface $em): Response
     {
         $article = new Article();
@@ -46,7 +46,7 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid()){
-            $article->setUser($this->getUser());
+            $article->setAuthor($this->getUser());
             $em->persist($article);
             $em->flush();
             

@@ -26,18 +26,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string')]
     private $password;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $username;
+
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $avatar;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Article::class)]
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Article::class)]
     private $articles;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $username;
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Comment::class)]
+    private $comments;
 
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -75,6 +79,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
+        $roles[] = 'ROLE_ADMIN';
+        
 
         return array_unique($roles);
     }
@@ -110,6 +116,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
     public function getAvatar(): ?string
     {
         return $this->avatar;
@@ -134,7 +152,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->articles->contains($article)) {
             $this->articles[] = $article;
-            $article->setUser($this);
+            $article->setAuthor($this);
         }
 
         return $this;
@@ -144,22 +162,40 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->articles->removeElement($article)) {
             // set the owning side to null (unless already changed)
-            if ($article->getUser() === $this) {
-                $article->setUser(null);
+            if ($article->getAuthor() === $this) {
+                $article->setAuthor(null);
             }
         }
 
         return $this;
     }
 
-    public function getUsername(): ?string
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
     {
-        return $this->username;
+        return $this->comments;
     }
 
-    public function setUsername(string $username): self
+    public function addComment(Comment $comment): self
     {
-        $this->username = $username;
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getAuthor() === $this) {
+                $comment->setAuthor(null);
+            }
+        }
 
         return $this;
     }
