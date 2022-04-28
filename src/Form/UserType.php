@@ -15,7 +15,12 @@ class UserType extends AbstractType
             ->add('email')
             ->add('roles')
             ->add('password')
-            ->add('avatar')
+            ->add('avatarFile', VichImageType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer l\'avatar',
+                'asset_helper' => true,
+            ])
         ;
     }
 

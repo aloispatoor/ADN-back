@@ -1,9 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="ADN, Association LGBTQIA+ à Périgueux en Dordogne. Propose écoutes, soutiens, aides et moments de convivialité. Mène également des actions politiques pour les droits des personnes lesbiennes, gay, bies, trans, intersexes, non binaires, asexuelles et aromantiques">
+        <meta property="og:title" content="ADN, Au Delà des Normes" />
+        <link rel="alternate" hreflang="fr-FR">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon-16x16.png') }}">
+        <link rel="stylesheet" href="assets/css/all.min.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <title>ADN, Au Delà des Normes. Association LGBTQIA+ en Dordogne</title>
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
@@ -14,9 +22,9 @@
         {% endblock %}
     </head>
     <body>
-        {% include '_header.html.twig' %}
-        {% include '_navbar.html.twig' %}
+        {% include "_header.html.twig" %}
+        {% include "_navbar.html.twig" %}
         {% block body %}{% endblock %}
-        {% include '_footer.html.twig' %}
+        {% include "_footer.html.twig" %}
     </body>
 </html>

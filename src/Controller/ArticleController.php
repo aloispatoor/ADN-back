@@ -21,21 +21,21 @@ class ArticleController extends AbstractController
     public function index(ArticleRepository $articleRepository): Response
     {
         $articles = $articleRepository->findBy([], ['createdAt' => 'DESC']);
-        return $this->render('offers/offers.html.twig', [
+        return $this->render('article/index.html.twig', [
             'articles' => $articles,
         ]);
     }
 
     #[Route('/{id}<\d+>}', name: 'app_article_single')]
-    public function single(Article $article, UserRepository $userRepository, CommentRepository $commentRepository): Response
+    public function single(Article $article, CommentRepository $commentRepository): Response
     {
         $user = $this->getUser();
-        $comments = $commentRepository->findBy(['author' => $user->getUserIdentifier()], ['createdAt' => 'DESC']);
+        $comments = $commentRepository->findBy([], ['createdAt' => 'DESC']);
 
 
-        if ($article->getAuthor() === $user) {
-            $user = $userRepository->findAll();
-        }
+        // if ($article->getAuthor() === $user) {
+        //     $user = $userRepository->findAll();
+        // }
         return $this->render('article/single.html.twig', [
             'article' => $article,
             'user' => $user,
@@ -56,9 +56,43 @@ class ArticleController extends AbstractController
             $em->persist($article);
             $em->flush();
             
-            return $this->redirectToRoute('app_article_single');
+            return $this->redirectToRoute('app_article_index');
         }
         
         return $this->renderForm('article/create.html.twig', ['form' => $form, 'action' => 'Create']);
     }
+
+    #[Route('/edit/{id<\d+>}', name: 'app_article_edit')]
+    #[IsGranted('ROLE_ADMIN', message: 'Vous devez être connecté en tant que membre de l\'association pour accéder à cette page')]
+    public function edit(Article $article, Request $request, EntityManagerInterface $em): Response
+    {
+        if ($this->getUser() === $article->getAuthor()) {
+            $form = $this->createForm(ArticleType::class, $article);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em->flush();
+
+                return $this->redirectToRoute('app_article_index');
+            }
+
+            return $this->renderForm('article/create.html.twig', ['form' => $form, 'article' => $article, 'action' => 'Edit']);
+        }
+
+        return $this->redirectToRoute('app_article_index');
+    }
+
+    #[Route('/delete/{id<\d+>}', name: 'app_article_delete')]
+    #[IsGranted('ROLE_ADMIN', message: 'Vous devez être connecté en tant que membre de l\'association pour accéder à cette page')]
+    public function delete(Article $article, EntityManagerInterface $em): Response
+    {
+        if ($this->getUser() === $article->getAuthor()) {
+                $em->remove($article);
+                $em->flush();
+                $this->addFlash('deleteArticle', 'L\'article a été supprimé avec succès');
+
+                return $this->redirectToRoute('app_article_index');
+        }
+        return $this->redirectToRoute('app_article_index');
+    }
 }
+

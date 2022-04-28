@@ -3,16 +3,24 @@
 {% block title %}{{ article.title }}{% endblock %}
 
 {% block body %}
-    <section>
-        <div>
-            <article>
+    <section id="singleArticle">
+        <div class="article-container">
+            <article id="blogArticle">
                 <h1>{{ article.title }}</h1>
-                <p>{{ article.content }}</p>
+                <small>Publié le {{ article.createdAt | date('d M Y')}} par <a href="">{{ article.author.username }}</a></small>
+                <p>{{ article.content|raw }}</p>
             </article>
+        </div>
+        <div class="createComment">
+            <h2>Écrire un commentaire</h2>
+            {{form_start(form)}}
+            {{form_row(form.content)}}
+            <button type="submit" class="button">Envoyer votre commentaire</button>
+            {{form_end(form)}}
         </div>
         {% for comment in comments %}
         <div id="comments">
-            <p><a href="{{ path('app_user_profile', {id: user.id} )}}">{{ comment.author }}</a></p>
+            <p><a href="{{ path('app_user_profile', {id: user.id} )}}">{{ comment.author.username }}</a></p>
             <p>{{ comment.content }}</p>
             <p>{{ comment.createdAt }}</p>
         </div>
