@@ -1,10 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ArticleController!{% endblock %}
+{% block title %}Articles de blog{% endblock %}
 
 {% block body %}
-    {% for article in articles %}
-        <h2><a href="{{ path('app_article_single', {id: article.id})}}">{{ article.title }}</a></h2>
-        <p>{{ article.content|raw|length > 50 ? article.content|raw|slice(0, 50) ~ '...' : article.content|raw}}</p>
-    {% endfor %}
+    <section id="articlesList">
+        {% for article in articles %}
+            <div class="container">
+                <h2><a href="{{ path('app_article_single', {id: article.id})}}">{{ article.title }}</a></h2>
+                <p>{{ article.content|raw|length > 50 ? article.content|raw|slice(0, 50) ~ '...' : article.content|raw}}</p>
+            </div>
+        {% endfor %}
+    </section>
 {% endblock %}

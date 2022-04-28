@@ -20,6 +20,10 @@
     border-radius: 30px;
     transition: all .5s ease-in;
 }
+
+.red{
+    background-color: $red;
+}
 .button-small{
     font-family: walkway_rounded, sans-serif;
     border:none;

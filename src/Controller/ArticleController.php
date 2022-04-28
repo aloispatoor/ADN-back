@@ -71,11 +71,16 @@ class ArticleController extends AbstractController
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
                 $em->flush();
+                $this->addFlash('success', 'Article modifié avec succès !');
 
                 return $this->redirectToRoute('app_article_index');
             }
 
-            return $this->renderForm('article/create.html.twig', ['form' => $form, 'article' => $article, 'action' => 'Edit']);
+            return $this->renderForm('article/create.html.twig', [
+                'form' => $form,
+                'article' => $article,
+                'action' => 'Edit'
+                ]);
         }
 
         return $this->redirectToRoute('app_article_index');

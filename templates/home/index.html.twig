@@ -1,13 +1,77 @@
-{% extends 'base.html.twig' %}
+{% extends 'homebase.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}ADN - Au-delà des Normes, Association LGBTQIA+ en Dordogne{% endblock %}
 
 {% block body %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    
-</div>
+<!-- MAIN INDEX -->
+        <main id="indexMain">
+            <!-- A PROPOS -->
+            <section id="sectionAbout">
+                <article>
+                    <h2>Qui Sommes-nous</h2>
+                    <p>Nous sommes une association <strong>LGBTQIA+, féministe, mixte, militante</strong> et apartisane sur tout le territoire de la <strong>Dordogne</strong>. Nous sommes basé à Périgueux mais intervenons sur tout le département.</p>
+                    <a href="/" class="button">En Savoir +</a>
+                </article>
+            </section>
+            <!-- PARTENAIRES -->
+            <section id="sectionPartners">
+                <article>
+                    <h2>nos partenaires</h2>
+                    <p>ADN est une association <strong>adhérente et membre actif de l’interLGBT</strong>. Nous avons également plusieurs <strong>partenaires locaux</strong> qui participent de près ou de loin à nos actions.</p>
+                </article>
+                <article>
+                    <img src="{{ asset('images/logoInterLGBT.png') }}" alt="Logo de l'interLGBT">
+                </article>
+                <a href="/" class="button">Savoir +</a>
+            </section>
+            <!-- BLOG -->
+            <section id="sectionBlog">
+                <article>
+                    <h2>notre blog</h2>
+                    <p>Notre association publie régulièrement des billets de blog que vous pouvez retrouver sur nos divers réseaux sociaux. Mais vous pouvez également les consulter ici sur notre site internet.</p>
+                </article>
+                <article class="socialNetworks">
+                    <a href="https://www.facebook.com/AuDeladesNormes" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com/AuDN24" target="_blank"><i class="fab fa-twitter-square"></i></a>
+                    <a href="https://instagram.com/au.dela.des.normes.24" target="_blank"><i class="fab fa-instagram"></i></a>
+                </article>
+                <a href="/article" class="button">Consulter</a>
+            </section>
+            <!-- CONTACT -->
+            <section id="sectionContact">
+                <article>
+                    <h2>vous souhaitez nous contacter ?</h2>
+                    <a href="/" class="button">Cliquez ici</a>
+                </article>
+            </section>
+            <!-- RENDEZ-VOUS -->
+            <section id="sectionRDV">
+                <article>
+                    <h2>nos événements</h2>
+                    <div></div>
+                    <div></div>
+                    <a href="/" class="button">Voir +</a>
+                </article>
+                <article id="permanences">
+                    <div class="filter">
+                        <h2>nos permanences d'écoute et d'accueil</h2>
+                        <div class="subPart-permances">
+                            <p>Les 1er et 3e Mercredis de chaque mois</p>
+                            <p>De 17h à 20h</p>
+                        </div>
+                        <div class="subPart-permances">
+                            <p>Le dernier Samedi du mois</p>
+                            <p>De 14h à 18h</p>
+                        </div>
+                        <p>Au café Associatif les ThéTards</p>
+                        <p>7 rue de la Bride à Périgueux</p>
+                    </div>
+                </article>  
+            </section>
+            <!-- BOUTON SOUTENIR -->
+            <section id="clickMe">
+                <a href="https://www.helloasso.com/associations/au-dela-des-normes/formulaires/1" class="button-large" target="_blank">Nous Soutenir</a>
+            </section>
+        </main>
 {% endblock %}
