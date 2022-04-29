@@ -1,0 +1,32 @@
+#articlesList{
+    @include flex($dir : column);
+    padding: 2em 0;
+    gap: 3em;
+    background-image: url(../../public/images/pancarte.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    .container{
+        @include flex($dir : column);
+        padding: 3em;
+        background-color: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(10px);
+        border-radius: 30px;
+        transition: all .3s ease;
+    }
+    .container:hover{
+        transform: translate(-5px, -5px);
+        box-shadow: 5px 5px $violet;
+    }
+}
+
+#createArticle{
+    margin: 2em 5em;
+    .article-container{
+        padding: 3em;
+        border: 1px solid black;
+        button{
+            margin-top: 2em;
+        }
+    }
+}

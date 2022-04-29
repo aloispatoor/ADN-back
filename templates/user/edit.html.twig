@@ -1,0 +1,21 @@
+{% extends 'blogbase.html.twig' %}
+
+{% block title %}Modifier vos informations{% endblock %}
+
+{% block body %}
+    <section id="userProfile">
+        <article id="userInfo">
+            <h1>Bonjour {{ user.username }}</h1>
+            <div id="user-avatar">
+                {% if user.avatar == null %}
+
+                {% else %}
+                    <img src={{ vich_uploader_asset(avatar) }} alt={{user.username}}>
+                {% endif %}
+                    {{ form_row(form.avatarFile, {'label':'Ajouter / Modifier l\'avatar'})}}
+            </div>
+            <p><span class="bold">Votre adresse e-mail : </span>{{ user.email }}</p>
+                {{ form_row(form.email, {'label':'Modifier votre adresse e-mail'})}}
+        </article>
+    </section>
+{% endblock %}

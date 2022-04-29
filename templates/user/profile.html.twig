@@ -1,0 +1,33 @@
+{% extends 'blogbase.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+    <section id="userProfile">
+        <article id="userInfo">
+            <h1>Bonjour {{ user.username }}</h1>
+            <div id="user-avatar">
+            {% if user.avatar == null %}
+
+            {% else %}
+                <img src={{ vich_uploader_asset(avatar) }} alt={{user.username}}>
+            {% endif %}
+            </div>
+            <p><span class="bold">Votre adresse e-mail : </span>{{ user.email }}</p>
+            {% if app.user %}
+                <a href="{{path('app_user_edit', {id: user.id})}}" class="button">Modifier vos informations</a>
+            {% endif %}
+        </article>
+        {% if is_granted('ROLE_ADMIN') %}
+            {% for article in articles%}
+                <div>
+                    <p>{{ article.title }}</p>
+                    <div class="button-container">
+                        <a href="{{path('app_article_edit', {id: article.id})}}" class="button">Modifier l'article</a>
+                        <a href="{{path('app_article_delete', {id: article.id})}}" class="button red">Supprimer l'article</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </section>
+{% endblock %}

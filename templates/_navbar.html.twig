@@ -1,0 +1,18 @@
+{% block blogNav %}
+    <nav id="blogNav">
+        <ul>
+            <li><a href="/article" class="special-anim">articles</a></li>
+            {% if app.user %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li><a href="{{ path('app_article_create')}}" class="special-anim">écrire un article</a></li>
+                {% endif %}
+                <li><a href="{{ path('app_user_profile') }}" class="special-anim">profile</a></li>
+                <li><a href="{{ path('app_logout') }}" class="special-anim">se déconnecter</a></li>
+            {% endif %}
+            {% if not app.user %}
+            <li><a href="/login" class="special-anim">se connecter</a></li>
+            <li><a href="/register" class="special-anim">s'inscrire</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endblock %}

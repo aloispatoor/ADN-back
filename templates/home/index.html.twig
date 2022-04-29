@@ -49,9 +49,13 @@
             <section id="sectionRDV">
                 <article>
                     <h2>nos événements</h2>
-                    <div></div>
-                    <div></div>
-                    <a href="/" class="button">Voir +</a>
+                    {% for booking in bookings | slice(0,2) %}
+                    <div>
+                        <h3>{{ booking.title }}</h3>
+                        <p>{{ booking.beginAt ? booking.beginAt|date('d M Y') : '' }}</p>
+                    </div>
+                    {% endfor %}
+                    <a href="/booking" class="button">Voir +</a>
                 </article>
                 <article id="permanences">
                     <div class="filter">

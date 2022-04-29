@@ -1,0 +1,22 @@
+{% extends 'blogbase.html.twig' %}
+
+{% block title %}Écrivez votre article{% endblock %}
+
+{% block body %}
+    {% if is_granted('ROLE_ADMIN') %}
+    <section id="createArticle">
+        <h1>{{ action == 'Edit' ? "Modifier l'article" : "Écrire un article"}}</h1>
+        <div class="article-container">
+            {{form_start(form)}}
+            {{form_row(form.title, {
+                'label' : 'Titre : '
+            })}}
+            {{form_row(form.content, {
+                'label' : 'Contenu : '
+            })}}
+            <button type="submit" class="button">Publier</button>
+            {{form_end(form)}}
+        </div>
+    </section>
+    {% endif %}
+{% endblock %}

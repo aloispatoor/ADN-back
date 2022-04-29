@@ -1,0 +1,157 @@
+#sectionAbout{
+    height: 40vh;
+    @include flex;
+    article{
+        @include flex($dir:column);
+        padding: 2em;
+        background-color: $grey;
+        border-radius: 30px;
+        h2{
+            padding-bottom: 2em;
+        }
+        .button{
+            margin-top : 2em;
+        }
+    }
+}
+
+#sectionPartners{
+    position: relative;
+    color: white;
+    background: $darkergrey;
+    padding: 5em 10em;
+    @include flex;
+    .button{
+        position: absolute;
+        left: 50%;
+        bottom: 5em;
+        transform: translate(-50%);
+    }
+    article{
+        padding: 5em;
+        h2{
+            text-align: left;
+            margin-bottom: 2em;
+        }
+        img{
+            width: 40rem;
+        }
+    }
+}
+
+#sectionBlog{
+    position: relative;
+    background-image: url(../../public/images/unicorn.jpeg);
+    background-size: cover;
+    background-position: center;
+    height: 60vh;
+    padding: 5em 10em;
+    @include flex ($dir: row-reverse);
+    gap: 30em;
+    .button{
+        position: absolute;
+        left: 50%;
+        bottom: 5em;
+        transform: translate(-50%);
+    }
+    article:first-child{
+        padding: 5em;
+        width: 30%;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 30px;
+        backdrop-filter: blur(10px);
+        h2{
+            text-align: right;
+            margin-bottom: 2em;
+        }
+        p{
+            text-align:right;
+        }
+    }
+    .socialNetworks{
+        text-align: center;
+        font-size: 3em;
+        padding: 1em;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 30px;
+        backdrop-filter: blur(20px);
+        @include flex;
+        i{
+            padding: 0.2em;
+        }
+    }
+}
+
+#sectionContact{
+    height: 60vh;
+    padding: 5em;
+    background-image: url(../../public/images/craies.jpeg);
+    background-size: cover;
+    background-position: center;
+    @include flex;
+    article{
+        @include flex($dir: column);
+        gap: 2em;
+        padding: 5em;
+        margin: 2em 5em;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 30px;
+        backdrop-filter: blur(20px);
+    }
+}
+
+#sectionRDV{
+    padding-top: 5%;
+    width: 100%;
+    height: 40rem;
+    @include flex ($just: space-around);
+    background-image: url(../../public/images/rainbowflags.jpeg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    article{
+        @include flex($dir:column);
+        text-align:center;
+        padding: 2% 5% 5% 5%;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 30px;
+        backdrop-filter: blur(20px);
+        h2{
+            padding-bottom: 2em;
+        }
+        .button{
+            margin-top : 1em;
+        }
+        div{
+            text-align:center;
+            margin-bottom: 5%;
+            padding: 5% 10%;
+            background-color: rgba(221, 221, 221, 0.8);
+            border-radius: 30px;
+            backdrop-filter: blur(20px);
+        }
+    }
+    #permanences{
+        @include flex($dir:column);
+        background-image: url(../../public/images/thetards2.jpg);
+        background-position: center;
+        background-size: cover;
+        color: white;
+        width: 20%;
+        padding: 2% 5% 5% 5%;
+        .filter{
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            .subPart-permances{
+                color:black;
+            }
+        }   
+    }
+}
+#clickMe{
+    @include flex;
+    width: 100%;
+    height: 20rem;
+    background-image: url(../../public/images/colored_arrow.jpg);
+    background-position: center;
+}
