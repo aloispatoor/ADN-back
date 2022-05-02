@@ -13,4 +13,5 @@ require('@fortawesome/fontawesome-free/js/all.js');
 // start the Stimulus application
 import './bootstrap';
 import './carousel/carousel.js';
-import './FullCalendar/calendar.js';
+// import './FullCalendar/index.js';
+import './MenuBurger/menuburger.js';

@@ -5,7 +5,7 @@
 {% block body %}
     {% if is_granted('ROLE_ADMIN') %}
     <section id="createArticle">
-        <h1>{{ action == 'Edit' ? "Modifier l'article" : "Écrire un article"}}</h1>
+        <h2>{{ action == 'Edit' ? "Modifier l'article" : "Écrire un article"}}</h2>
         <div class="article-container">
             {{form_start(form)}}
             {{form_row(form.title, {

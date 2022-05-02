@@ -4,14 +4,17 @@
 
 {% block body %}
     <section id="calendar">
+        <h2>nos rendez-vous</h2>
         {% if is_granted('ROLE_ADMIN')%}
-        <a href="{{ path('app_booking_new') }}" class="button">Create new booking</a>
+            <div class="button-container">
+                <a href="{{ path('app_booking_new') }}" class="button">Créer un nouvel événement</a>
+            </div>
         {% endif %}
 
-        <div id="calendar-holder">
-            {% for booking in bookings %}
+        <div id="calendar-holder" data-events-url="{{ path('fc_load_events') }}">
+            {# {% for booking in bookings %}
             <p>{{ booking.title }}</p>
-            {% endfor %}
+            {% endfor %} #}
         </div>
 
         <a href="/login">Se connecter</a>

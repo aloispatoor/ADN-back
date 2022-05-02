@@ -18,7 +18,9 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "@fullcalendar/core": "^5.11.0",
         "@fullcalendar/daygrid": "^5.11.0",
+        "@fullcalendar/interaction": "^5.11.0",
         "@fullcalendar/react": "^5.11.1",
         "node-sass": "^7.0.1",
         "prop-types": "^15.8.1",

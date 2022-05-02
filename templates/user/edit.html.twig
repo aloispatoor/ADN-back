@@ -4,18 +4,29 @@
 
 {% block body %}
     <section id="userProfile">
+        <h2>Bonjour {{ user.username }}</h2>
         <article id="userInfo">
-            <h1>Bonjour {{ user.username }}</h1>
-            <div id="user-avatar">
-                {% if user.avatar == null %}
+            {{ form_start(form) }}
+                <div id="user-avatar">
+                    {% if user.avatar == null %}
 
-                {% else %}
-                    <img src={{ vich_uploader_asset(avatar) }} alt={{user.username}}>
-                {% endif %}
-                    {{ form_row(form.avatarFile, {'label':'Ajouter / Modifier l\'avatar'})}}
-            </div>
-            <p><span class="bold">Votre adresse e-mail : </span>{{ user.email }}</p>
-                {{ form_row(form.email, {'label':'Modifier votre adresse e-mail'})}}
+                    {% else %}
+                        <img src={{ vich_uploader_asset(avatar) }} alt={{user.username}}>
+                    {% endif %}
+                    {{ form_row(form.avatarFile, { 
+                        'label' : "Ajouter / Modifier l'avatar"})
+                        }}
+                </div>
+                <div class="user-text">
+                    {{ form_row(form.email, { 
+                        'label' : "Modifier votre adresse e-mail"})
+                        }}
+                    {{ form_row(form.password, { 
+                        'label' : "Modifier votre mot de passe"})
+                        }}
+                </div>
+                <button type="submit" class="button">Enregistrer</button>
+            {{ form_end(form) }}
         </article>
     </section>
 {% endblock %}

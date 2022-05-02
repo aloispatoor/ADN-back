@@ -2,7 +2,6 @@
 
 namespace App\EventSubscriber;
 
-use App\Entity\Booking;
 use App\Repository\BookingRepository;
 use CalendarBundle\CalendarEvents;
 use CalendarBundle\Entity\Event;

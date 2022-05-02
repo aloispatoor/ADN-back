@@ -1,5 +1,9 @@
 #calendar{
     margin: 2em;
+    .button-container{
+        @include flex;
+        padding: 3em;
+    }
     #calendar-holder{
         margin: 2em;
     }
