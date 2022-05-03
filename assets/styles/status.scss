@@ -1,0 +1,19 @@
+#titleStatus{
+    text-align : center;
+    margin-bottom: 2em;
+}
+
+#statusArticles{
+    @include flex ($dir: column);
+    padding: 5em 10em;
+    article{
+        p{
+            margin-bottom: 1.5em;
+        }
+        ul li{
+            list-style-type: disc;
+            margin-left: 2em;
+            margin-bottom: 0.8em;
+        }
+    }
+}

@@ -8,13 +8,17 @@
         <h1>Inscrivez-vous</h1>
         <div class="form">
             {{ form_start(registrationForm) }}
-                {{ form_row(registrationForm.email) }}
-                {{ form_row(registrationForm.username, {
-                    'label' : "Nom d'utilisateur"
-                }) }}
-                {{ form_row(registrationForm.plainPassword, {
-                    'label' : "Mot de passe"
-                }) }}
+                <div class="formLines">
+                    {{ form_row(registrationForm.email) }}
+                    {{ form_row(registrationForm.username, {
+                        'label' : "Nom d'utilisateur"
+                    }) }}
+                </div>
+                <div class="formLines">
+                    {{ form_row(registrationForm.password, {
+                        'label' : "Mot de passe"
+                    }) }}
+                </div>
                 {{ form_row(registrationForm.agreeTerms, {
                     'label' : "Cochez si vous êtes d'accord avec les conditions d'utilisation"})
                  }}
@@ -24,5 +28,4 @@
         </div>
     </div>
 </section>
-
 {% endblock %}

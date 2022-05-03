@@ -1,0 +1,78 @@
+#aboutFirstText{
+    article{
+        margin-bottom: 5em;
+        h2{
+            margin: 2em;
+        }
+        p{
+            margin: 2em 10em;
+        }
+        a{
+            font-weight:bolder;
+            transition: .3s ease;
+        }
+    }
+}
+#missions{
+    background-image: url(../../public/images/thetards2.jpg);
+    background-position: center;
+    background-size: cover;
+    @include flex($dir:column);
+    h2{
+        display:inline-block;
+        margin-top: 3em;
+        padding: 1em 5em;
+        background-color: #efefefb0;
+        backdrop-filter: blur(10px);
+        border-radius: 30px;
+    }
+    .flexbox{
+        @include flex ($just:space-around);
+        gap: 2em;
+        padding: 5em;
+        article{
+            height: 15rem;
+            @include flex($dir:column);
+            padding: 5em 2em;
+            text-align: center;
+            background-color: #efefefb0;
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+        }
+    }  
+}
+#story{
+    margin: 5em;
+    h2{
+        margin:2em;
+    }
+    .textAndPicture{
+        @include flex($just:space-around);
+        margin: 2em;
+        p{
+            padding-left: 5em;
+        }
+        img{
+            width:100%;
+        }
+    }
+}
+#buttonsOnTheBottom{
+    @include flex($just:space-evenly);
+    article{
+        @include flex;
+        height: 60vh;
+    }
+    .firstButton{
+        background-image: url(../../public/images/enveloppes.jpeg);
+        background-position:center;
+        background-size: cover;
+        width: 100%;
+    }
+    .secondButton{
+        background-image: url(../../public/images/hands_in_the_air.jpg);
+        background-position:bottom;
+        background-size: cover;
+        width: 100%;
+    }
+}

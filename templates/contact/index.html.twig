@@ -1,0 +1,57 @@
+{% extends 'homebase.html.twig' %}
+
+{% block title %}Nous contacter{% endblock %}
+
+{% block body %}
+    <main id="contact">
+        <section id="titleContact">
+            <article>
+                <h2>Nous Contacter</h2>
+                <p>Vous avez des questions ? Vous avez besoin que nous intervenons ? Vous avez des idées d'actions à mener ? Vous pouvez nous contacter avec les moyens présentés ci-dessous.</p>
+            </article>
+        </section>
+        <section id="globalContact">
+            <article class="requestArticle selected-div">
+                {{ form_start(form) }}
+                    <div class="formLines">
+                        {{ form_row(form.prenom, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="formLines">
+                        {{ form_row(form.nom, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="formLines">
+                        {{ form_row(form.email, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="formLines">
+                        {{ form_row(form.message, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <button type="submit" class="button">Envoyer</button>
+                {{ form_end(form) }}
+            </article>
+            <article class="selected-div">
+                <p>
+                    <strong>ADN - Au-delà des Normes</strong>
+                </p>
+                <p>
+                    <i class="fas fa-map-marker-alt"></i> 12 Cour Fénelon <br>
+                    24000 Périgueux
+                </p>
+                <p>
+                    <i class="fas fa-phone-square-alt"></i> Numéro de téléphone
+                </p>
+                <p>
+                    <i class="far fa-envelope"></i> adn.dordogne@protonmail.com
+                </p>
+                <p>
+                    <i class="fab fa-facebook"></i> AuDeladesNormes
+                </p>
+                <p>
+                    <i class="fab fa-twitter-square"></i> @AuDN24
+                </p>
+                <p>
+                    <i class="fab fa-instagram"></i> au.dela.des.normes.24
+                </p>
+            </article>
+        </section>
+    </main>
+{% endblock %}

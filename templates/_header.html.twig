@@ -23,7 +23,41 @@
             </div>
           </div>
           <!-- NAV BAR -->
-          <nav id="desktopNav" class="dropdown">
+          <nav class="navbar"> 
+            <ul class="navbar_links">
+                <li class="navbar_item">
+                    <a href="/" class="special-anim navbar_link">accueil</a>
+                </li>
+                <li class="navbar_item">
+                    <a href="/about" class="special-anim navbar_link">à propos</a>
+                </li>
+                <li class="navbar_item">
+                    <a href="/contact" class="special-anim navbar_link">contact</a>
+                </li>
+                <li class="navbar_item">
+                    <a href="/booking" class="special-anim navbar_link">nos rendez-vous</a>
+                </li>
+                <li class="navbar_item">
+                    <a href="/article" class="special-anim navbar_link">blog</a>
+                </li>
+                <li class="navbar_item">
+                    <a href="/status" class="special-anim navbar_link">nos statuts</a>
+                </li>
+                <li class="navbar_item">
+                    <a href="/partners" class="special-anim navbar_link">nos partenaires</a>
+                </li>
+                <li class="navbar_item">
+                    <a href="https://www.helloasso.com/associations/au-dela-des-normes/adhesions/adhesion" class="special-anim navbar_link" target="_blank">adhérer</a>
+                </li>
+                <li class="navbar_item">
+                    <a href="https://www.helloasso.com/associations/au-dela-des-normes/formulaires/1" id="supportBtn" class="button" target="_blank">nous soutenir</a>
+                </li>
+            </ul>
+            <div id="menuBurger" class="navbar_burger">
+                <a id="link" href="#"><span id="bars"></span></a>
+            </div>
+          </nav>
+          {# <nav id="desktopNav" class="dropdown">
             <ul>
               <li><a href="/" class="special-anim">accueil</a></li>
               <li><a href="/about" class="special-anim">à propos</a></li>
@@ -38,7 +72,7 @@
           </nav>
           <div id="menuBurger">
             <a id="link" href="#"><span id="bars"></span></a>
-          </div>
+          </div> #}
           <div id="title">
             <div class="imgSize">
               <a href="/"><img src="{{ asset('images/ADN_logo_transparent.svg') }}" alt="Logo de ADN - Au Delà des Normes"></a>

@@ -1,0 +1,56 @@
+#titleContact{
+    text-align:center;
+    margin: 5em;
+    h2{
+        padding-bottom: 2em;
+    }
+}
+#globalContact{
+    height: 80vh;
+    background-image: url(../../public/images/Holi-Color-Background-PNG-Picture.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    @include flex($just:space-evenly, $align:flex-start);
+    padding-top: 3rem;
+    .requestArticle{
+        width: 30%;
+    }
+    article{
+        background-color: #efefefb0;
+        backdrop-filter: blur(20px);
+        border-radius: 30px;
+        padding: 3em;
+        p{
+            margin-bottom: 1em;
+            font-size: 1.2em;
+        }
+        form{
+            width: 100%;
+        }
+        .formLines{
+            @include flex($just:space-between, $dir:column);
+            margin-bottom: 2em;
+            .form-control{
+                @include flex($just:space-between);
+                label{
+                    margin-right: 2em;
+                }
+                input{
+                    font-family: firaSans_regular;
+                    height: 2em;
+                    width: 20rem;
+                    border: none;
+                }
+                textarea{
+                    font-family: firaSans_regular;
+                    border: none;
+                    min-height:10em;
+                    max-height: 10em;
+                    width: 20rem;
+                    max-width: 20rem;
+                }
+            }
+        }
+    }
+}

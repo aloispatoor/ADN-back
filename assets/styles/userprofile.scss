@@ -1,0 +1,30 @@
+#userProfile{
+    padding: 5em;
+    h2{
+        margin-bottom: 3em;
+    }
+    #userInfo{
+        background-color: #efefefb0;
+        backdrop-filter: blur(20px);
+        border-radius: 30px;
+        padding: 3em;
+        .flexbox{
+            @include flex ($just: space-between);
+        }
+        .user-text{
+            p, label, input{
+                margin-bottom: 1em;
+            }
+            label{
+                padding-right: 2em;
+            }
+        }
+        .user-avatar{
+            height: 300px;
+            width: 300px;
+            img{
+                object-fit: cover;
+            }
+        }
+    }
+}

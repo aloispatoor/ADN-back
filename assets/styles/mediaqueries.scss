@@ -1,0 +1,60 @@
+@media screen and (max-width: 1100px){
+    header .backgroundImg #title h1{
+        font-size: 2em;
+    }  
+    #menuBurger{
+        display: block;
+        visibility: visible;
+    }
+
+    .navbar{
+        .navbar_links{
+            display: none;
+            visibility: hidden;
+        }
+    }
+    .navbar{
+        .show-nav{
+            .navbar_links{
+                @include flex($dir:column, $align:flex-start);
+                visibility: visible;
+                margin-left: 1em;
+            }
+        }
+    }
+    #sectionRDV{
+        height: 60rem;
+        padding-bottom: 2em;
+        @include flex ($dir: column);
+        gap: 2em;
+        article, #permanences{
+            width: 50%;
+        }
+    }
+    footer{
+        nav{
+            @include flex ($dir:column);
+            gap: 2em;
+            .footerSections{
+                text-align: center;
+            }
+            .footerSections:last-child{
+                @include flex ($align:center, $dir:column);
+            }
+        }
+    }
+    #missions{
+        .flexbox{
+            @include flex ($dir:column);
+            padding: 2em;
+            article{
+                width: 50%;
+            }
+        }
+    }
+    #globalContact{
+        @include flex($dir: column-reverse);
+        gap: 2em;
+        height: 130vh;
+    }
+}

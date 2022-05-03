@@ -1,0 +1,69 @@
+{% extends 'homebase.html.twig' %}
+
+{% block title %}A propos d'ADN{% endblock %}
+
+{% block body %}
+    <main id="about">
+        <section id="aboutFirstText">
+            <article>
+                <h2>qui sommes-nous</h2>
+                <p>Nous sommes une association <strong>LGBTQIA+, féministe, mixte, militante</strong> et apartisane sur tout le territoire de la <strong>Dordogne</strong>. Nous sommes basé à Périgueux mais intervenons sur tout le département.  </p>
+                <p>Nous nous sommes créés en septembre 2021 avec le statut Association Loi 1901.
+                <p>Nous insistons sur le fait que nous soyons mixte. 
+                En effet, nous avons souhaité créer un espace où <strong>personnes concernées et non-concernées</strong> se sentent à l'aise et en sécurité tous-tes ensemble. </p>
+                <p>Notre organisation est <strong>collégiale et horizontale</strong>, c'est-à-dire que nous n'avons pas de président-e.
+                Nous fonctionnons minimum en binômes sur nos <strong>différents pôles</strong>, binômes qui ont pour vocation
+                de tourner au fil du temps.</p>
+                <p>Si vous souhaitez adhérer, sachez que <strong>notre adhésion est à prix libre</strong>, selon vos moyens. Et ça se passe <a href="#buttonsOnTheBottom">ici</a> !</p>
+            </article>
+        </section>
+        <section id="missions">
+            <h2>nos missions</h2>
+            <div class="flexbox">
+                <article class="selected-div">
+                    <p class="icons"><i class="fas fa-hands-helping"></i></p>
+                    <p><strong>Soutenir</strong> les personnes LGBTQIA+ et les accompagner dans leurs questionnements.</p>
+                    <p><strong>Ester en justice</strong> si besoin</p>
+                </article>
+                <article class="selected-div">
+                    <p class="icons"><i class="fas fa-graduation-cap"></i></p>
+                    <p><strong>Former et sensibiliser</strong> nos adhérent.e.s sur les questions LGBTQIA+ et le vocabulaire.</p>
+                    <p>Sensibiliser les <strong>établissements scolaires</strong>, les <strong>entreprises</strong> ou les <strong>institutions</strong> qui le souhaitent.</p>
+                </article>
+                <article class="selected-div">
+                    <p class="icons"><i class="fas fa-fist-raised"></i></p>
+                    <p><strong>Défendre nos droits</strong>, nos acquis, toujours en danger, et <strong>conquérir de nouveaux droits</strong>.</p>
+                    <p><strong>Promouvoir</strong> localement le combat pour nos droits à travers des actions, débats, etc...</p>
+                </article>
+            </div>
+        </section>
+        <section id="story">
+            <h2>genèse</h2>
+            <article class="selected-div textAndPicture">
+                <div class="boxSizing">
+                    <img src="{{ asset('images/membres.jpg') }}" alt="Photo de quelques membres de l'association ADN">
+                </div>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis officiis officia nulla sunt recusandae fugiat inventore iusto nisi. Recusandae amet cupiditate ut eveniet officia iure sequi nobis perspiciatis ad placeat?
+                Totam dolorum officia assumenda modi, nesciunt quis aliquid distinctio impedit maxime vero! Quidem tenetur illo earum consectetur consequuntur quos dignissimos autem omnis aliquid rerum fugiat, dicta quibusdam nam consequatur ipsa.
+                Dolor, explicabo, vero tenetur iste asperiores similique porro neque sapiente inventore quidem nostrum possimus laborum voluptatem, delectus repellendus odio perspiciatis omnis? Deserunt accusantium tempora qui corporis sapiente reiciendis, magni enim?
+                Assumenda error harum aliquam sed dolorem fugiat repellat ab qui maiores repudiandae obcaecati temporibus atque, incidunt nisi dolor minus, accusamus reprehenderit facere ipsam. Tempora non iure enim adipisci atque culpa?
+                Asperiores esse minima commodi voluptatum, adipisci repellendus sunt laboriosam deleniti nesciunt in. Maiores doloremque quis alias placeat incidunt natus ut soluta, sequi magnam delectus minus corrupti dicta est eius tenetur?</p>
+            </article>
+            <article class="selected-div text">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque pariatur fugiat sunt, reprehenderit suscipit a, cum, rem deserunt sequi magnam labore non veniam nostrum! Assumenda consequuntur ullam quo! Ratione, cupiditate!
+                Illo ea praesentium cum quod voluptas eligendi earum molestias ab? Esse qui soluta ut, incidunt sed nobis maxime provident nostrum accusantium. Eum deleniti officia ipsum error ab eligendi tenetur fugit!
+                Assumenda tempore ea illum quas et velit ad ut expedita qui. Aspernatur deleniti vero esse dolor. Ad, error. Natus eligendi magnam necessitatibus quam obcaecati molestiae repellendus facilis laudantium facere maiores?
+                Voluptates voluptatem officia vitae natus ad laudantium beatae. Incidunt debitis beatae optio dolore quibusdam necessitatibus laborum ab a dolores, molestiae consequuntur quos eaque quas voluptatum, magni impedit facere unde cumque!
+                Consectetur, labore expedita? Sequi quis aliquid dolorum fuga neque pariatur dignissimos, reprehenderit totam laboriosam cumque suscipit magnam veritatis perspiciatis quibusdam commodi harum consequuntur rem voluptatibus! Ratione tenetur dolorem dolor asperiores.</p>
+            </article>
+        </section>
+        <section id="buttonsOnTheBottom">
+            <article class="firstButton">
+                <a href="contact.php" class="button-large">Nous Contacter</a>
+            </article>
+            <article class="secondButton">
+            <a href="https://www.helloasso.com/associations/au-dela-des-normes/adhesions/adhesion" class="button-large" target="_blank">Adhérer</a>
+            </article>
+        </section>
+    </main>
+{% endblock %}

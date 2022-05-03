@@ -12,9 +12,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+#[Route('/comment')]
 class CommentController extends AbstractController
 {
-    #[Route('/comment', name: 'app_comment_index')]
+    #[Route('/', name: 'app_comment_index')]
     public function index(CommentRepository $commentRepository): Response
     {
         $comments = $commentRepository->findBy([], ['createdAt' => 'DESC']);
@@ -23,7 +24,7 @@ class CommentController extends AbstractController
         ]);
     }
 
-    #[Route('/comment/create', name: 'app_comment_create')]
+    #[Route('/create', name: 'app_comment_create')]
     #[IsGranted('ROLE_USER', message: 'Vous devez être connecté en tant qu\'utilisateu-rice pour accéder à cette page')]
     public function create(Request $request, EntityManagerInterface $em): Response
     {
@@ -40,7 +41,7 @@ class CommentController extends AbstractController
         }
         
         return $this->renderForm('article/single.html.twig', [
-            'form' => $form
+            'form' => $form,
         ]);
     }
 }
