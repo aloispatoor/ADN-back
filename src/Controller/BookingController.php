@@ -13,18 +13,10 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/booking')]
 class BookingController extends AbstractController
 {
-    /**
-     * @Route("/calendar", name="booking_calendar", methods={"GET"})
-     */
-    public function calendar(): Response
-    {
-        return $this->render('calendar/index.html.twig');
-    }
-
     #[Route('/', name: 'app_booking_index', methods: ['GET'])]
     public function index(BookingRepository $bookingRepository): Response
     {
-        return $this->render('calendar/index.html.twig', [
+        return $this->render('booking/index.html.twig', [
             'bookings' => $bookingRepository->findAll(),
         ]);
     }

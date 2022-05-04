@@ -14,5 +14,4 @@ require('@fortawesome/fontawesome-free/js/all.js');
 import './bootstrap';
 import './carousel/carousel.js';
 import './special-anim/special-anim.js';
-import './FullCalendar/index.js';
 import "./MenuBurger/menuburger.js";

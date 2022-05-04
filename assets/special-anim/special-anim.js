@@ -6,8 +6,8 @@ window.addEventListener("resize", function() {
         getNavBar.classList.remove("special-anim");
     }else{
         getNavBar.classList.add("special-anim");
-        getNavBar.classList.add("hide-nav");
-        getNavBar.classList.remove('show-nav');
+        getNavBar.classList.add("dropdown");
+        getNavBar.classList.remove('mobiledropdown');
         supportBtn.classList.add("button");
     };
 });

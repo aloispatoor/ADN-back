@@ -5,11 +5,11 @@ let getNavBar = document.getElementsByTagName('nav')[0];
 let supportBtn = document.getElementById('supportBtn');
 
 getBurgerBtn.addEventListener('click', function(){
-    // getBurger.classList.toggle('hide-nav');
-    // getNavBar.classList.toggle('hide-nav');
+    getBurger.classList.toggle('dropdown');
+    getNavBar.classList.toggle('dropdown');
     supportBtn.classList.remove('button');
-    getBurger.classList.toggle('show-nav');
-    getNavBar.classList.toggle('show-nav');
+    getBurger.classList.toggle('mobiledropdown');
+    getNavBar.classList.toggle('mobiledropdown');
 });
 // ANIMATION BARS => CROIX
 getBurgerBtn.addEventListener('click', function(e) {

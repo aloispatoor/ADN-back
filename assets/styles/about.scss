@@ -22,9 +22,7 @@
         display:inline-block;
         margin-top: 3em;
         padding: 1em 5em;
-        background-color: #efefefb0;
-        backdrop-filter: blur(10px);
-        border-radius: 30px;
+        @include glass;
     }
     .flexbox{
         @include flex ($just:space-around);
@@ -35,9 +33,7 @@
             @include flex($dir:column);
             padding: 5em 2em;
             text-align: center;
-            background-color: #efefefb0;
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
+            @include glass;
         }
     }  
 }

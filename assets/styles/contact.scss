@@ -17,9 +17,7 @@
         width: 30%;
     }
     article{
-        background-color: #efefefb0;
-        backdrop-filter: blur(20px);
-        border-radius: 30px;
+        @include glass;
         padding: 3em;
         p{
             margin-bottom: 1em;

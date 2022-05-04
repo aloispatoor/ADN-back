@@ -1,27 +1,28 @@
 @media screen and (max-width: 1100px){
     header .backgroundImg #title h1{
         font-size: 2em;
-    }  
+    }
     #menuBurger{
         display: block;
-        visibility: visible;
     }
 
-    .navbar{
-        .navbar_links{
+    #desktopNav{
+        &.dropdown{
             display: none;
             visibility: hidden;
         }
     }
-    .navbar{
-        .show-nav{
-            .navbar_links{
+
+
+    #desktopNav{
+        &.mobiledropdown{
+            ul{
                 @include flex($dir:column, $align:flex-start);
-                visibility: visible;
                 margin-left: 1em;
             }
         }
-    }
+    } 
+
     #sectionRDV{
         height: 60rem;
         padding-bottom: 2em;

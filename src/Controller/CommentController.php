@@ -41,7 +41,7 @@ class CommentController extends AbstractController
         }
         
         return $this->renderForm('article/single.html.twig', [
-            'form' => $form,
+            'commentform' => $form->createView(),
         ]);
     }
 }

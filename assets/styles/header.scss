@@ -10,20 +10,16 @@ header{
             @include flex($dir: column);
             padding-top: 5em;
             h1{
+                @include glass;
                 display: inline-block;
-                background:rgba(255, 255, 255, 0.6);
-                backdrop-filter: blur(10px);
                 font-size: 2.5em;
                 margin: 2% auto;
                 text-align:center;
-                border-radius: 30px;
                 padding: 0.3em;
             }
             .imgSize{
-                background:rgba(255, 255, 255, 0.6);
-                backdrop-filter: blur(10px);
+                @include glass;
                 padding: 1em;
-                border-radius: 30px;
                 width: 30%;
                 margin: 0 auto;
                 img{
@@ -52,7 +48,9 @@ header{
                 left: 0;
                 transition: all .3s ease-out;
                 }
-                div {height: 100%;}
+                div {
+                    height: 100%;
+                }
                 .slide1 {
                     background-image: url(../../public/images/IMG_20200929_141812.jpg);
                     background-size: cover;

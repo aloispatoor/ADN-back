@@ -1,92 +1,85 @@
-/* NAV BARS */
-.navbar{
-    position: relative;
-    width: 100%;
-    height: 4em;
-    background-color: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(20px);
-}
-
-.navbar_links{
-    display:flex;
-    justify-content: flex-end;
-    font-size: 1em;
-    padding: 1em;
-    text-transform: uppercase;
-}
-
-.navbar_item{
-    padding: 0 1em;
-}
-
-.navbar_link{
-    position: relative;
-}
-.navbar_link{
-    &.special-anim{
-    color: black;
+// NAV BAR
+#desktopNav{
+    &.dropdown{
+        position: relative;
+        width: 100%;
+        height: 4em;
+        background-color: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(20px);
+        ul{
+            @include flex ($just : flex-end);
+            font-size: 1em;
+            padding: 1em;
+            text-transform: uppercase;
+            li{
+                padding: 0 1em;
+                a{
+                    position: relative;
+                    &.special-anim{
+                        color: black;
+                    }
+                    
+                    &.special-anim:after,
+                    &.special-anim:before{
+                        content: '';
+                        display: block;
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        width: 100%;
+                        height: 2px;
+                        background-color: black;
+                        transition: all 0.3s ease;
+                        transform: scale(0.85);
+                    }
+                    
+                
+                    &.special-anim:hover:before{
+                        top: 0;
+                        transform: scale(1);
+                    }
+                    
+                
+                    &.special-anim:hover:after{
+                        transform: scale(1);
+                    }
+                    
+                }
+            }
+            .button{
+                text-transform: capitalize;
+            }
+        }
+    }
+    &.mobiledropdown{
+        position: fixed;
+        z-index: 199;
+        right: 0;
+        top: 4rem;
+        width: 20rem;
+        height: 100%;
+        @include glass2;
+        overflow: auto;
+        animation-name: getDropdown;
+        animation-duration: .5s;
+        transition: .5s;
+        ul{
+            font-size: 1.5em;
+            text-transform: uppercase;
+            text-align: right;
+            padding-right: 2em;
+            li{
+                padding: 1em 0;
+            }
+        }
     }
 }
-.navbar_link {
-    &.special-anim:after,
-    &.special-anim:before{
-    content: '';
-    display: block;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: black;
-    transition: all 0.3s ease;
-    transform: scale(0.85);
-    }
-}
 
-.navbar_link{
-    &.special-anim:hover:before{
-    top: 0;
-    transform: scale(1);
-    }
-}
-    
-.navbar_link {
-    &.special-anim:hover:after{
-    transform: scale(1);
-    }
-}
 
-.button{
-    text-transform: capitalize;
-}
-
-.show-nav{
-    position: fixed;
-    z-index: 199;
-    right: 0;
-    top: 4rem;
-    width: 20rem;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(20px);
-    overflow: auto;
-    animation-name: getDropdown;
-    animation-duration: .5s;
-    transition: .5s;
-}
-.show-nav .navbar_links{
-    font-size: 1.5em;
-    text-transform: uppercase;
-    text-align: right;
-    padding-right: 2em;
-}
-.show-nav .navbar_item{
-    padding: 1em 0;
-}
 
 /* ANIMATION MENU BURGER */
 #menuBurger{
-    visibility: hidden;
+    display: none;
     position: fixed;
     right: 0em;
     top: 0em;
@@ -94,6 +87,7 @@
     font-size: 2.5em;
     z-index: 200;
     background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
     padding: 0 0.5em 0.5em 0.5em;
     border-bottom-right-radius: 30px;
     border-bottom-left-radius: 30px;
@@ -123,8 +117,7 @@
   top:10px;
 }
 #bars.open {
-    background:transparent; 
-    width: 0;
+    background:transparent; /* la barre du milieu disparait */
 }
   /* celles du haut et du bas s'inclinent pour former une croix */
 #bars.open::before {
@@ -143,9 +136,6 @@
     to {
         right: 0px;
     }
-}
-.displayNone{
-    display: none;
 }
 
 
