@@ -36,7 +36,7 @@
     transition: all .3s ease-in;
 }
 
-.button:hover, .button-large:hover{
+.button-small:hover, .button:hover, .button-large:hover{
     background-color: $orange;
     box-shadow: 0 100px 100px -100px $yellow inset; 
     color: $violet;

@@ -1,47 +1,48 @@
-{% extends 'homebase.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Nos Rendez-vous{% endblock %}
 
 {% block body %}
     <section id="calendar">
-        <h2>nos rendez-vous</h2>
-        {% if is_granted('ROLE_ADMIN')%}
-            <div class="button-container">
-                <a href="{{ path('app_booking_new') }}" class="button">Créer un nouvel événement</a>
-            </div>
-        {% endif %}
-
-        <div id="calendar-holder" data-events-url="{{ path('fc_load_events') }}">
+        <article>
+            <div id="calendrier"></div>
+        </article>
+        <article>
+            {{ include('calendar/list.html.twig') }}
+        </article>
+        <div class="button-container">
+            {% if not app.user %}
+                <a href="/login" class="button-small">Se connecter</a>
+            {% endif %}
+            {% if is_granted("ROLE_ADMIN")%}
+                <a href="/rdv" class="button-small">Administration des événements</a>
+            {% endif %}
         </div>
-
-        {% if not app.user %}
-        <a href="/login">Se connecter</a>
-        {% endif %}
     </section>
 {% endblock %}
 {% block stylesheets %}
+	{{ encore_entry_link_tags('app') }}
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.css" integrity="sha256-jLWPhwkAHq1rpueZOKALBno3eKP3m4IMB131kGhAlRQ=" crossorigin="anonymous">
 {% endblock %}
+
 {% block javascripts %}
 	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.js" integrity="sha256-bFpArdcNM5XcSM+mBAUSDAt4YmEIeSAdUASB2rrSli4=" crossorigin="anonymous"></script>
 	<script>
 		window.onload = () => {
             let calendarEl = document.querySelector('#calendrier');
-
             let calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
                 locale: 'fr',
                 timeZone: 'Europe/Paris',
                 headerToolbar: {
-                    start: 'today prev,next',
+                    start: 'prev,next',
                     center: 'title',
-                    end: 'dayGridMonth'
-                    },
+                    end: ''
+                },
                 events: {{ data|raw }},
-                editable: true,
+                editable: false,
                 eventResizableFromStart: true
-                })
-
+            })
             calendar.on('eventChange', (e) => {
                 let url = `/api/${
                 e.event.id
@@ -59,7 +60,7 @@
                 let xhr = new XMLHttpRequest
                 xhr.open("PUT", url)
                 xhr.send(JSON.stringify(donnees))
-                })
+            })
             calendar.render()
         }
 	</script>

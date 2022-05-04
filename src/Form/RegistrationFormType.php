@@ -47,7 +47,9 @@ class RegistrationFormType extends AbstractType
             // ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
+                'mapped' => false,
                 'invalid_message' => 'Les champs ne sont pas identiques',
+                'attr' => ['autocomplete' => 'new-password'],
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
                 'first_options'  => ['label' => 'Mot de Passe'],

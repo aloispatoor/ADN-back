@@ -19,7 +19,7 @@ class CommentController extends AbstractController
     public function index(CommentRepository $commentRepository): Response
     {
         $comments = $commentRepository->findBy([], ['createdAt' => 'DESC']);
-        return $this->render('article/single.html.twig', [
+        return $this->render('comment/index.html.twig', [
             'comments' => $comments,
         ]);
     }
@@ -40,8 +40,8 @@ class CommentController extends AbstractController
             return $this->redirectToRoute('app_article_single');
         }
         
-        return $this->renderForm('article/single.html.twig', [
-            'commentform' => $form->createView(),
+        return $this->renderForm('comment/create.html.twig', [
+            'commentform' => $form,
         ]);
     }
 }

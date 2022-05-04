@@ -29,9 +29,8 @@
         gap: 2em;
         padding: 5em;
         article{
-            height: 15rem;
             @include flex($dir:column);
-            padding: 5em 2em;
+            padding: 10em 2em;
             text-align: center;
             @include glass;
         }

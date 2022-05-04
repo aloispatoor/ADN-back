@@ -1,10 +1,33 @@
 #calendar{
     margin: 2em;
+    @include flex;
     .button-container{
-        @include flex;
+        @include flex($just : space-around);
+        gap: 2em;
         padding: 3em;
     }
-    #calendar-holder{
-        margin: 2em;
+    // #calendrier{
+    //     margin: 2em;
+    // }
+}
+
+.booking{
+    margin: 3em;
+    .button-container{
+        @include flex;
+        gap: 2em;
+        padding: 3em;
+    }
+    h2{
+        margin-bottom: 3em;
+    }
+    table{
+        margin: 0 auto;
+    }
+    .booking-form{
+        margin: 0 5em;
+        .form-control, .form-group, .form-check{
+            margin: .5em 0;
+        }
     }
 }

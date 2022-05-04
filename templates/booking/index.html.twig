@@ -1,42 +1,56 @@
-{% extends 'base.html.twig' %}
+{% extends 'homebase.html.twig' %}
 
-{% block title %}Nos rendez-vous{% endblock %}
+{% block title %}Administration des événements{% endblock %}
 
 {% block body %}
-    <h2>Nos rendez-vous</h2>
+    <section class="booking">
+        <h2>Nos rendez-vous</h2>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>BeginAt</th>
-                <th>EndAt</th>
-                <th>Title</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for booking in bookings %}
-            <tr>
-                <td>{{ booking.id }}</td>
-                <td>{{ booking.start ? booking.start|date('d-m-Y') : '' }}</td>
-                <td>{{ booking.end ? booking.end|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ booking.title }}</td>
-                <td>
-                    <a href="{{ path('app_booking_show', {'id': booking.id}) }}" class="button">show</a>
-                    {% if is_granted('ROLE_ADMIN')%}
-                        <a href="{{ path('app_booking_edit', {'id': booking.id}) }}" class="button">edit</a>
-                    {% endif %}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    {% if is_granted('ROLE_ADMIN')%}
-        <a href="{{ path('app_booking_new') }}" class="button">Créer un nouvel événement</a>
-    {% endif %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Titre</th>
+                    <th>Début</th>
+                    <th>Fin</th>
+                    <th>Description</th>
+                    <th>Jour entier</th>
+                    <th>Couleur de fond</th>
+                    <th>Couleur de bordure</th>
+                    <th>Couleur de texte</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.id }}</td>
+                    <td>{{ booking.title }}</td>
+                    <td>{{ booking.start ? booking.start|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ booking.end ? booking.end|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ booking.description }}</td>
+                    <td>{{ booking.allDay ? 'Yes' : 'No' }}</td>
+                    <td>{{ booking.backgroundColor }}</td>
+                    <td>{{ booking.borderColor }}</td>
+                    <td>{{ booking.textColor }}</td>
+                    <td>
+                        <a href="{{ path('app_booking_show', {'id': booking.id}) }}" class="btn">Montrer</a>
+                        {% if is_granted('ROLE_ADMIN')%}
+                            <a href="{{ path('app_booking_edit', {'id': booking.id}) }}" class="btn">Modifier</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="10">Pas d'événements trouvés</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="button-container">
+            {% if is_granted('ROLE_ADMIN')%}
+                <a href="{{ path('app_booking_new') }}" class="button-small">Créer un nouvel événement</a>
+            {% endif %}
+        </div>
+    </section>
 {% endblock %}

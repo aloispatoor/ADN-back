@@ -31,6 +31,7 @@
         h2{
             text-align: left;
             margin-bottom: 2em;
+            color: white;
         }
         img{
             width: 40rem;
@@ -71,6 +72,7 @@
         padding: 1em;
         @include glass;
         @include flex;
+        gap: 1em;
         i{
             padding: 0.2em;
         }
@@ -94,9 +96,8 @@
 }
 
 #sectionRDV{
-    padding-top: 5%;
     width: 100%;
-    height: 40rem;
+    height: 80vh;
     @include flex ($just: space-around);
     background-image: url(../../public/images/rainbowflags.jpeg);
     background-position: center;
@@ -122,19 +123,15 @@
     }
     #permanences{
         @include flex($dir:column);
-        background-image: url(../../public/images/thetards2.jpg);
-        background-position: center;
-        background-size: cover;
-        color: white;
-        width: 20%;
+        @include glass;
         padding: 2% 5% 5% 5%;
-        .filter{
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.4);
-            .subPart-permances{
-                color:black;
-            }
-        }   
+        height: 60vh;
+        h2{
+            color: white;
+        }
+        .subPart-permances{
+            color:black;
+        }  
     }
 }
 #clickMe{

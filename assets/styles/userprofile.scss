@@ -4,9 +4,7 @@
         margin-bottom: 3em;
     }
     #userInfo{
-        background-color: #efefefb0;
-        backdrop-filter: blur(20px);
-        border-radius: 30px;
+        @include glass;
         padding: 3em;
         .flexbox{
             @include flex ($just: space-between);

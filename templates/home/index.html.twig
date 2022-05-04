@@ -52,25 +52,23 @@
                     {% for booking in bookings | slice(0,2) %}
                     <div>
                         <h3>{{ booking.title }}</h3>
-                        <p>{{ booking.beginAt ? booking.beginAt|date('d M Y') : '' }}</p>
+                        <p>{{ booking.start ? booking.start|date('d M Y') : '' }}</p>
                     </div>
                     {% endfor %}
-                    <a href="/booking" class="button">Voir +</a>
+                    <a href="/calendar" class="button">Voir +</a>
                 </article>
                 <article id="permanences">
-                    <div class="filter">
-                        <h2>nos permanences d'écoute et d'accueil</h2>
-                        <div class="subPart-permances">
-                            <p>Les 1er et 3e Mercredis de chaque mois</p>
-                            <p>De 17h à 20h</p>
-                        </div>
-                        <div class="subPart-permances">
-                            <p>Le dernier Samedi du mois</p>
-                            <p>De 14h à 18h</p>
-                        </div>
-                        <p>Au café Associatif les ThéTards</p>
-                        <p>7 rue de la Bride à Périgueux</p>
+                    <h2>nos permanences d'écoute et d'accueil</h2>
+                    <div class="subPart-permances">
+                        <p>Les 1er et 3e Mercredis de chaque mois</p>
+                        <p>De 17h à 20h</p>
                     </div>
+                    <div class="subPart-permances">
+                        <p>Le dernier Samedi du mois</p>
+                        <p>De 14h à 18h</p>
+                    </div>
+                    <p>Au café Associatif les ThéTards</p>
+                    <p>7 rue de la Bride à Périgueux</p>
                 </article>  
             </section>
             <!-- BOUTON SOUTENIR -->

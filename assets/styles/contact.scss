@@ -17,6 +17,9 @@
         width: 30%;
     }
     article{
+        .button-container{
+            @include flex;
+        }
         @include glass;
         padding: 3em;
         p{

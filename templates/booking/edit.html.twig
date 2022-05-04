@@ -1,13 +1,16 @@
-{% extends 'base.html.twig' %}
+{% extends 'homebase.html.twig' %}
 
-{% block title %}Edit Booking{% endblock %}
+{% block title %}Modifier l'événement{% endblock %}
 
 {% block body %}
-    <h1>Edit Booking</h1>
+    <section class="booking">
+        <h2>Modifier l'événement</h2>
 
-    {{ include('booking/_form.html.twig', {'button_label': 'Update'}) }}
+            {{ include('booking/_form.html.twig', {'button_label': 'Modifier'}) }}
+        <div class="button-container">
+            <a href="{{ path('app_booking_index') }}">Retour à la liste</a>
+            {{ include('booking/_delete_form.html.twig') }}
+        </div>
+    </section>
 
-    <a href="{{ path('app_booking_index') }}">back to list</a>
-
-    {{ include('booking/_delete_form.html.twig') }}
 {% endblock %}

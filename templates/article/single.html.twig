@@ -7,25 +7,10 @@
         <div class="article-container">
             <article id="blogArticle">
                 <h1>{{ article.title }}</h1>
-                <small>Publié le {{ article.createdAt | date('d M Y')}} par <a href="">{{ article.author.username }}</a></small>
+                <small>Publié le {{ article.createdAt | date('d M Y')}} par <a href="{{ path('app_user_profile', {id: user.id}) }}">{{ article.author.username }}</a></small>
                 <p>{{ article.content|raw }}</p>
             </article>
         </div>
-        <div class="createComment">
-            <h2>Écrire un commentaire</h2>
-            {{form_start(commentform)}}
-            {{form_row(commentform.content, {
-                'label' : 'Commentaire : '
-            })}}
-            <button type="submit" class="button">Envoyer votre commentaire</button>
-            {{form_end(commentform)}}
-        </div>
-        {% for comment in comments %}
-        <div id="comments">
-            <p><a href="{{ path('app_user_profile', {id: user.id} )}}">{{ comment.author.username }}</a></p>
-            <p>{{ comment.content }}</p>
-            <p>{{ comment.createdAt }}</p>
-        </div>
-        {% endfor %}
+        {{ include('comment/index.html.twig') }}
     </section>
 {% endblock %}

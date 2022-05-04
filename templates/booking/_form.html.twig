@@ -1,4 +1,39 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="button">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="booking-form">
+    {{ form_start(form) }}
+        {{ form_row(form.title, {
+            'label' : 'Titre : ',
+            'attr': {'class': 'form-control'}
+        }) }}
+        {{ form_row(form.start, {
+            'label' : 'Commence le : ',
+            'attr': {'class': 'form-group'}
+        }) }}
+        {{ form_row(form.end, {
+            'label' : 'Termine le : ',
+            'attr': {'class': 'form-group'}
+        }) }}
+        {{ form_row(form.description, {
+            'label' : 'Description : ',
+            'attr': {'class': 'form-control'}
+        }) }}
+        {{ form_row(form.all_day, {
+            'label' : 'Jour entier : ',
+            'attr': {'class': 'form-check'}
+        }) }}
+        {{ form_row(form.background_color, {
+            'label' : 'Couleur de fond : ',
+            'attr': {'class': 'form-control form-control-color'}
+        }) }}
+        {{ form_row(form.text_color, {
+            'label' : 'Couleur du texte : ',
+            'attr': {'class': 'form-control form-control-color'}
+        }) }}
+        {{ form_row(form.border_color, {
+            'label' : 'Couleur de bordure : ',
+            'attr': {'class': 'form-control form-control-color'}
+        }) }}
+        <div class="button-container">
+            <button class="button-small">{{ button_label|default('Enregistrer') }}</button>
+        </div>
+    {{ form_end(form) }}
+</div>
