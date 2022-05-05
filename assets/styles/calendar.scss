@@ -1,14 +1,36 @@
 #calendar{
     margin: 2em;
-    @include flex;
+    @include flex($just : space-evenly);
     .button-container{
         @include flex($just : space-around);
         gap: 2em;
         padding: 3em;
     }
-    // #calendrier{
-    //     margin: 2em;
-    // }
+    #calendrier{
+        width: 40vw; 
+    }
+    .date-container{
+        @include glass;
+        padding: 2em;
+        p{
+            position:relative;
+            padding-bottom: 1em;
+        }
+    }
+    .date-container p::after{
+        content: '';
+        display: block;
+        position: absolute;
+        background-color: black;
+        height: 1px;
+        bottom: -0.5em;
+        width: 70%;
+    }
+}
+
+.button-container{
+    margin: 2em 0;
+    @include flex;
 }
 
 .booking{

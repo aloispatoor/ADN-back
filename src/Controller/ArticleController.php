@@ -30,7 +30,7 @@ class ArticleController extends AbstractController
     public function single(Article $article, CommentRepository $commentRepository): Response
     {
         $user = $this->getUser();
-        $comments = $commentRepository->findBy([], ['createdAt' => 'DESC']);
+        // $comments = $commentRepository->findBy([], ['createdAt' => 'DESC']);
 
 
         // if ($article->getAuthor() === $user) {
@@ -39,7 +39,7 @@ class ArticleController extends AbstractController
         return $this->render('article/single.html.twig', [
             'article' => $article,
             'user' => $user,
-            'comments' => $comments,
+            // 'comments' => $comments,
         ]);
     }
 

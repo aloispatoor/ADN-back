@@ -7,7 +7,7 @@
         {% for article in articles %}
             <div class="container">
                 <h2><a href="{{ path('app_article_single', {id: article.id})}}">{{ article.title }}</a></h2>
-                <p>{{ article.content|length > 50 ? article.content|slice(0, 50)|raw ~ '...' : article.content|raw}}</p>
+                <p>{{ article.content|raw }}</p>
             </div>
         {% endfor %}
     </section>

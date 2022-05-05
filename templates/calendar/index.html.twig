@@ -7,18 +7,15 @@
         <article>
             <div id="calendrier"></div>
         </article>
-        <article>
-            {{ include('calendar/list.html.twig') }}
+        <article class="date-container">
+            {{ include('list_booking/index.html.twig') }}
         </article>
-        <div class="button-container">
-            {% if not app.user %}
-                <a href="/login" class="button-small">Se connecter</a>
-            {% endif %}
-            {% if is_granted("ROLE_ADMIN")%}
-                <a href="/rdv" class="button-small">Administration des événements</a>
-            {% endif %}
-        </div>
     </section>
+    <div class="button-container">
+        {% if is_granted("ROLE_ADMIN")%}
+            <a href="{{path('app_booking_index')}}" class="button-small">Administration des événements</a>
+        {% endif %}
+    </div>
 {% endblock %}
 
 {% block stylesheets %}
