@@ -3,29 +3,34 @@
 {% block title %}S'incrire{% endblock %}
 
 {% block body %}
-<section class="loginFormPage">
-    <div class="container">
-        <h1>Inscrivez-vous</h1>
-        <div class="form">
-            {{ form_start(registrationForm) }}
-                <div class="formLines">
-                    {{ form_row(registrationForm.email) }}
-                    {{ form_row(registrationForm.username, {
-                        'label' : "Nom d'utilisateur"
+    <section class="loginFormPage">
+        <div class="container">
+            <h1>Inscrivez-vous</h1>
+            <div class="form">
+                {{ form_start(registrationForm) }}
+                    <div class="formLines">
+                        {{ form_row(registrationForm.email, {
+                            'attr': {'class': 'form-control'}
+                        }) }}
+                        {{ form_row(registrationForm.username, {
+                            'label' : "Nom d'utilisateur",
+                            'attr': {'class': 'form-control'}
+                        }) }}
+                    </div>
+                    <div class="formPasswords">
+                        {{ form_row(registrationForm.password, {
+                            'label' : "Mot de passe",
+                            'attr': {'class': 'form-control'}
+                        }) }}
+                    </div>
+                    {{ form_row(registrationForm.agreeTerms, {
+                        'label' : "Cochez si vous êtes d'accord avec les conditions d'utilisation",
+                        'attr': {'class': 'form-check form-check-inline'}
                     }) }}
-                </div>
-                <div class="formLines">
-                    {{ form_row(registrationForm.password, {
-                        'label' : "Mot de passe"
-                    }) }}
-                </div>
-                {{ form_row(registrationForm.agreeTerms, {
-                    'label' : "Cochez si vous êtes d'accord avec les conditions d'utilisation"})
-                 }}
 
-                <button type="submit" class="button">S'incrire</button>
-            {{ form_end(registrationForm) }}
+                    <button type="submit" class="button">S'incrire</button>
+                {{ form_end(registrationForm) }}
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 {% endblock %}

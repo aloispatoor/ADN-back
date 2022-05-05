@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ContactController extends AbstractController
 {
-    #[Route('/contact', name: 'app_contact')]
+    #[Route('/contact', name: 'app_contact_index')]
     public function index(Request $request, MailerInterface $mailer): Response
     {
         $form = $this->createForm(ContactType::class);
@@ -25,16 +25,16 @@ class ContactController extends AbstractController
             
             $message = (new Email())
                 ->from($contactFormData['email'])
-                ->to('ton@gmail.com')
-                ->subject('vous avez reçu unn email')
+                ->to('palois89@vivaldi.net')
+                ->subject('vous avez reçu un email')
                 ->text('Sender : '.$contactFormData['email'].\PHP_EOL.
-                    $contactFormData['Message'],
+                    $contactFormData['message'],
                     'text/plain');
             $mailer->send($message);
 
             $this->addFlash('success', 'Vore message a été envoyé');
 
-            return $this->redirectToRoute('contact');
+            return $this->redirectToRoute('app_contact_index');
         }
 
         return $this->render('contact/index.html.twig', [

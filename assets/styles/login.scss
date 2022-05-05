@@ -15,9 +15,20 @@
         form{
             @include flex ($dir : column);
             gap: 1em;
+            input{
+                border: none;
+            }
             .formLines{
-                @include flex($dir:column);
-                gap: 5%;
+                @include flex;
+                gap: 2em;
+            }
+            .formPasswords{
+                margin-top: 2em;
+                @include flex ($dir: column);
+                gap: 1.5em;
+                label{
+                    padding-right: 1em;
+                }
             }
         }
     }

@@ -8,6 +8,12 @@
             <article>
                 <h2>Nous Contacter</h2>
                 <p>Vous avez des questions ? Vous avez besoin que nous intervenons ? Vous avez des idées d'actions à mener ? Vous pouvez nous contacter avec les moyens présentés ci-dessous.</p>
+
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
             </article>
         </section>
         <section id="globalContact">

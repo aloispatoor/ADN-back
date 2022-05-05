@@ -23,6 +23,7 @@
                 </div>
             </div>
         </article>
+        {% if is_granted('ROLE_ADMIN') %}
         <article id="user-articles">
             <h3>Vos articles</h3>
             {% for article in articles %}
@@ -39,5 +40,6 @@
                 {% endif %}
             {% endfor %}
         </article>
+        {% endif %}
     </section>
 {% endblock %}
