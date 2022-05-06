@@ -9,7 +9,7 @@
             {{ form_start(form) }}
                 <div id="user-avatar">
                     {% if user.avatar == null %}
-
+                        <img src={{ asset('images/avatar_generic.png') }} alt="Avatar générique">
                     {% else %}
                         <img src={{ vich_uploader_asset(avatar) }} alt={{user.username}}>
                     {% endif %}
@@ -19,10 +19,14 @@
                 </div>
                 <div class="user-text">
                     {{ form_row(form.email, { 
-                        'label' : "Modifier votre adresse e-mail"})
+                        'label' : "Modifier votre adresse e-mail",
+                            'attr': {'class': 'form-control'}
+                            })
                         }}
                     {{ form_row(form.password, { 
-                        'label' : "Modifier votre mot de passe"})
+                        'label' : "Modifier votre mot de passe",
+                            'attr': {'class': 'form-control'}
+                            })
                         }}
                 </div>
                 <button type="submit" class="button">Enregistrer</button>

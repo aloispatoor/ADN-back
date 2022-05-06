@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Comment;
 use App\Form\ArticleType;
+use App\Form\CommentType;
+use App\Repository\UserRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,19 +29,31 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/{id}<\d+>}', name: 'app_article_single')]
-    public function single(Article $article, CommentRepository $commentRepository): Response
+    public function single(Article $article, CommentRepository $commentRepository, Request $request, EntityManagerInterface $em): Response
     {
         $user = $this->getUser();
-        // $comments = $commentRepository->findBy([], ['createdAt' => 'DESC']);
+        
+        $comments = $commentRepository->findBy([], ['createdAt' => 'DESC']);
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid()){
+            $comment->setAuthor($this->getUser());
+            $em->persist($comment);
+            $em->flush();
+            
+            return $this->redirectToRoute('app_article_single', [
+                'id' => $article->getId()
+            ]);
+        }
 
 
-        // if ($article->getAuthor() === $user) {
-        //     $user = $userRepository->findAll();
-        // }
         return $this->render('article/single.html.twig', [
             'article' => $article,
             'user' => $user,
-            // 'comments' => $comments,
+            'comments' => $comments,
+            'commentform' => $form->createView()
         ]);
     }
 

@@ -30,9 +30,9 @@
                     <td>{{ booking.end ? booking.end|date('Y-m-d H:i:s') : '' }}</td>
                     <td>{{ booking.description }}</td>
                     <td>{{ booking.allDay ? 'Yes' : 'No' }}</td>
-                    <td>{{ booking.backgroundColor }}</td>
-                    <td>{{ booking.borderColor }}</td>
-                    <td>{{ booking.textColor }}</td>
+                    <td style="background-color:{{ booking.backgroundColor }}"></td>
+                    <td style="background-color:{{ booking.borderColor  }}"></td>
+                    <td style="background-color:{{ booking.textColor }}"></td>
                     <td>
                         <a href="{{ path('app_booking_show', {'id': booking.id}) }}" class="btn">Montrer</a>
                         {% if is_granted('ROLE_ADMIN')%}

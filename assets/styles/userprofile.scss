@@ -8,6 +8,7 @@
         padding: 3em;
         .flexbox{
             @include flex ($just: space-between);
+            margin-top: 2em;
         }
         .user-text{
             p, label, input{
@@ -17,12 +18,16 @@
                 padding-right: 2em;
             }
         }
-        .user-avatar{
-            height: 300px;
-            width: 300px;
+        #user-avatar{
+            height: 100px;
+            width: 100px;
             img{
+                width: 100%;
                 object-fit: cover;
             }
         }
+    }
+    #user-articles{
+        margin: 3em;
     }
 }

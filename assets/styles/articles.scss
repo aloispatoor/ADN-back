@@ -34,4 +34,18 @@
 
 #singleArticle{
     margin: 5em;
+    .article-container{
+        padding-bottom: 2em;
+        border-bottom: 1px solid black;
+    }
+    .createComment{
+        margin : 2em 0;
+        .button-container{
+            margin-top: 2em;
+        }
+    }
+    #comments{
+        padding: 2em 0;
+        border-bottom: 1px solid black;
+    }
 }

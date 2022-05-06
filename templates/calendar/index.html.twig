@@ -25,6 +25,7 @@
 
 {% block javascripts %}
 	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.js" integrity="sha256-bFpArdcNM5XcSM+mBAUSDAt4YmEIeSAdUASB2rrSli4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/locales-all.js" integrity="sha256-Mu1bnaszjpLPWI+/bY7jB6JMtHj5nn9zIAsXMuaNxdk=" crossorigin="anonymous"></script>
 	<script>
 		window.onload = () => {
             let calendarEl = document.querySelector('#calendrier');
@@ -33,7 +34,7 @@
                 locale: 'fr',
                 timeZone: 'Europe/Paris',
                 headerToolbar: {
-                    start: 'prev,next',
+                    start: 'today prev,next',
                     center: 'title',
                     end: ''
                 },
