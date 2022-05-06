@@ -10,6 +10,7 @@ use App\Repository\UserRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,20 +21,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ArticleController extends AbstractController
 {
     #[Route('/', name: 'app_article_index')]
-    public function index(ArticleRepository $articleRepository): Response
+    public function index(ArticleRepository $articleRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $articles = $articleRepository->findBy([], ['createdAt' => 'DESC']);
+
+        $articles = $paginator->paginate($articles, $request->query->getInt('page', 1), 6);
+
         return $this->render('article/index.html.twig', [
             'articles' => $articles,
         ]);
     }
 
     #[Route('/{id}<\d+>}', name: 'app_article_single')]
-    public function single(Article $article, CommentRepository $commentRepository, Request $request, EntityManagerInterface $em): Response
+    public function single(Article $article, CommentRepository $commentRepository, Request $request, EntityManagerInterface $em, PaginatorInterface $paginator): Response
     {
         $user = $this->getUser();
         
         $comments = $commentRepository->findBy([], ['createdAt' => 'DESC']);
+        $comments = $paginator->paginate($comments, $request->query->getInt('page', 1), 6);
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);

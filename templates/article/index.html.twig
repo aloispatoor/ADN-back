@@ -10,5 +10,6 @@
                 <p>{{ article.content|raw }}</p>
             </div>
         {% endfor %}
+        {{ knp_pagination_render(articles, 'pagination.html.twig') }}
     </section>
 {% endblock %}

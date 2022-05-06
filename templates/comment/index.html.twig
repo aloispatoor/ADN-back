@@ -11,4 +11,5 @@
             <small>{{ comment.createdAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}</small>
         </div>
     {% endfor %}
+        {{ knp_pagination_render(comments, 'pagination.html.twig') }}
 {% endblock %}
