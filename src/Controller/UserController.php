@@ -13,11 +13,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/user')]
+/*
+* @ParamConverter("user", options={"id" = "user_id"})
+*/
 class UserController extends AbstractController
 {
     #[Route('/profile', name: 'app_user_profile')]
     #[IsGranted('ROLE_USER', message: 'Vous devez être connecté en tant qu\'utilisateu-rice pour accéder à cette page')]
-    public function profile(ArticleRepository $articleRepository): Response
+    public function profile(User $user, ArticleRepository $articleRepository): Response
     {
         
         $user = $this->getUser();
@@ -46,7 +49,17 @@ class UserController extends AbstractController
         if ($this->getUser() === $user) {
             $form = $this->createForm(UserType::class, $user);
             $form->handleRequest($request);
+
             if ($form->isSubmitted() && $form->isValid()) {
+                $user = $form->getData();
+                if ($user->getPlainPassword() !== null) {
+                    $user->setPassword($this->userPasswordEncoder->encode(
+                        $user->getPlainPassword(),
+                        $user
+                    ));
+                }
+
+                $em->persist($user);
                 $em->flush();
                 $this->addFlash('success', 'Informations modifiées avec succès !');
 

@@ -1,4 +1,4 @@
-#userProfile{
+#userProfile, #editUserProfile{
     padding: 5em;
     h2{
         margin-bottom: 3em;
@@ -30,4 +30,13 @@
     #user-articles{
         margin: 3em;
     }
+    form{
+        @include flex($dir: column);
+        gap: 2em;
+        label{
+            padding-right: 1em;
+        }
+    }
 }
+
+

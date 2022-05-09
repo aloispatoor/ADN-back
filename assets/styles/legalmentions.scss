@@ -1,0 +1,16 @@
+#legalMentions{
+    padding : 3em;
+    background-image: url(../../public/images/2202_w022_n001_542_holi_p15_542.png);
+    background-size: cover;
+    h3{
+        margin-bottom: 1em;
+    }
+    section{
+        margin: 2em;
+        padding: 5em;
+        @include glass;
+        article{
+            margin: 2em 0;
+        }
+    }
+}

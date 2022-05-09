@@ -2,14 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 
 /**
@@ -17,7 +18,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @Vich\Uploadable
  */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, \Serializable, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -41,7 +42,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @Vich\UploadableField(mapping="avatars", fileNameProperty="avatar")
-     * @var File
+     * @var File|null
      */
     private $avatarFile;
 
@@ -56,6 +57,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Comment::class)]
     private $comments;
+
+    private $plainPassword;
 
     public function __construct()
     {
@@ -125,13 +128,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
+    public function setPlainPassword(string $plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+    }
+
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
     public function eraseCredentials()
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 
     public function getUsername(): ?string
@@ -146,17 +155,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function setAvatarFile(File $avatar = null)
+    /**
+    * @param null|File $imageFile
+    * @return User
+    * @throws Exception
+    */
+    public function setAvatarFile(?File $avatarFile): User
     {
-        $this->avatarFile = $avatar;
-
-        // VERY IMPORTANT:
-        // It is required that at least one field changes if you are using Doctrine,
-        // otherwise the event listeners won't be called and the file is lost
-        if ($avatar) {
-            // if 'updatedAt' is not defined in your entity, use another property
-            $this->updatedAt = new \DateTime('now');
-        }
+    $this->avatarFile = $avatarFile;
+    if ($this->avatarFile instanceof UploadedFile) {
+    $this->updated_at = new \DateTime('now');
+    }
+    return $this;
     }
 
     public function getAvatarFile()
@@ -164,16 +174,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->avatarFile;
     }
 
-    public function getAvatar()
+    public function getAvatar(): ?string
     {
         return $this->avatar;
     }
 
-    public function setAvatar(?string $avatar)
+    public function setAvatar(?string $avatar): User
     {
         $this->avatar = $avatar;
 
-        return $this->avatar;
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
     }
 
     /**
@@ -234,5 +256,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    public function serialize() 
+    {
+
+        return serialize(array(
+        $this->id,
+        $this->username,
+        $this->password,
+        ));
+        
+    }
+        
+    public function unserialize($serialized) 
+    {
+    
+        list (
+        $this->id,
+        $this->username,
+        $this->password,
+        ) = unserialize($serialized);
     }
 }

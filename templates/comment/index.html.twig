@@ -3,6 +3,13 @@
     {% for comment in comments %}
         <div id="comments">
             <p>
+                <div id="user-avatar">
+                    {% if user.avatar == null %}
+                        <img src={{ asset('images/avatar_generic.png') }} alt="Avatar générique">
+                    {% else %}
+                        <img src={{ vich_uploader_asset(avatar) }} alt={{user.username}}>
+                    {% endif %}
+                </div>
                 <a href="{{ path('app_user_usersprofile', {id: comment.author.id})}}">
                     {{ comment.author.username }}
                 </a>
