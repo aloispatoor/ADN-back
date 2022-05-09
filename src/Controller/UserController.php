@@ -13,9 +13,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/user')]
-/*
-* @ParamConverter("user", options={"id" = "user_id"})
-*/
 class UserController extends AbstractController
 {
     #[Route('/profile', name: 'app_user_profile')]
@@ -50,29 +47,31 @@ class UserController extends AbstractController
             $form = $this->createForm(UserType::class, $user);
             $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid()) {
-                $user = $form->getData();
-                if ($user->getPlainPassword() !== null) {
-                    $user->setPassword($this->userPasswordEncoder->encode(
-                        $user->getPlainPassword(),
-                        $user
-                    ));
-                }
-
-                $em->persist($user);
-                $em->flush();
-                $this->addFlash('success', 'Informations modifiées avec succès !');
-
-                return $this->redirectToRoute('app_user_profile');
-            }
-
-            return $this->renderForm('user/edit.html.twig', [
-                'form' => $form,
-                'user' => $user,
-                'action' => 'Edit'
-                ]);
+            // return $this->redirectToRoute('app_user_profile');
         }
 
-        return $this->redirectToRoute('app_user_profile');
+        if ($user->getPlainPassword() !== null) {
+            $user->setPassword($this->userPasswordEncoder->encode(
+                $user->getPlainPassword(),
+                $user
+            ));
+            return $this->redirectToRoute('app_user_profile');
+        }
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $form->getData();
+
+            $em->persist($user);
+            $em->flush();
+            $this->addFlash('success', 'Informations modifiées avec succès !');
+
+            return $this->redirectToRoute('app_user_profile');
+        }
+
+        return $this->renderForm('user/edit.html.twig', [
+            'form' => $form,
+            'user' => $user,
+            'action' => 'Edit'
+            ]);
     }
 }
