@@ -15,6 +15,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/user')]
 class UserController extends AbstractController
 {
+    #[Route('/usersProfile/{id<\d+>}', name: 'app_user_usersprofile')]
+    public function usersProfile(ArticleRepository $articleRepository, User $user): Response
+    {
+        $articles = $articleRepository->findBy(['author' => $user->getUserIdentifier()], ['createdAt' => 'DESC']);
+        return $this->render('user/usersProfile.html.twig', [
+            'articles' => $articles,
+            'user' => $user
+        ]);
+    }
+
     #[Route('/profile', name: 'app_user_profile')]
     #[IsGranted('ROLE_USER', message: 'Vous devez être connecté en tant qu\'utilisateu-rice pour accéder à cette page')]
     public function profile(User $user, ArticleRepository $articleRepository): Response
@@ -29,16 +39,10 @@ class UserController extends AbstractController
         ]);  
     }
 
-    #[Route('/usersProfile/{id<\d+>}', name: 'app_user_usersprofile')]
-    public function usersProfile(ArticleRepository $articleRepository, User $user): Response
-    {
-        $articles = $articleRepository->findBy(['author' => $user->getUserIdentifier()], ['createdAt' => 'DESC']);
-        return $this->render('user/usersProfile.html.twig', [
-            'articles' => $articles,
-            'user' => $user
-        ]);
-    }
-
+    /**
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/edit/{id<\d+>}', name: 'app_user_edit')]
     #[IsGranted('ROLE_USER', message: 'Vous devez être connecté en tant qu\'utilisateu-rice pour accéder à cette page')]
     public function edit(User $user, Request $request, EntityManagerInterface $em): Response
@@ -51,7 +55,8 @@ class UserController extends AbstractController
         }
 
         if ($user->getPlainPassword() !== null) {
-            $user->setPassword($this->userPasswordEncoder->encode(
+            $user->setPassword(
+                $this->userPasswordEncoder->encode(
                 $user->getPlainPassword(),
                 $user
             ));

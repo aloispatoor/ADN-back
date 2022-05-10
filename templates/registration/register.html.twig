@@ -27,7 +27,9 @@
                         'label' : "Cochez si vous êtes d'accord avec les conditions d'utilisation",
                         'attr': {'class': 'form-check form-check-inline'}
                     }) }}
-
+                    {% for role in registrationForm.roles %}
+                        {{ form_row(role)}}
+                    {% endfor %}
                     <button type="submit" class="button">S'incrire</button>
                 {{ form_end(registrationForm) }}
             </div>

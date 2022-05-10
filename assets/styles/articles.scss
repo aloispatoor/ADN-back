@@ -10,11 +10,6 @@
         @include flex($dir : column);
         padding: 3em;
         @include glass;
-        transition: all .3s ease;
-    }
-    .container:hover{
-        transform: translate(-5px, -5px);
-        box-shadow: 5px 5px $violet;
     }
 }
 

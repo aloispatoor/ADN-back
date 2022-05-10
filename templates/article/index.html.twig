@@ -4,12 +4,16 @@
 
 {% block body %}
     <section id="articlesList">
-        {% for article in articles %}
             <div class="container">
+            {% for article in articles %}
+                {% if article is empty %}
+                    <p>Il n'y a pas (encore) d'articles publiés</p>
+                {% else %}
                 <h2><a href="{{ path('app_article_single', {id: article.id})}}">{{ article.title }}</a></h2>
                 <p>{{ article.content|raw }}</p>
+                {% endif %}
+            {% endfor %}
             </div>
-        {% endfor %}
         {{ knp_pagination_render(articles, 'pagination.html.twig') }}
     </section>
 {% endblock %}
