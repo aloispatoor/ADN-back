@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
  * @Vich\Uploadable
  */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User implements UserInterface, \Serializable, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -100,7 +100,7 @@ class User implements UserInterface, \Serializable, PasswordAuthenticatedUserInt
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        $roles[] = '';
         
 
         return array_unique($roles);
@@ -258,24 +258,24 @@ class User implements UserInterface, \Serializable, PasswordAuthenticatedUserInt
         return $this;
     }
 
-    public function serialize() 
-    {
+    // public function serialize() 
+    // {
 
-        return serialize(array(
-        $this->id,
-        $this->username,
-        $this->password,
-        ));
+    //     return serialize(array(
+    //     $this->id,
+    //     $this->username,
+    //     $this->password,
+    //     ));
         
-    }
+    // }
         
-    public function unserialize($serialized) 
-    {
+    // public function unserialize($serialized) 
+    // {
     
-        list (
-        $this->id,
-        $this->username,
-        $this->password,
-        ) = unserialize($serialized);
-    }
+    //     list (
+    //     $this->id,
+    //     $this->username,
+    //     $this->password,
+    //     ) = unserialize($serialized);
+    // }
 }
