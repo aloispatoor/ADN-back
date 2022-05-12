@@ -28,7 +28,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     private $email;
 
-    #[ORM\Column(type: 'json')]
+    #[ORM\Column(type: 'array')]
     private $roles = [];
 
     #[ORM\Column(type: 'string')]
@@ -100,16 +100,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = '';
+        $roles = 'ROLE_USER';
         
 
-        return array_unique($roles);
+        return array($roles);
     }
 
-    public function setRoles(array $roles): self
+    public function setRoles($roles): self
     {
         $this->roles = $roles;
-
+        // $this->roles[] = current($roles);
         return $this;
     }
 
@@ -258,24 +258,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    // public function serialize() 
-    // {
+    public function serialize() 
+    {
 
-    //     return serialize(array(
-    //     $this->id,
-    //     $this->username,
-    //     $this->password,
-    //     ));
+        return serialize(array(
+        $this->id,
+        $this->username,
+        $this->password,
+        ));
         
-    // }
+    }
         
-    // public function unserialize($serialized) 
-    // {
+    public function unserialize($serialized) 
+    {
     
-    //     list (
-    //     $this->id,
-    //     $this->username,
-    //     $this->password,
-    //     ) = unserialize($serialized);
-    // }
+        list (
+        $this->id,
+        $this->username,
+        $this->password,
+        ) = unserialize($serialized);
+    }
 }

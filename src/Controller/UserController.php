@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/user')]
 class UserController extends AbstractController
 {
-    #[Route('/usersProfile/{id<\d+>}', name: 'app_user_usersprofile')]
+    #[Route('/usersProfile/{id<\d+>}', name: 'app_user_usersprofile', methods: ['GET'])]
     public function usersProfile(ArticleRepository $articleRepository, User $user): Response
     {
         $articles = $articleRepository->findBy(['author' => $user->getUserIdentifier()], ['createdAt' => 'DESC']);
@@ -25,7 +25,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/profile', name: 'app_user_profile')]
+    #[Route('/profile', name: 'app_user_profile', methods: ['GET'])]
     #[IsGranted('ROLE_USER', message: 'Vous devez être connecté en tant qu\'utilisateu-rice pour accéder à cette page')]
     public function profile(User $user, ArticleRepository $articleRepository): Response
     {
@@ -39,11 +39,7 @@ class UserController extends AbstractController
         ]);  
     }
 
-    /**
-     * @param Request $request
-     * @return Response
-     */
-    #[Route('/edit/{id<\d+>}', name: 'app_user_edit')]
+    #[Route('/edit/{id<\d+>}', name: 'app_user_edit', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER', message: 'Vous devez être connecté en tant qu\'utilisateu-rice pour accéder à cette page')]
     public function edit(User $user, Request $request, EntityManagerInterface $em): Response
     {
@@ -51,17 +47,16 @@ class UserController extends AbstractController
             $form = $this->createForm(UserType::class, $user);
             $form->handleRequest($request);
 
-            // return $this->redirectToRoute('app_user_profile');
+            if ($user->getPlainPassword() !== null) {
+                $user->setPassword(
+                    $this->userPasswordEncoder->encode(
+                    $user->getPlainPassword(),
+                    $user
+                ));
+                return $this->redirectToRoute('app_user_profile');
+            }
         }
 
-        if ($user->getPlainPassword() !== null) {
-            $user->setPassword(
-                $this->userPasswordEncoder->encode(
-                $user->getPlainPassword(),
-                $user
-            ));
-            return $this->redirectToRoute('app_user_profile');
-        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
