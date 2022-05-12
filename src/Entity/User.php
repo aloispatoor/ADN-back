@@ -188,12 +188,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
@@ -258,24 +258,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function serialize() 
-    {
+    // public function serialize() 
+    // {
 
-        return serialize(array(
-        $this->id,
-        $this->username,
-        $this->password,
-        ));
+    //     return serialize(array(
+    //     $this->id,
+    //     $this->username,
+    //     $this->password,
+    //     ));
         
-    }
+    // }
         
-    public function unserialize($serialized) 
-    {
+    // public function unserialize($serialized) 
+    // {
     
-        list (
-        $this->id,
-        $this->username,
-        $this->password,
-        ) = unserialize($serialized);
-    }
+    //     list (
+    //     $this->id,
+    //     $this->username,
+    //     $this->password,
+    //     ) = unserialize($serialized);
+    // }
 }

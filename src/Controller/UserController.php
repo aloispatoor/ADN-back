@@ -27,7 +27,7 @@ class UserController extends AbstractController
 
     #[Route('/profile', name: 'app_user_profile', methods: ['GET'])]
     #[IsGranted('ROLE_USER', message: 'Vous devez être connecté en tant qu\'utilisateu-rice pour accéder à cette page')]
-    public function profile(User $user, ArticleRepository $articleRepository): Response
+    public function profile(ArticleRepository $articleRepository): Response
     {
         
         $user = $this->getUser();
