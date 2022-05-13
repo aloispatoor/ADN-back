@@ -1,0 +1,7 @@
+<div id="user-avatar">
+    {% if avatar.image is not defined %}
+        <img src={{ asset('images/avatar_generic.png') }} alt="Avatar générique">
+    {% else %}
+        <img src={{ vich_uploader_asset(image) }} alt={{avatar.user.username}}>
+    {% endif %}
+</div>

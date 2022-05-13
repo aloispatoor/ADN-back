@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Avatar;
 use App\Form\UserType;
+use App\Form\AvatarType;
+use App\Repository\AvatarRepository;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,26 +19,30 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class UserController extends AbstractController
 {
     #[Route('/usersProfile/{id<\d+>}', name: 'app_user_usersprofile', methods: ['GET'])]
-    public function usersProfile(ArticleRepository $articleRepository, User $user): Response
+    public function usersProfile(ArticleRepository $articleRepository, AvatarRepository $avatarRepository, User $user): Response
     {
         $articles = $articleRepository->findBy(['author' => $user->getUserIdentifier()], ['createdAt' => 'DESC']);
+        $userAvatar = $avatarRepository->findBy(['user' => $user->getUserIdentifier()]);
         return $this->render('user/usersProfile.html.twig', [
             'articles' => $articles,
-            'user' => $user
+            'user' => $user,
+            'avatar' => $userAvatar
         ]);
     }
 
     #[Route('/profile', name: 'app_user_profile', methods: ['GET'])]
     #[IsGranted('ROLE_USER', message: 'Vous devez être connecté en tant qu\'utilisateu-rice pour accéder à cette page')]
-    public function profile(ArticleRepository $articleRepository): Response
+    public function profile(ArticleRepository $articleRepository, AvatarRepository $avatarRepository): Response
     {
-        
         $user = $this->getUser();
+
+        $userAvatar = $avatarRepository->findBy([]);
         $articles = $articleRepository->findBy(['author' => $user->getUserIdentifier()], ['createdAt' => 'DESC']);
 
         return $this->render('user/profile.html.twig', [
             'articles' => $articles,
-            'user' => $user
+            'user' => $user,
+            'avatar' => $userAvatar
         ]);  
     }
 
@@ -43,34 +50,47 @@ class UserController extends AbstractController
     #[IsGranted('ROLE_USER', message: 'Vous devez être connecté en tant qu\'utilisateu-rice pour accéder à cette page')]
     public function edit(User $user, Request $request, EntityManagerInterface $em): Response
     {
-        if ($this->getUser() === $user) {
+        if ($this->getUser()) {
             $form = $this->createForm(UserType::class, $user);
             $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $user = $form->getData();
+                $em->persist($user);
+                $em->flush();
+                $this->addFlash('success', 'Informations modifiées avec succès !');
+    
+                return $this->redirectToRoute('app_user_profile');
+            }
+        }
+        if ($user->getPlainPassword() !== null) {
+            $user->setPassword(
+                $this->userPasswordEncoder->encode(
+                $user->getPlainPassword(),
+                $user
+            ));
+            return $this->redirectToRoute('app_user_profile');
+        }
 
-            if ($user->getPlainPassword() !== null) {
-                $user->setPassword(
-                    $this->userPasswordEncoder->encode(
-                    $user->getPlainPassword(),
-                    $user
-                ));
+        if($this->getUser()) {
+            $imageForm = $this->createForm(AvatarType::class);
+            $imageForm->handleRequest($request);
+            if ($imageForm->isSubmitted() && $imageForm->isValid()) {
+                $user = $imageForm->getData();
+                $em->persist($user);
+                $em->flush();
+    
                 return $this->redirectToRoute('app_user_profile');
             }
         }
 
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user = $form->getData();
-
-            $em->persist($user);
-            $em->flush();
-            $this->addFlash('success', 'Informations modifiées avec succès !');
-
-            return $this->redirectToRoute('app_user_profile');
-        }
+        
 
         return $this->renderForm('user/edit.html.twig', [
             'form' => $form,
+            'imageForm' => $imageForm,
             'user' => $user,
+            // 'avatar' => $avatar,
             'action' => 'Edit'
             ]);
     }

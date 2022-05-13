@@ -7,16 +7,8 @@
         <h2>Bonjour {{ user.username }}</h2>
         <article id="userInfo" class="container-fluid">
             {{ form_start(form) }}
-                {% if user.avatar == null %}
-                    <img src={{ asset('images/avatar_generic.png') }} alt="Avatar générique">
-                {% else %}
-                    <img src={{ vich_uploader_asset(avatar) }} alt={{user.username}}>
-                {% endif %}
-                {{ form_row(form.avatarFile, { 
-                    'label' : "Ajouter / Modifier votre avatar",
-                    'attr': {'class': 'form-control form-control-file'}
-                    })
-                }}
+                {{ include('avatar/show.html.twig') }}
+                {{ include('avatar/edit.html.twig') }}
                 {{ form_row(form.email, { 
                     'label' : "Modifier votre adresse e-mail",
                         'attr': {'class': 'form-control'}

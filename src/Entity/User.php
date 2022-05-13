@@ -5,10 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
-use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+// use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
@@ -37,21 +36,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255)]
     private $username;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $avatar;
-
-    /**
-     * @Vich\UploadableField(mapping="avatars", fileNameProperty="avatar")
-     * @var File|null
-     */
-    private $avatarFile;
-
-    /**
-     * @ORM\Column(type="datetime")
-     * @var \DateTime
-     */
-    private $updatedAt;
-
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Article::class)]
     private $articles;
 
@@ -59,6 +43,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $comments;
 
     private $plainPassword;
+
+    #[ORM\OneToOne(mappedBy: 'user', targetEntity: Avatar::class, cascade: ['persist', 'remove'])]
+    private $avatar;
 
     public function __construct()
     {
@@ -156,49 +143,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-    * @param null|File $imageFile
-    * @return User
-    * @throws Exception
-    */
-    public function setAvatarFile(?File $avatarFile): User
-    {
-    $this->avatarFile = $avatarFile;
-    if ($this->avatarFile instanceof UploadedFile) {
-    $this->updated_at = new \DateTime('now');
-    }
-    return $this;
-    }
-
-    public function getAvatarFile()
-    {
-        return $this->avatarFile;
-    }
-
-    public function getAvatar(): ?string
-    {
-        return $this->avatar;
-    }
-
-    public function setAvatar(?string $avatar): User
-    {
-        $this->avatar = $avatar;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Article>
      */
     public function getArticles(): Collection
@@ -258,24 +202,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    // public function serialize() 
-    // {
+    public function getAvatar(): ?Avatar
+    {
+        return $this->avatar;
+    }
 
-    //     return serialize(array(
-    //     $this->id,
-    //     $this->username,
-    //     $this->password,
-    //     ));
-        
-    // }
-        
-    // public function unserialize($serialized) 
-    // {
-    
-    //     list (
-    //     $this->id,
-    //     $this->username,
-    //     $this->password,
-    //     ) = unserialize($serialized);
-    // }
+    public function setAvatar(?Avatar $avatar): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($avatar === null && $this->avatar !== null) {
+            $this->avatar->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($avatar !== null && $avatar->getUser() !== $this) {
+            $avatar->setUser($this);
+        }
+
+        $this->avatar = $avatar;
+
+        return $this;
+    }
 }
