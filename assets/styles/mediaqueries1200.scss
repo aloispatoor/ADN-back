@@ -1,4 +1,7 @@
-@media screen and (max-width: 1100px){
+@media screen and (max-width: 1200px){
+    h2{
+        font-size: 1.5em;
+    }
     header .backgroundImg #title h1{
         font-size: 2em;
     }
@@ -23,13 +26,29 @@
         }
     } 
 
+    #sectionBlog{
+        gap: 10em;
+        article:first-child{
+            padding: 2em;
+            h2{
+                margin-bottom: 0.5em;
+            }
+            p{
+                text-align:right;
+            }
+        }
+    }
+
     #sectionRDV{
-        height: 60rem;
+        height: 80rem;
         padding-bottom: 2em;
         @include flex ($dir: column);
         gap: 2em;
         article, #permanences{
             width: 50%;
+        }
+        article h2{
+            padding-bottom: 0.2em;
         }
     }
     footer{
@@ -50,12 +69,27 @@
             padding: 2em;
             article{
                 width: 50%;
+                height: 30em;
+            }
+        }
+    }
+    #story{
+        .textAndPicture{
+            @include flex($dir: column);
+            p{
+                margin-top: 2em;
+                padding-left: 0;
             }
         }
     }
     #globalContact{
+        padding-top: 1rem;
+        gap: 1rem;
         @include flex($dir: column-reverse);
         gap: 2em;
-        height: 130vh;
+        height: 140vh;
+        article{
+            width: 30em;
+        }
     }
 }

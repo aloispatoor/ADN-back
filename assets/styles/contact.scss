@@ -13,15 +13,15 @@
     background-size: cover;
     @include flex($just:space-evenly, $align:flex-start);
     padding-top: 3rem;
-    .requestArticle{
-        width: 30%;
-    }
     article{
+        @include glass;
+        padding: 3em;
+        .requestArticle{
+            width: 30%;
+        }
         .button-container{
             @include flex;
         }
-        @include glass;
-        padding: 3em;
         p{
             margin-bottom: 1em;
             font-size: 1.2em;
