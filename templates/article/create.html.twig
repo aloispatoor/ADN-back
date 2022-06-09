@@ -9,7 +9,8 @@
         <div class="article-container">
             {{form_start(form)}}
             {{form_row(form.title, {
-                'label' : 'Titre : '
+                'label' : 'Titre : ',
+                'attr': {'class': 'form-control'}
             })}}
             {{form_row(form.content, {
                 'label' : 'Contenu : '

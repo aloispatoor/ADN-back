@@ -21,6 +21,9 @@
     .article-container{
         padding: 3em;
         border: 1px solid black;
+        .form-control{
+            margin-bottom: 2em;
+        }
         button{
             margin-top: 2em;
         }

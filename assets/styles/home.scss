@@ -55,13 +55,12 @@
         transform: translate(-50%);
     }
     article:first-child{
-        padding: 5em;
-        width: 30%;
-        height: 100%;
+        padding: 2em;
+        width: 40em;
         @include glass;
         h2{
             text-align: right;
-            margin-bottom: 2em;
+            margin-bottom: 1.5em;
         }
         p{
             text-align:right;
