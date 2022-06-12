@@ -47,16 +47,10 @@
     height: 60vh;
     padding: 5em 10em;
     @include flex ($dir: row-reverse);
-    gap: 30em;
-    .button{
-        position: absolute;
-        left: 50%;
-        bottom: 5em;
-        transform: translate(-50%);
-    }
+    gap: 5em;
     article:first-child{
         padding: 2em;
-        width: 40em;
+        width: 60em;
         @include glass;
         h2{
             text-align: right;
@@ -76,6 +70,9 @@
         i{
             padding: 0.2em;
         }
+    }
+    .button-container{
+        @include flex;
     }
 }
 

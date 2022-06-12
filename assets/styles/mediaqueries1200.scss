@@ -22,6 +22,9 @@
             ul{
                 @include flex($dir:column, $align:flex-start);
                 margin-left: 1em;
+                li{
+                    font-size: 0.8em;
+                }
             }
         }
     } 
@@ -43,7 +46,7 @@
         height: 80rem;
         padding-bottom: 2em;
         @include flex ($dir: column);
-        gap: 2em;
+        gap: 10em;
         article, #permanences{
             width: 50%;
         }
