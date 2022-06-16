@@ -48,7 +48,7 @@
         @include flex ($dir: column);
         gap: 10em;
         article, #permanences{
-            width: 50%;
+            width: 70%;
         }
         article h2{
             padding-bottom: 0.2em;
@@ -90,7 +90,7 @@
         gap: 1rem;
         @include flex($dir: column-reverse);
         gap: 2em;
-        height: 140vh;
+        height: 180vh;
         article{
             width: 30em;
         }

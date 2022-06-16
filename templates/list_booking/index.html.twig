@@ -1,5 +1,9 @@
-{% for booking in bookings %}
-    <h3>{{ booking.title }}</h3>
-    <small>{{ booking.start|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}</small>
-    <p>{{ booking.description }}</p>
-{% endfor %}
+{% if bookings is empty %}
+    <p>Il n'y a pas (encore) d'événements dans le calendrier</p>
+{% else %}
+    {% for booking in bookings %}
+        <h3>{{ booking.title }}</h3>
+        <small>{{ booking.start|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}</small>
+        <p>{{ booking.description }}</p>
+    {% endfor %}
+{% endif %}

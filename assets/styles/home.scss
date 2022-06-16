@@ -1,5 +1,5 @@
 #sectionAbout{
-    height: 40vh;
+    height: 60vh;
     @include flex;
     article{
         @include flex($dir:column);
@@ -46,7 +46,7 @@
     background-position: center;
     height: 60vh;
     padding: 5em 10em;
-    @include flex ($dir: row-reverse);
+    @include flex ($dir: row);
     gap: 5em;
     article:first-child{
         padding: 2em;
@@ -104,9 +104,12 @@
         @include flex($dir:column);
         text-align:center;
         padding: 2% 5% 5% 5%;
+        width : 30em;
+        height: 30em;
         @include glass;
         h2{
-            padding-bottom: 2em;
+            font-size: 1.2em;
+            padding-bottom: 1em;
         }
         .button{
             margin-top : 1em;
