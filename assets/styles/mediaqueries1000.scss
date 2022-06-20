@@ -1,0 +1,32 @@
+@media screen and (max-width: 1000px){
+    #sectionBlog{
+        height: 140vh;
+    }
+    h2{
+        font-size: 1.2em;
+    }
+    header{
+        height: 60vh;
+    }
+    header .backgroundImg #title{
+        h1{
+            font-size: 1.5em;
+        }
+    }
+
+    #sectionAbout{
+        height: 40vh;
+    }
+
+    #sectionPartners{
+        article{
+            padding: 2em;
+        }
+    }
+
+    #sectionBlog{
+        height: 120vh;
+        gap: 1em;
+        padding: 2em;
+    }
+}

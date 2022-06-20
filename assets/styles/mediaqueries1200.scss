@@ -4,6 +4,7 @@
     }
     header .backgroundImg #title h1{
         font-size: 2em;
+        margin: 1em;
     }
     #menuBurger{
         display: block;
@@ -31,6 +32,7 @@
 
     #sectionBlog{
         gap: 10em;
+        height: 120vh;
         article:first-child{
             padding: 2em;
             h2{
@@ -94,5 +96,9 @@
         article{
             width: 30em;
         }
+    }
+
+    #sectionPartners{
+        @include flex($dir: column);
     }
 }
