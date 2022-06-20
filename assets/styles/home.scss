@@ -44,10 +44,12 @@
     background-image: url(../../public/images/unicorn.jpeg);
     background-size: cover;
     background-position: center;
-    height: 60vh;
+    height: 100vh;
     padding: 5em 10em;
-    @include flex ($dir: row);
-    gap: 5em;
+    .flexbox{
+        @include flex($dir:row);
+        gap: 5em;
+    }
     article:first-child{
         padding: 2em;
         width: 60em;
@@ -73,6 +75,12 @@
     }
     .button-container{
         @include flex;
+    }
+
+    .firstBlogArticle{
+        @include glass;
+        padding: 1em;
+        margin: 3em;
     }
 }
 
@@ -110,6 +118,9 @@
         h2{
             font-size: 1.2em;
             padding-bottom: 1em;
+        }
+        h3{
+            font-size: 1em;
         }
         .button{
             margin-top : 1em;

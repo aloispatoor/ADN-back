@@ -12,7 +12,7 @@ class AvatarController extends AbstractController
     public function show(): Response
     {
         return $this->render('avatar/show.html.twig', [
-            'controller_name' => 'AvatarController',
+            
         ]);
     }
 }

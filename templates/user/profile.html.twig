@@ -18,7 +18,7 @@
             </div>
         </article>
         {% if user.articles == null %}
-
+            <p>Vous n'avez pas (encore) publié d'article</p>
         {% else %}
             {% if is_granted('ROLE_ADMIN') %}
                 <article id="user-articles">

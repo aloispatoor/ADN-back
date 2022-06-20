@@ -26,10 +26,10 @@
                 <tr>
                     <td>{{ booking.id }}</td>
                     <td>{{ booking.title }}</td>
-                    <td>{{ booking.start ? booking.start|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ booking.end ? booking.end|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ booking.start ? booking.start|date('d-m-Y') : '' }}</td>
+                    <td>{{ booking.end ? booking.end|date('d-m-Y') : '' }}</td>
                     <td>{{ booking.description }}</td>
-                    <td>{{ booking.allDay ? 'Yes' : 'No' }}</td>
+                    <td>{{ booking.allDay ? 'Oui' : 'Non' }}</td>
                     <td style="background-color:{{ booking.backgroundColor }}"></td>
                     <td style="background-color:{{ booking.borderColor  }}"></td>
                     <td style="background-color:{{ booking.textColor }}"></td>

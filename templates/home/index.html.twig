@@ -27,17 +27,29 @@
             </section>
             <!-- BLOG -->
             <section id="sectionBlog">
-                <article>
-                    <h2>notre blog</h2>
-                    <p>Notre association publie régulièrement des billets de blog que vous pouvez retrouver sur nos divers réseaux sociaux. Mais vous pouvez également les consulter ici sur notre site internet.</p>
-                    <div class="button-container">
-                        <a href="/article" class="button">Consulter</a>
-                    </div>
-                </article>
-                <article class="socialNetworks">
-                    <a href="https://www.facebook.com/AuDeladesNormes" target="_blank"><i class="fab fa-facebook"></i></a>
-                    <a href="https://twitter.com/AuDN24" target="_blank"><i class="fab fa-twitter-square"></i></a>
-                    <a href="https://instagram.com/au.dela.des.normes.24" target="_blank"><i class="fab fa-instagram"></i></a>
+                <div class="flexbox">
+                    <article>
+                        <h2>notre blog</h2>
+                        <p>Notre association publie régulièrement des billets de blog que vous pouvez retrouver sur nos divers réseaux sociaux. Mais vous pouvez également les consulter ici sur notre site internet.</p>
+                        <div class="button-container">
+                            <a href="/article" class="button">Consulter</a>
+                        </div>
+                    </article>
+                    <article class="socialNetworks">
+                        <a href="https://www.facebook.com/AuDeladesNormes" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://twitter.com/AuDN24" target="_blank"><i class="fab fa-twitter-square"></i></a>
+                        <a href="https://instagram.com/au.dela.des.normes.24" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </article>
+                </div>
+                <article class="firstBlogArticle">
+                    <h3>Dernier article du Blog</h3>
+                    {% for article in articles | slice(0,1) %}
+                        <h4>{{ article.title }}</h4>
+                        <p>{{ article.content|length > 500 ? article.content|raw|slice(0, 500) ~ '...' : article.content|raw }}</p>
+                        <div class="button-container">
+                            <a href="{{ path('app_article_single', {id: article.id})}}" class="button">Lire</a>
+                        </div>
+                    {% endfor %}
                 </article>
             </section>
             <!-- CONTACT -->

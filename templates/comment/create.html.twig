@@ -11,4 +11,8 @@
     </div>
     {{form_end(commentform)}}
 </div>
+{% else %}
+<div class="createComment">
+    <p>Vous voulez commenter ? <a href="/login">Connectez-vous ici</a><p>
+</div>
 {% endif %}

@@ -1,5 +1,5 @@
 .loginFormPage{
-    background-image: url(../../public/images/sarlat2.jpg);
+    background-image: url(../../public/images/tourtoirac.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -9,6 +9,13 @@
         @include flex ($dir : column);
         padding: 3em;
         @include glass;
+        .imgSize{
+            width: 20em;
+            margin-bottom: 2em;
+            img{
+                width:100%;
+            }
+        }
         h1{
             margin-bottom: 1em;
         }
@@ -29,6 +36,9 @@
                 label{
                     padding-right: 1em;
                 }
+            }
+            .button{
+                margin-top: 1em;
             }
         }
     }
