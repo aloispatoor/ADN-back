@@ -29,14 +29,14 @@ class RegistrationFormType extends AbstractType
             //     'multiple' => true,
             //     'label' => 'Rôles' 
             // ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'Vous devez acceptez nos conditions d\'utilisation',
-                    ]),
-                ],
-            ])
+            // ->add('agreeTerms', CheckboxType::class, [
+            //     'mapped' => false,
+            //     'constraints' => [
+            //         new IsTrue([
+            //             'message' => 'Vous devez acceptez nos conditions d\'utilisation',
+            //         ]),
+            //     ],
+            // ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'mapped' => false,

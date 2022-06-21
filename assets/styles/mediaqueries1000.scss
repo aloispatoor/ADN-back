@@ -2,10 +2,10 @@
     #sectionBlog{
         height: 140vh;
     }
-    h2{
-        font-size: 1.2em;
-    }
     header{
+        height: 60vh;
+    }
+    header .backgroundImg .carousel{
         height: 60vh;
     }
     header .backgroundImg #title{
@@ -16,6 +16,9 @@
 
     #sectionAbout{
         height: 40vh;
+        article{
+            margin: 1em;
+        }
     }
 
     #sectionPartners{
@@ -28,5 +31,37 @@
         height: 120vh;
         gap: 1em;
         padding: 2em;
+    }
+
+    .button-large{
+        font-size: 2em;
+        padding: 0.8rem 3rem;
+    }
+
+    .button{
+        font-size: 1em;
+        padding: 5px 15px;
+    }
+
+    .button-small{
+        padding: 5px 15px;
+        font-size: 0.8em;
+    }
+
+    #calendar{
+        @include flex($dir:column);
+        gap: 2em;
+    }
+
+    #statusArticles{
+        padding: 2em;
+    }
+
+    #legalMentions{
+        padding: 2em;
+    }
+
+    #globalContact{
+        height: 160vh;
     }
 }

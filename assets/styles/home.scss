@@ -4,6 +4,7 @@
     article{
         @include flex($dir:column);
         padding: 2em;
+        margin: 2em;
         @include glass;
         h2{
             padding-bottom: 2em;

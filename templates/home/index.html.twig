@@ -51,6 +51,8 @@
                         <div class="button-container">
                             <a href="{{ path('app_article_single', {id: article.id})}}" class="button">Lire</a>
                         </div>
+                    {% else %}
+                        <p>Il n'y a pas (encore) d'articles publiés</p>
                     {% endfor %}
                 </article>
             </section>
