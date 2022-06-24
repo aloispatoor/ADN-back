@@ -121,5 +121,20 @@ class ArticleController extends AbstractController
         }
         return $this->redirectToRoute('app_article_index');
     }
+
+    // #[Route('/{id}<\d+>}/comment/delete/{id<\d+>}', name: 'app_comment_delete')]
+    // public function deleteComment(Comment $comment, EntityManagerInterface $em): Response
+    // {
+    //     if ($this->getUser() === $comment->getAuthor()) {
+    //             $em->remove($comment);
+    //             $em->flush();
+    //             $this->addFlash('deleteComment', 'Le commentaire a été supprimé avec succès');
+
+    //             return $this->redirectToRoute('app_article_single', [
+    //                 'id' => $comment->getArticle()
+    //             ]);
+    //     }
+    //     return $this->redirectToRoute('app_article_single');
+    // }
 }
 

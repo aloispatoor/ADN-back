@@ -19,22 +19,19 @@
         </article>
         {% if user.articles == null %}
             <p>Vous n'avez pas (encore) publié d'article</p>
-        {% else %}
-            {% if is_granted('ROLE_ADMIN') %}
-                <article id="user-articles">
-                    <h3>Vos articles</h3>
-                    {% for article in articles %}
-                        <div class="user-article">
-                            <p>{{ article.title }}</p>
-                            <div class="button-container">
-                                <a href="{{path('app_article_single', {id: article.id})}}" class="button">Voir</a>
-                                <a href="{{path('app_article_edit', {id: article.id})}}" class="button">Modifier</a>
-                                <a href="{{path('app_article_delete', {id: article.id})}}" class="button red">Supprimer</a>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </article>
-            {% endif %}
         {% endif %}
+        <article id="user-articles">
+            <h3>Vos articles</h3>
+            {% for article in articles %}
+                <div class="user-article">
+                    <p>{{ article.title }}</p>
+                    <div class="button-container">
+                        <a href="{{path('app_article_single', {id: article.id})}}" class="button">Voir</a>
+                        <a href="{{path('app_article_edit', {id: article.id})}}" class="button">Modifier</a>
+                        <a href="{{path('app_article_delete', {id: article.id})}}" class="button red">Supprimer</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </article>
     </section>
 {% endblock %}
