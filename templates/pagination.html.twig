@@ -1,26 +1,26 @@
 {% if pageCount > 1 %}
-    <nav aria-label="Pagination">
+    <nav aria-label="Pagination" class="button-container">
         {% set classAlign = (align is defined) ? " text-#{align}" : '' %}
         <ul class="pagination{{ classAlign }}">
 
             {% if previous is defined %}
-                <li class="pagination-previous">
+                <li class="pagination-previous btn btn-secondary">
                     <a rel="prev" href="{{ path(route, query|merge({(pageParameterName): previous})) }}">
                         {{ 'label_previous'|trans({}, 'KnpPaginatorBundle') }}
                     </a>
                 </li>
             {% else %}
-                <li class="pagination-previous disabled">
+                <li class="pagination-previous disabled btn btn-secondary">
                     {{ 'label_previous'|trans({}, 'KnpPaginatorBundle') }}
                 </li>
             {% endif %}
 
             {% if startPage > 1 %}
-                <li>
+                <li class="btn btn-secondary">
                     <a href="{{ path(route, query|merge({(pageParameterName): 1})) }}">1</a>
                 </li>
                 {% if startPage == 3 %}
-                    <li>
+                    <li class="btn btn-secondary">
                         <a href="{{ path(route, query|merge({(pageParameterName): 2})) }}">2</a>
                     </li>
                 {% elseif startPage != 2 %}
@@ -30,20 +30,20 @@
 
             {% for page in pagesInRange %}
                 {% if page != current %}
-                    <li>
+                    <li class="btn btn-secondary">
                         <a href="{{ path(route, query|merge({(pageParameterName): page})) }}">
                             {{ page }}
                         </a>
                     </li>
                 {% else %}
-                    <li class="current">{{ page }}</li>
+                    <li class="current btn btn-secondary">{{ page }}</li>
                 {% endif %}
             {% endfor %}
 
             {% if pageCount > endPage %}
                 {% if pageCount > (endPage + 1) %}
                     {% if pageCount > (endPage + 2) %}
-                        <li class="ellipsis"></li>
+                        <li class="ellipsis btn btn-secondary"></li>
                     {% else %}
                         <li>
                             <a href="{{ path(route, query|merge({(pageParameterName): (pageCount - 1)})) }}">
@@ -52,19 +52,19 @@
                         </li>
                     {% endif %}
                 {% endif %}
-                <li>
+                <li class="btn btn-secondary">
                     <a href="{{ path(route, query|merge({(pageParameterName): pageCount})) }}">{{ pageCount }}</a>
                 </li>
             {% endif %}
 
             {% if next is defined %}
-                <li class="pagination-next">
+                <li class="pagination-next btn btn-secondary">
                     <a rel="next" href="{{ path(route, query|merge({(pageParameterName): next})) }}">
                         {{ 'label_next'|trans({}, 'KnpPaginatorBundle') }}
                     </a>
                 </li>
             {% else %}
-                <li class="pagination-next disabled">
+                <li class="pagination-next disabled btn btn-secondary">
                     {{ 'label_next'|trans({}, 'KnpPaginatorBundle') }}
                 </li>
             {% endif %}

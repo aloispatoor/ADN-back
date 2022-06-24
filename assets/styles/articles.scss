@@ -49,4 +49,9 @@
             @include flex($just: flex-start);
         }
     }
+    nav{
+        .button-container{
+            gap: 2%;
+        }
+    }
 }

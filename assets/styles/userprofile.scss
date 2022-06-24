@@ -29,6 +29,9 @@
     }
     #user-articles{
         margin: 3em;
+        .button-container{
+            gap: 2%;
+        }
     }
     form{
         @include flex($dir: column);
