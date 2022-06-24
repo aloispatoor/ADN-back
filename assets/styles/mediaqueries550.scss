@@ -27,9 +27,8 @@
     }
     #blogNav{
         ul{
-            @include flex($just:space-between);
             a{
-                font-size: 0.9em;
+                font-size: 0.8em;
             }
         }
     }
@@ -99,5 +98,9 @@
         .flexbox{
             gap: 2em;
         }
+    }
+
+    #singleArticle{
+        margin: 2em;
     }
 }

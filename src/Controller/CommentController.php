@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Article;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Repository\AvatarRepository;
@@ -31,16 +32,15 @@ class CommentController extends AbstractController
 
     #[Route('/create', name: 'app_comment_create')]
     #[IsGranted('ROLE_USER', message: 'Vous devez être connecté en tant qu\'utilisateu-rice pour accéder à cette page')]
-    public function create(Request $request, ArticleRepository $articleRepository, $id, EntityManagerInterface $em): Response
+    public function create(Request $request, Article $article, EntityManagerInterface $em): Response
     {
         $comment = new Comment();
-        $article = $articleRepository->findOneBy([ 'id' => $id ]);
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid()){
-            $comment->setArticle($article);
             $comment->setAuthor($this->getUser());
+            $comment->setArticle($article);
             $em->persist($comment);
             $em->flush();
             
@@ -50,5 +50,20 @@ class CommentController extends AbstractController
         return $this->renderForm('comment/create.html.twig', [
             'commentform' => $form,
         ]);
+    }
+
+    #[Route('/delete/{id<\d+>}', name: 'app_comment_delete')]
+    public function delete(Comment $comment, EntityManagerInterface $em): Response
+    {
+        if ($this->getUser() === $comment->getAuthor()) {
+                $em->remove($comment);
+                $em->flush();
+                $this->addFlash('deleteComment', 'Le commentaire a été supprimé avec succès');
+
+                return $this->redirectToRoute('app_article_single', [
+                    'id' => $comment->getArticle()
+                ]);
+        }
+        return $this->redirectToRoute('app_article_single');
     }
 }

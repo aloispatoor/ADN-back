@@ -44,6 +44,7 @@ class ArticleController extends AbstractController
         
         if($form->isSubmitted() && $form->isValid()){
             $comment->setAuthor($this->getUser());
+            $comment->setArticle($article);
             $em->persist($comment);
             $em->flush();
             
@@ -77,7 +78,10 @@ class ArticleController extends AbstractController
             return $this->redirectToRoute('app_article_index');
         }
         
-        return $this->renderForm('article/create.html.twig', ['form' => $form, 'action' => 'Create']);
+        return $this->renderForm('article/create.html.twig', [
+            'form' => $form, 
+            'action' => 'Create'
+        ]);
     }
 
     #[Route('/edit/{id<\d+>}', name: 'app_article_edit')]
