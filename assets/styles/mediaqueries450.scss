@@ -1,0 +1,74 @@
+@media screen and (max-width: 450px){
+    #blogNav{
+        ul{
+            a{
+                font-size: 0.6em;
+            }
+        }
+    }
+    h2{
+        font-size: 1em;
+    }
+    h3{
+        font-size: 0.9em;
+    }
+    h4{
+        font-size: 0.8em;
+    }
+    p{
+        font-size: 0.7em;
+    }
+    small{
+        font-size: 0.6em;
+    }
+    header .backgroundImg #title{
+        h1{
+            font-size: 1em;
+        }
+    }
+    footer{
+        nav{
+            .footerSections{
+                padding: 0 2em;
+            }
+        }
+    }
+
+    #desktopNav{
+        &.mobiledropdown{
+            ul{
+                margin-left: 1em;
+                li{
+                    font-size: 0.6em;
+                }
+            }
+        }
+    } 
+
+    .button-large{
+        font-size: 1em;
+        padding: 0.3rem 1rem;
+    }
+    .button{
+        font-size: 0.7em;
+        padding: 5px 10px;
+    }
+
+    .button-small{
+        padding: 5px 10px;
+        font-size: 0.6em;
+    }
+
+    #globalContact{
+        height: 130vh;
+    }
+
+    #editUserProfile{
+        padding: 1em;
+        form{
+            label{
+                font-size: 0.8em;
+            }
+        }
+    }
+}

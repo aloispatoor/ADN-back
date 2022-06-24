@@ -19,8 +19,8 @@
     position: relative;
     color: white;
     background: $darkergrey;
-    padding: 5em 10em;
-    @include flex;
+    padding: 5em 7em;
+    @include flex($wrap: wrap);
     .button-container{
         @include flex;
     }

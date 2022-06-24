@@ -11,6 +11,9 @@
     p{
         font-size: 0.8em;
     }
+    small{
+        font-size: 0.6em;
+    }
     header .backgroundImg #title{
         h1{
             font-size: 1.1em;
@@ -35,8 +38,8 @@
     footer{
         nav{
             .footerSections{
-                .walkwayFont{
-                    font-size: 1em;
+                a{
+                    font-size: 0.8em;
                 }
             }
         }
@@ -102,5 +105,12 @@
 
     #singleArticle{
         margin: 2em;
+    }
+
+    #buttonsOnTheBottom{
+        article{
+            height: 30vh;
+            padding: 1em;
+        }
     }
 }
