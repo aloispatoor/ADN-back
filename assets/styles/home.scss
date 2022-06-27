@@ -1,5 +1,5 @@
 #sectionAbout{
-    height: 60vh;
+    height: 40vh;
     @include flex;
     article{
         @include flex($dir:column);
@@ -42,7 +42,7 @@
     background-image: url(../../public/images/unicorn.jpeg);
     background-size: cover;
     background-position: center;
-    height: 105vh;
+    height: 80vh;
     padding: 5em 10em;
     .flexbox{
         @include flex($dir:row);
@@ -77,6 +77,8 @@
 
     .firstBlogArticle{
         @include glass;
+        align-self: center;
+        width: 40%;
         padding: 2em;
         margin: 3em;
     }

@@ -21,7 +21,10 @@
                 <h3>articles</h3>
                 {% for article in articles %}
                     <div class="user-article">
-                        <p>{{ user.article.title }}</p>
+                        <p>{{ article.title }}</p>
+                        <div class="button-container">
+                            <a href="{{path('app_article_single', {id: article.id})}}" class="button">Voir</a>
+                        </div>
                 {% endfor %}
             </article>
         {% endif %}

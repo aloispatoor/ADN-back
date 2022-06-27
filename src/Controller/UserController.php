@@ -20,12 +20,14 @@ class UserController extends AbstractController
     #[Route('/usersProfile/{id<\d+>}', name: 'app_user_usersprofile', methods: ['GET'])]
     public function usersProfile(ArticleRepository $articleRepository, AvatarRepository $avatarRepository, User $user): Response
     {
-        $articles = $articleRepository->findBy(['author' => $user->getId()], ['createdAt' => 'DESC']);
-        $userAvatar = $avatarRepository->findBy(['user' => $user->getId()]);
+        // $user = $userRepository->findOneBy([$id]);
+        $userAvatar = $avatarRepository->findBy([]);
+        $articles = $articleRepository->findBy(['author' => $user], ['createdAt' => 'DESC']);
         return $this->render('user/usersProfile.html.twig', [
             'articles' => $articles,
             'user' => $user,
-            'avatar' => $userAvatar
+            'id' => $user->getId(),
+            'avatar' => $userAvatar,
         ]);
     }
 

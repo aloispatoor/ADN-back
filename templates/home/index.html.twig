@@ -47,7 +47,7 @@
                     <h3>Dernier article du Blog</h3>
                     {% for article in articles | slice(0,1) %}
                         <h4>{{ article.title }}</h4>
-                        <p>{{ article.content|length > 100 ? article.content|raw|slice(0, 100) ~ '...' : article.content|raw }}</p>
+                        {# <p>{{ article.content|length > 100 ? article.content|raw|slice(0, 100) ~ '...' : article.content|raw }}</p> #}
                         <div class="button-container">
                             <a href="{{ path('app_article_single', {id: article.id})}}" class="button">Lire</a>
                         </div>

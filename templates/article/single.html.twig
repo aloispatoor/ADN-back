@@ -7,7 +7,7 @@
         <div class="article-container">
             <article id="blogArticle">
                 <h1>{{ article.title }}</h1>
-                <small>Publié le {{ article.createdAt | date('d M Y')}} par <a href="{{ path('app_user_profile', {id: article.author.id}) }}">{{ article.author.username }}</a></small>
+                <small>Publié le {{ article.createdAt | format_datetime(locale='fr',pattern="dd MMMM YYYY")}} par <a href="{{ path('app_user_usersprofile', {id: article.author.id}) }}">{{ article.author.username }}</a></small>
                 <p>{{ article.content|raw }}</p>
             </article>
         </div>
