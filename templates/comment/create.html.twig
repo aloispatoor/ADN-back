@@ -1,6 +1,11 @@
 {% if app.user %}
 <div class="createComment">
     <h2>Écrire un commentaire</h2>
+    {% for message in app.flashes('addComment') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
     {{form_start(commentform)}}
     {{form_row(commentform.content, {
         'label' : 'Commentaire : ',

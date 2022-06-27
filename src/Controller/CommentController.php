@@ -43,6 +43,7 @@ class CommentController extends AbstractController
             $comment->setArticle($article);
             $em->persist($comment);
             $em->flush();
+            $this->addFlash('addComment', 'Le commentaire a été ajouté avec succès');
             
             return $this->redirectToRoute('app_article_single');
         }

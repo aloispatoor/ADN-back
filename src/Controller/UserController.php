@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[Route('/user')]
 class UserController extends AbstractController
@@ -49,7 +50,7 @@ class UserController extends AbstractController
 
     #[Route('/edit/{id<\d+>}', name: 'app_user_edit', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER', message: 'Vous devez être connecté en tant qu\'utilisateu-rice pour accéder à cette page')]
-    public function edit(User $user, Request $request, EntityManagerInterface $em, $id, AvatarRepository $avatarRepository): Response
+    public function edit(User $user, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $em, $id, AvatarRepository $avatarRepository): Response
     {
         if ($this->getUser()) {
             $form = $this->createForm(UserType::class, $user);
@@ -65,10 +66,12 @@ class UserController extends AbstractController
         }
         if ($user->getPlainPassword() !== null) {
             $user->setPassword(
-                $this->userPasswordEncoder->encode(
-                $user->getPlainPassword(),
-                $user
-            ));
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('password')->getData()
+                )
+            );
+
             return $this->redirectToRoute('app_user_profile');
         }
 
