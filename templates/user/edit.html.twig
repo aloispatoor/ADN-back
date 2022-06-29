@@ -6,7 +6,7 @@
     <section id="editUserProfile">
         <h2>Bonjour {{ user.username }}</h2>
         <article id="userInfo" class="container-fluid">
-            {{ form_start(form) }}
+            {{ form_start(imageForm) }}
                 {{ include('avatar/show.html.twig') }}
                 {{ include('avatar/edit.html.twig') }}
                 {# {{ form_row(form.email, { 
@@ -23,7 +23,7 @@
                         })
                     }} #}
                 <button type="submit" class="button">Enregistrer</button>
-            {{ form_end(form) }}
+            {{ form_end(imageForm) }}
         </article>
     </section> 
 {% endblock %}
