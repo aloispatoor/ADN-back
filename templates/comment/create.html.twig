@@ -1,7 +1,12 @@
 {% if app.user %}
 <div class="createComment">
     <h2>Écrire un commentaire</h2>
-    {% for message in app.flashes('addComment') %}
+    {% for message in app.flashes('successEditProfile') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('deleteComment') %}
         <div class="alert alert-success">
             {{ message }}
         </div>

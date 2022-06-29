@@ -93,7 +93,7 @@ class ArticleController extends AbstractController
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
                 $em->flush();
-                $this->addFlash('success', 'Article modifié avec succès !');
+                $this->addFlash('editArticle', 'Article modifié avec succès !');
 
                 return $this->redirectToRoute('app_article_index');
             }
@@ -121,20 +121,5 @@ class ArticleController extends AbstractController
         }
         return $this->redirectToRoute('app_article_index');
     }
-
-    // #[Route('/{id}<\d+>}/comment/delete/{id<\d+>}', name: 'app_comment_delete')]
-    // public function deleteComment(Comment $comment, EntityManagerInterface $em): Response
-    // {
-    //     if ($this->getUser() === $comment->getAuthor()) {
-    //             $em->remove($comment);
-    //             $em->flush();
-    //             $this->addFlash('deleteComment', 'Le commentaire a été supprimé avec succès');
-
-    //             return $this->redirectToRoute('app_article_single', [
-    //                 'id' => $comment->getArticle()
-    //             ]);
-    //     }
-    //     return $this->redirectToRoute('app_article_single');
-    // }
 }
 

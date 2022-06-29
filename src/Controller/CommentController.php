@@ -7,7 +7,6 @@ use App\Entity\Article;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Repository\AvatarRepository;
-use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -56,15 +55,13 @@ class CommentController extends AbstractController
     #[Route('/delete/{id<\d+>}', name: 'app_comment_delete')]
     public function delete(Comment $comment, EntityManagerInterface $em): Response
     {
-        if ($this->getUser() === $comment->getAuthor()) {
-                $em->remove($comment);
-                $em->flush();
-                $this->addFlash('deleteComment', 'Le commentaire a été supprimé avec succès');
+        $article = $comment->getArticle();
+        $em->remove($comment);
+        $em->flush();
+        $this->addFlash('deleteComment', 'Le commentaire a été supprimé avec succès');
 
-                return $this->redirectToRoute('app_article_single', [
-                    'id' => $comment->getArticle()
-                ]);
-        }
-        return $this->redirectToRoute('app_article_single');
+        return $this->redirectToRoute('app_article_single', [
+            'id' => $article->getId()
+        ]);
     }
 }

@@ -5,6 +5,11 @@
 {% block body %}
     <section id="userProfile">
         <h2>Bonjour {{ user.username }}</h2>
+        {% for message in app.flashes('addComment') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
         <article id="userInfo">
             <h3>Vos informations</h3>
             <div class="flexbox">

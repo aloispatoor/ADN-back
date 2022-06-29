@@ -17,27 +17,27 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class)
-            ->add('plainPassword', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'mapped' => false,
-                'invalid_message' => 'Les champs ne sont pas identiques',
-                'attr' => ['autocomplete' => 'new-password'],
-                'options' => ['attr' => ['class' => 'password-field', 'form-control']],
-                'required' => false,
-                'first_options'  => ['label' => 'Nouveau Mot de Passe'],
-                'second_options' => ['label' => 'Répéter le mot de passe'],
-                'constraints' => [
-                    // new NotBlank([
-                    //     'message' => 'Entrez un mot de passe',
-                    // ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Votre mot de passe doit impérativement contenir au moins {{ limit }} caractères',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
-                    ]),
-                ]
-            ]);
+            // ->add('plainPassword', RepeatedType::class, [
+            //     'type' => PasswordType::class,
+            //     'mapped' => false,
+            //     'invalid_message' => 'Les champs ne sont pas identiques',
+            //     'attr' => ['autocomplete' => 'new-password'],
+            //     'options' => ['attr' => ['class' => 'password-field', 'form-control']],
+            //     'required' => false,
+            //     'first_options'  => ['label' => 'Nouveau Mot de Passe'],
+            //     'second_options' => ['label' => 'Répéter le mot de passe'],
+            //     'constraints' => [
+            //         // new NotBlank([
+            //         //     'message' => 'Entrez un mot de passe',
+            //         // ]),
+            //         new Length([
+            //             'min' => 6,
+            //             'minMessage' => 'Votre mot de passe doit impérativement contenir au moins {{ limit }} caractères',
+            //             // max length allowed by Symfony for security reasons
+            //             'max' => 4096,
+            //         ]),
+            //     ]
+            // ]);
         ;
     }
 

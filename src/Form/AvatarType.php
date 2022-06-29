@@ -20,9 +20,7 @@ class AvatarType extends AbstractType
                     'allow_delete' => true,
                     'delete_label' => 'Supprimer l\'avatar',
                     'asset_helper' => true,
-                ]
-                )
-        ;
+                ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

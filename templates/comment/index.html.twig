@@ -19,7 +19,7 @@
                 <small>{{ comment.createdAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}</small>
                 <div class="button-container">
                     {% if app.user == comment.author %}
-                    <a href="{{path('app_comment_delete', {id: comment.id})}}" class="btn btn-danger">Supprimer</a>
+                        <a href="{{path('app_comment_delete', {id: comment.id})}}" class="btn btn-danger">Supprimer</a>
                     {% endif %}
                 </div>
             </div>
