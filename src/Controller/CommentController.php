@@ -2,11 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Entity\Article;
 use App\Entity\Comment;
 use App\Form\CommentType;
-use App\Repository\AvatarRepository;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,13 +17,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CommentController extends AbstractController
 {
     #[Route('/', name: 'app_comment_index')]
-    public function index(CommentRepository $commentRepository, AvatarRepository $avatarRepository, User $user): Response
+    public function index(CommentRepository $commentRepository): Response
     {
         $comments = $commentRepository->findBy([], ['createdAt' => 'DESC']);
-        $userAvatar = $avatarRepository->findBy(['user' => $user->getUserIdentifier()]);
         return $this->render('comment/index.html.twig', [
             'comments' => $comments,
-            'avatar' => $userAvatar,
         ]);
     }
 

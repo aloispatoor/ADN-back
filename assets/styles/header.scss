@@ -60,25 +60,28 @@ header{
                 .slide2 {
                     background-image: url(../../public/images/bergerac.jpg);
                     background-size: cover;
+                    background-position: center;
                 }
                 .slide3 {
                     background-image: url(../../public/images/tourtoirac.jpg);
                     background-size: cover;
+                    background-position: center;
                 }
                 .slide4{
                     background-image: url(../../public/images/riberac.jpeg);
                     background-size: cover;
-                }
-                .slide5{
-                    background-image: url(../../public/images/chateau-de-grignols-24_b.jpg);
-                    background-size: cover;
                     background-position: center;
                 }
-                .slide6{
-                    background-image: url(../../public/images/chateau-de-nontron.jpg);
-                    background-size: cover;
-                    background-position: center;
-                }
+                // .slide5{
+                //     background-image: url(../../public/images/chateau-de-grignols-24_b.jpg);
+                //     background-size: cover;
+                //     background-position: center;
+                // }
+                // .slide6{
+                //     background-image: url(../../public/images/chateau-de-nontron.jpg);
+                //     background-size: cover;
+                //     background-position: center;
+                // }
             }
         }
     }

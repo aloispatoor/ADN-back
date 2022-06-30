@@ -1,31 +1,33 @@
 {% block comments %}
     {{ include('comment/create.html.twig') }}
     {% for comment in comments %}
-            {% if article == comment.article %}
-            <div id="comments">
-                <p>
-                    <div id="user-avatar">
-                        {% if comment.author.avatar is empty %}
-                            <img src={{ asset('images/avatar_generic.png') }} alt="Avatar générique">
-                        {% else %}
-                            <img src={{ vich_uploader_asset(avatar) }} alt={{user.username}}>
-                        {% endif %}
-                    </div>
-                    <a href="{{ path('app_user_usersprofile', {id: comment.author.id})}}">
-                        {{ comment.author.username }}
-                    </a>
-                </p>
-                <p>{{ comment.content }}</p>
-                <small>{{ comment.createdAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}</small>
-                <div class="button-container">
-                    {% if app.user == comment.author %}
-                        <a href="{{path('app_comment_delete', {id: comment.id})}}" class="btn btn-danger">Supprimer</a>
+        {% if article == comment.article %}
+        <div id="comments">
+            <p>
+                <div id="user-avatar">
+                {% for avatar in avatars %}
+                    {% if user.avatar %}
+                        <img src={{ vich_uploader_asset(avatar) }} alt={{user.username}}>
+                    {% else %}
+                        <img src={{ asset('images/avatar_generic.png') }} alt="Avatar générique">
                     {% endif %}
+                {% endfor %}
                 </div>
+                <a href="{{ path('app_user_usersprofile', {id: comment.author.id})}}">
+                    {{ comment.author.username }}
+                </a>
+            </p>
+            <p>{{ comment.content }}</p>
+            <small>{{ comment.createdAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}</small>
+            <div class="button-container">
+                {% if app.user == comment.author %}
+                    <a href="{{path('app_comment_delete', {id: comment.id})}}" class="btn btn-danger">Supprimer</a>
+                {% endif %}
             </div>
-            {% else %}
+        </div>
+        {% else %}
 
-            {% endif %}
+        {% endif %}
     {% endfor %}
         {{ knp_pagination_render(comments, 'pagination.html.twig') }}
 {% endblock %}

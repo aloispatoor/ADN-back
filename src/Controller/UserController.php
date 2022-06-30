@@ -45,13 +45,13 @@ class UserController extends AbstractController
         return $this->render('user/profile.html.twig', [
             'articles' => $articles,
             'user' => $user,
-            'avatar' => $userAvatar
+            'avatars' => $userAvatar
         ]);  
     }
 
     #[Route('/edit/{id<\d+>}', name: 'app_user_edit', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER', message: 'Vous devez être connecté en tant qu\'utilisateu-rice pour accéder à cette page')]
-    public function edit(User $user, Request $request, EntityManagerInterface $em): Response
+    public function edit(User $user, AvatarRepository $avatarRepository, Request $request, EntityManagerInterface $em): Response
     {
             $avatar = new Avatar();
 
@@ -68,9 +68,12 @@ class UserController extends AbstractController
                 return $this->redirectToRoute('app_user_profile');
             }
 
+            $userAvatar = $avatarRepository->findBy(['user' => $user]);
+
         return $this->renderForm('user/edit.html.twig', [
             'imageForm' => $imageForm,
             'avatar' => $avatar,
+            'avatars' => $userAvatar,
             'user' => $user,
             ]);
     }

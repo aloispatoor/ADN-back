@@ -55,11 +55,11 @@ class Avatar
         return $this;
     }
 
-    /**
-    * @param null|File $imageFile
-    * @return User
-    * @throws Exception
-    */
+    // /**
+    // * @param null|File $imageFile
+    // * @return User
+    // * @throws Exception
+    // */
     public function setAvatarFile(File $image = null)
     {
         $this->avatarFile = $image;

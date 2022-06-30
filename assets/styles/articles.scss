@@ -45,6 +45,13 @@
     #comments{
         padding: 2em 0;
         border-bottom: 1px solid black;
+        #user-avatar{
+            width: 20%;
+            img{
+                width:100%;
+                object-fit: cover;
+            }
+        }
         .button-container{
             @include flex($just: flex-start);
         }

@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Avatar;
 use App\Entity\Article;
 use App\Entity\Comment;
 use App\Form\ArticleType;
 use App\Form\CommentType;
+use App\Repository\AvatarRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -32,10 +34,11 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/{id}<\d+>}', name: 'app_article_single')]
-    public function single(Article $article, CommentRepository $commentRepository, Request $request, EntityManagerInterface $em, PaginatorInterface $paginator): Response
+    public function single(Article $article, CommentRepository $commentRepository, AvatarRepository $avatarRepository, Request $request, EntityManagerInterface $em, PaginatorInterface $paginator): Response
     {
         $user = $this->getUser();
         
+        // Section Comments
         $comments = $commentRepository->findBy([], ['createdAt' => 'DESC']);
         $comments = $paginator->paginate($comments, $request->query->getInt('page', 1), 6);
         $comment = new Comment();
@@ -53,10 +56,16 @@ class ArticleController extends AbstractController
             ]);
         }
 
+        //Show the users' avatar
+        $userAvatar = new Avatar();
+        $userAvatar->getUser();
+        $avatars = $avatarRepository->findBy(['user' => $userAvatar]);
+
 
         return $this->render('article/single.html.twig', [
             'article' => $article,
             'user' => $user,
+            'avatars' => $avatars,
             'comments' => $comments,
             'commentform' => $form->createView()
         ]);
