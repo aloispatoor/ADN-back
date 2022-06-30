@@ -5,7 +5,12 @@
 {% block body %}
     <section id="userProfile">
         <h2>Bonjour {{ user.username }}</h2>
-        {% for message in app.flashes('addComment') %}
+        {% for message in app.flashes('successEditProfile') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('deleteArticle') %}
             <div class="alert alert-success">
                 {{ message }}
             </div>
@@ -14,11 +19,11 @@
             <h3>Vos informations</h3>
             <div class="flexbox">
                 {{ include('avatar/show.html.twig') }}
-                <div class="user-text">
-                    <p><span class="bold">Votre adresse e-mail : </span>{{ user.email }}</p>
                     {% if app.user %}
                         <a href="{{path('app_user_edit', {id: user.id})}}" class="button">Modifier vos informations</a>
                     {% endif %}
+                <div class="user-text">
+                    <p><span class="bold">Votre adresse e-mail : </span>{{ user.email }}</p>
                 </div>
             </div>
         </article>

@@ -22,28 +22,4 @@ class AvatarController extends AbstractController
             'avatar' => $userAvatar
         ]);
     }
-
-    // #[Route('/avatar/edit/{id<\d+>}', name: 'app_avatar_edit')]
-    // public function edit(Request $request, Avatar $avatar, EntityManagerInterface $em): Response
-    // {
-    //     $imageForm = $this->createForm(AvatarType::class, $avatar);
-    //     $imageForm->handleRequest($request);
-
-    //     if ($this->getUser()) {
-    //         if ($imageForm->isSubmitted() && $imageForm->isValid()) {
-    //             // $user->setAvatar($avatar);
-    //             // $user = $imageForm->getData();
-    //             // $em->persist($user);
-    //             $em->flush();
-    //         }
-    
-    //         return $this->redirectToRoute('app_user_profile');
-    //         }
-
-    //     return $this->renderForm('avatar/edit.html.twig', [
-    //         'imageForm' => $imageForm,
-    //         'avatar' => $avatar,
-    //         'action' => 'Edit'
-    //         ]);
-    // }
 }

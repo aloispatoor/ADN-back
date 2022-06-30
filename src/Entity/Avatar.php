@@ -12,6 +12,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity
  * @Vich\Uploadable
  */
+#[ORM\HasLifecycleCallbacks()]
 #[ORM\Entity(repositoryClass: AvatarRepository::class)]
 class Avatar
 {
@@ -24,8 +25,7 @@ class Avatar
     private $image;
 
     /**
-     * @Vich\UploadableField(mapping="avatars", fileNameProperty="avatar")
-     * @var File|null
+     * @Vich\UploadableField(mapping="avatars", fileNameProperty="image")
      */
     private $avatarFile;
 
@@ -55,11 +55,6 @@ class Avatar
         return $this;
     }
 
-    // /**
-    // * @param null|File $imageFile
-    // * @return User
-    // * @throws Exception
-    // */
     public function setAvatarFile(File $image = null)
     {
         $this->avatarFile = $image;
@@ -74,17 +69,17 @@ class Avatar
         return $this->avatarFile;
     }
 
-    public function getAvatar(): ?string
-    {
-        return $this->image;
-    }
+    // public function getAvatar(): ?string
+    // {
+    //     return $this->image;
+    // }
 
-    public function setAvatar(?string $image)
-    {
-        $this->image = $image;
+    // public function setAvatar(?string $image)
+    // {
+    //     $this->image = $image;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
@@ -94,6 +89,15 @@ class Avatar
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
+    public function defaultUpdatedAt(): self
+    {
+        $this->updatedAt = new \DateTime();
 
         return $this;
     }

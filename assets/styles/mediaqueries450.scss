@@ -59,6 +59,10 @@
         font-size: 0.6em;
     }
 
+    .btn-danger, .btn-secondary{
+        font-size: 0.7em;
+    }
+
     #globalContact{
         height: 130vh;
     }
@@ -69,6 +73,13 @@
             label{
                 font-size: 0.8em;
             }
+        }
+    }
+    #userProfile #user-articles{
+        margin: 1em;
+        .button-container{
+            @include flex ($just: flex-start, $dir: column);
+            gap: 1em;
         }
     }
 }

@@ -76,13 +76,6 @@
         padding: 1em;
     }
 
-    #userProfile #userInfo{
-        .flexbox{
-            @include flex($dir:column);
-            gap: 2em;
-        }
-    }
-
     #buttonsOnTheBottom{
         article{
             height: 40vh;

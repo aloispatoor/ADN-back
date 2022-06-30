@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Avatar;
-use App\Form\UserType;
 use App\Form\AvatarType;
 use App\Repository\AvatarRepository;
 use App\Repository\ArticleRepository;
@@ -14,8 +13,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[Route('/user')]
 class UserController extends AbstractController
@@ -27,7 +24,7 @@ class UserController extends AbstractController
         $articles = $articleRepository->findBy(['author' => $user], ['createdAt' => 'DESC']);
         return $this->render('user/usersProfile.html.twig', [
             'articles' => $articles,
-            'avatar' => $userAvatar,
+            'avatars' => $userAvatar,
             'user' => $user,
             'id' => $user->getId(),
         ]);
