@@ -101,11 +101,4 @@
     #sectionPartners{
         @include flex($dir: column);
     }
-
-    #userProfile #userInfo{
-        .flexbox{
-            @include flex($dir:column);
-            gap: 2em;
-        }
-    }
 }

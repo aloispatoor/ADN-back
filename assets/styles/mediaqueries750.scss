@@ -96,4 +96,18 @@
             margin: 1em;
         }
     }
+
+    #userProfile, #editUserProfile{
+        #userInfo{
+            width: 80%;
+        }
+    }
+
+    #singleArticle{
+        #comments{
+            #user-avatar{
+                width: 10%;
+            }
+        }
+    }
 }

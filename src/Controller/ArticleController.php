@@ -34,11 +34,11 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/{id}<\d+>}', name: 'app_article_single')]
-    public function single(Article $article, CommentRepository $commentRepository, AvatarRepository $avatarRepository, Request $request, EntityManagerInterface $em, PaginatorInterface $paginator): Response
+    public function single(Article $article, CommentRepository $commentRepository, Request $request, EntityManagerInterface $em, PaginatorInterface $paginator): Response
     {
-        $user = $this->getUser();
         
         // Section Comments
+        $user = $this->getUser();
         $comments = $commentRepository->findBy([], ['createdAt' => 'DESC']);
         $comments = $paginator->paginate($comments, $request->query->getInt('page', 1), 6);
         $comment = new Comment();
@@ -57,9 +57,7 @@ class ArticleController extends AbstractController
         }
 
         //Show the users' avatar
-        $userAvatar = new Avatar();
-        $userAvatar->getUser();
-        $avatars = $avatarRepository->findBy(['user' => $userAvatar]);
+        $avatars = $em->getRepository(Avatar::class)->findAll();
 
 
         return $this->render('article/single.html.twig', [

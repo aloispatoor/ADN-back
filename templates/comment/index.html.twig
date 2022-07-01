@@ -4,14 +4,13 @@
         {% if article == comment.article %}
         <div id="comments">
             <p>
-                {# {{ include('avatar/show.html.twig') }} #}
                 <div id="user-avatar">
-                {% for avatar in avatars %}
-                    {% if user.avatar is empty %}
-                        <img src={{ asset('images/avatar_generic.png') }} alt="Avatar générique">
-                    {% else %}
-                        <img src={{ vich_uploader_asset(avatar) }} alt={{user.username}}>
+                {% for avatar in avatars | slice(0,1) %}
+                    {% if avatar.user.id == comment.author.id %}
+                        <img src={{ vich_uploader_asset(avatar) }} alt={{avatar.user}}>
                     {% endif %}
+                {% else %}
+                    <img src={{ asset('images/avatar_generic.png') }} alt="Avatar générique">
                 {% endfor %}
                 </div>
                 <a href="{{ path('app_user_usersprofile', {id: comment.author.id})}}">

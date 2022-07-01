@@ -6,8 +6,10 @@
     <section id="editUserProfile">
         <h2>Bonjour {{ user.username }}</h2>
         <article id="userInfo" class="container-fluid">
-            {{ form_start(imageForm) }}
+            <div class="flexbox">
                 {{ include('avatar/show.html.twig') }}
+            </div>
+            {{ form_start(imageForm) }}
                 {{ include('avatar/edit.html.twig') }}
                 
                 <button type="submit" class="button">Enregistrer</button>

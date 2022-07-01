@@ -56,6 +56,8 @@ class UserController extends AbstractController
             $imageForm->handleRequest($request);
 
             if ($imageForm->isSubmitted() && $imageForm->isValid()) {
+                $avatar = $imageForm->getData();
+                // $avatar->setImage();
                 $avatar->setUser($user);
                 $em->persist($avatar);
                 $em->flush();

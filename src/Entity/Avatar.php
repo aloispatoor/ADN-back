@@ -35,7 +35,7 @@ class Avatar
      */
     private $updatedAt;
 
-    #[ORM\OneToOne(inversedBy: 'avatar', targetEntity: User::class, cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'avatar', targetEntity: User::class, cascade: ['persist', 'remove'])]
     private $user;
 
     public function getId(): ?int
@@ -68,18 +68,6 @@ class Avatar
     {
         return $this->avatarFile;
     }
-
-    // public function getAvatar(): ?string
-    // {
-    //     return $this->image;
-    // }
-
-    // public function setAvatar(?string $image)
-    // {
-    //     $this->image = $image;
-
-    //     return $this;
-    // }
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
