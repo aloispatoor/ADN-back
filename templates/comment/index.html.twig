@@ -18,7 +18,7 @@
                 </a>
             </p>
             <p>{{ comment.content }}</p>
-            <small>{{ comment.createdAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}</small>
+            <small>{{ comment.createdAt|format_datetime("full") }}</small>
             <div class="button-container">
                 {% if app.user == comment.author %}
                     <a href="{{path('app_comment_delete', {id: comment.id})}}" class="btn btn-danger">Supprimer</a>
