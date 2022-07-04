@@ -5,13 +5,14 @@ namespace App\Entity;
 use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\AvatarRepository;
-use Vich\UploaderBundle\Entity\File;
+use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity
  * @Vich\Uploadable
  */
+#[ORM\HasLifecycleCallbacks()]
 #[ORM\Entity(repositoryClass: AvatarRepository::class)]
 class Avatar
 {
@@ -24,8 +25,7 @@ class Avatar
     private $image;
 
     /**
-     * @Vich\UploadableField(mapping="avatars", fileNameProperty="avatar")
-     * @var File|null
+     * @Vich\UploadableField(mapping="avatars", fileNameProperty="image")
      */
     private $avatarFile;
 
@@ -35,7 +35,7 @@ class Avatar
      */
     private $updatedAt;
 
-    #[ORM\OneToOne(inversedBy: 'avatar', targetEntity: User::class, cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'avatar', targetEntity: User::class, cascade: ['persist', 'remove'])]
     private $user;
 
     public function getId(): ?int
@@ -55,11 +55,6 @@ class Avatar
         return $this;
     }
 
-    /**
-    * @param null|File $imageFile
-    * @return User
-    * @throws Exception
-    */
     public function setAvatarFile(File $image = null)
     {
         $this->avatarFile = $image;
@@ -74,18 +69,6 @@ class Avatar
         return $this->avatarFile;
     }
 
-    public function getAvatar(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setAvatar(?string $image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
@@ -94,6 +77,15 @@ class Avatar
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
+    public function defaultUpdatedAt(): self
+    {
+        $this->updatedAt = new \DateTime();
 
         return $this;
     }

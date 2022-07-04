@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Avatar;
-use App\Form\UserType;
 use App\Form\AvatarType;
 use App\Repository\AvatarRepository;
 use App\Repository\ArticleRepository;
@@ -21,12 +20,13 @@ class UserController extends AbstractController
     #[Route('/usersProfile/{id<\d+>}', name: 'app_user_usersprofile', methods: ['GET'])]
     public function usersProfile(ArticleRepository $articleRepository, AvatarRepository $avatarRepository, User $user): Response
     {
-        $articles = $articleRepository->findBy(['author' => $user->getUserIdentifier()], ['createdAt' => 'DESC']);
-        $userAvatar = $avatarRepository->findBy(['user' => $user->getUserIdentifier()]);
+        $userAvatar = $avatarRepository->findBy(['user' => $user]);
+        $articles = $articleRepository->findBy(['author' => $user], ['createdAt' => 'DESC']);
         return $this->render('user/usersProfile.html.twig', [
             'articles' => $articles,
+            'avatars' => $userAvatar,
             'user' => $user,
-            'avatar' => $userAvatar
+            'id' => $user->getId(),
         ]);
     }
 
@@ -36,62 +36,44 @@ class UserController extends AbstractController
     {
         $user = $this->getUser();
 
-        $userAvatar = $avatarRepository->findBy([]);
-        $articles = $articleRepository->findBy(['author' => $user->getUserIdentifier()], ['createdAt' => 'DESC']);
+        $userAvatar = $avatarRepository->findBy(['user' => $user]);
+        $articles = $articleRepository->findBy(['author' => $user], ['createdAt' => 'DESC']);
 
         return $this->render('user/profile.html.twig', [
             'articles' => $articles,
             'user' => $user,
-            'avatar' => $userAvatar
+            'avatars' => $userAvatar
         ]);  
     }
 
     #[Route('/edit/{id<\d+>}', name: 'app_user_edit', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER', message: 'Vous devez être connecté en tant qu\'utilisateu-rice pour accéder à cette page')]
-    public function edit(User $user, Request $request, EntityManagerInterface $em): Response
+    public function edit(User $user, AvatarRepository $avatarRepository, Request $request, EntityManagerInterface $em): Response
     {
-        if ($this->getUser()) {
-            $form = $this->createForm(UserType::class, $user);
-            $form->handleRequest($request);
-            if ($form->isSubmitted() && $form->isValid()) {
-                $user = $form->getData();
-                $em->persist($user);
-                $em->flush();
-                $this->addFlash('success', 'Informations modifiées avec succès !');
-    
-                return $this->redirectToRoute('app_user_profile');
-            }
-        }
-        if ($user->getPlainPassword() !== null) {
-            $user->setPassword(
-                $this->userPasswordEncoder->encode(
-                $user->getPlainPassword(),
-                $user
-            ));
-            return $this->redirectToRoute('app_user_profile');
-        }
+            $avatar = new Avatar();
 
-        if($this->getUser()) {
-            $imageForm = $this->createForm(AvatarType::class);
+            $imageForm = $this->createForm(AvatarType::class, $avatar);
             $imageForm->handleRequest($request);
+
             if ($imageForm->isSubmitted() && $imageForm->isValid()) {
-                $user = $imageForm->getData();
-                $em->persist($user);
+                $avatar = $imageForm->getData();
+                // $avatar->setImage();
+                $avatar->setUser($user);
+                $em->persist($avatar);
                 $em->flush();
+            
+                $this->addFlash('successEditProfile', 'Informations modifiées avec succès !');
     
                 return $this->redirectToRoute('app_user_profile');
             }
-        }
 
-
-        
+            $userAvatar = $avatarRepository->findBy(['user' => $user]);
 
         return $this->renderForm('user/edit.html.twig', [
-            'form' => $form,
             'imageForm' => $imageForm,
+            'avatar' => $avatar,
+            'avatars' => $userAvatar,
             'user' => $user,
-            // 'avatar' => $avatar,
-            'action' => 'Edit'
             ]);
     }
 }

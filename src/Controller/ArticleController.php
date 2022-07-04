@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Avatar;
 use App\Entity\Article;
 use App\Entity\Comment;
 use App\Form\ArticleType;
 use App\Form\CommentType;
+use App\Repository\AvatarRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -34,8 +36,9 @@ class ArticleController extends AbstractController
     #[Route('/{id}<\d+>}', name: 'app_article_single')]
     public function single(Article $article, CommentRepository $commentRepository, Request $request, EntityManagerInterface $em, PaginatorInterface $paginator): Response
     {
-        $user = $this->getUser();
         
+        // Section Comments
+        $user = $this->getUser();
         $comments = $commentRepository->findBy([], ['createdAt' => 'DESC']);
         $comments = $paginator->paginate($comments, $request->query->getInt('page', 1), 6);
         $comment = new Comment();
@@ -44,6 +47,7 @@ class ArticleController extends AbstractController
         
         if($form->isSubmitted() && $form->isValid()){
             $comment->setAuthor($this->getUser());
+            $comment->setArticle($article);
             $em->persist($comment);
             $em->flush();
             
@@ -52,10 +56,14 @@ class ArticleController extends AbstractController
             ]);
         }
 
+        //Show the users' avatar
+        $avatars = $em->getRepository(Avatar::class)->findAll();
+
 
         return $this->render('article/single.html.twig', [
             'article' => $article,
             'user' => $user,
+            'avatars' => $avatars,
             'comments' => $comments,
             'commentform' => $form->createView()
         ]);
@@ -77,7 +85,10 @@ class ArticleController extends AbstractController
             return $this->redirectToRoute('app_article_index');
         }
         
-        return $this->renderForm('article/create.html.twig', ['form' => $form, 'action' => 'Create']);
+        return $this->renderForm('article/create.html.twig', [
+            'form' => $form, 
+            'action' => 'Create'
+        ]);
     }
 
     #[Route('/edit/{id<\d+>}', name: 'app_article_edit')]
@@ -89,7 +100,7 @@ class ArticleController extends AbstractController
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
                 $em->flush();
-                $this->addFlash('success', 'Article modifié avec succès !');
+                $this->addFlash('editArticle', 'Article modifié avec succès !');
 
                 return $this->redirectToRoute('app_article_index');
             }

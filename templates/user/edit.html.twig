@@ -6,24 +6,14 @@
     <section id="editUserProfile">
         <h2>Bonjour {{ user.username }}</h2>
         <article id="userInfo" class="container-fluid">
-            {{ form_start(form) }}
+            <div class="flexbox">
                 {{ include('avatar/show.html.twig') }}
+            </div>
+            {{ form_start(imageForm) }}
                 {{ include('avatar/edit.html.twig') }}
-                {{ form_row(form.email, { 
-                    'label' : "Modifier votre adresse e-mail",
-                        'attr': {'class': 'form-control'}
-                        })
-                    }}
-                {{ form_row(form.plainPassword, {
-                        'attr': {'class': 'form-control'}
-                    }) }}
-                {# {{ form_row(form.password, { 
-                    'label' : "Entrez votre mot de passe pour valider vos changements",
-                        'attr': {'class': 'form-control'}
-                        })
-                    }} #}
+                
                 <button type="submit" class="button">Enregistrer</button>
-            {{ form_end(form) }}
+            {{ form_end(imageForm) }}
         </article>
     </section> 
 {% endblock %}

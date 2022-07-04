@@ -1,14 +1,17 @@
 {% block comments %}
     {{ include('comment/create.html.twig') }}
     {% for comment in comments %}
+        {% if article == comment.article %}
         <div id="comments">
             <p>
                 <div id="user-avatar">
-                    {% if user.avatar == null %}
-                        <img src={{ asset('images/avatar_generic.png') }} alt="Avatar générique">
-                    {% else %}
-                        <img src={{ vich_uploader_asset(avatar) }} alt={{user.username}}>
+                {% for avatar in avatars | slice(0,1) %}
+                    {% if avatar.user.id == comment.author.id %}
+                        <img src={{ vich_uploader_asset(avatar) }} alt={{avatar.user}}>
                     {% endif %}
+                {% else %}
+                    <img src={{ asset('images/avatar_generic.png') }} alt="Avatar générique">
+                {% endfor %}
                 </div>
                 <a href="{{ path('app_user_usersprofile', {id: comment.author.id})}}">
                     {{ comment.author.username }}
@@ -16,7 +19,15 @@
             </p>
             <p>{{ comment.content }}</p>
             <small>{{ comment.createdAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}</small>
+            <div class="button-container">
+                {% if app.user == comment.author %}
+                    <a href="{{path('app_comment_delete', {id: comment.id})}}" class="btn btn-danger">Supprimer</a>
+                {% endif %}
+            </div>
         </div>
+        {% else %}
+
+        {% endif %}
     {% endfor %}
         {{ knp_pagination_render(comments, 'pagination.html.twig') }}
 {% endblock %}

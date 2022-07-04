@@ -3,7 +3,7 @@ header{
     height: 80vh;
     .backgroundImg{
         width: 100%;
-        height: 100%;
+        // height: 100%;
         
         // TITLE
         #title{
@@ -13,7 +13,8 @@ header{
                 @include glass;
                 display: inline-block;
                 font-size: 2.5em;
-                margin: 2% auto;
+                letter-spacing: 10px;
+                margin: 2% 1em;
                 text-align:center;
                 padding: 0.3em;
             }
@@ -59,25 +60,28 @@ header{
                 .slide2 {
                     background-image: url(../../public/images/bergerac.jpg);
                     background-size: cover;
+                    background-position: center;
                 }
                 .slide3 {
                     background-image: url(../../public/images/tourtoirac.jpg);
                     background-size: cover;
+                    background-position: center;
                 }
                 .slide4{
                     background-image: url(../../public/images/riberac.jpeg);
                     background-size: cover;
-                }
-                .slide5{
-                    background-image: url(../../public/images/chateau-de-grignols-24_b.jpg);
-                    background-size: cover;
                     background-position: center;
                 }
-                .slide6{
-                    background-image: url(../../public/images/chateau-de-nontron.jpg);
-                    background-size: cover;
-                    background-position: center;
-                }
+                // .slide5{
+                //     background-image: url(../../public/images/chateau-de-grignols-24_b.jpg);
+                //     background-size: cover;
+                //     background-position: center;
+                // }
+                // .slide6{
+                //     background-image: url(../../public/images/chateau-de-nontron.jpg);
+                //     background-size: cover;
+                //     background-position: center;
+                // }
             }
         }
     }

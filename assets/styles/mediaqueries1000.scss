@@ -1,0 +1,67 @@
+@media screen and (max-width: 1000px){
+    #sectionBlog{
+        height: 140vh;
+    }
+    header .backgroundImg #title{
+        h1{
+            font-size: 1.5em;
+        }
+    }
+
+    #sectionAbout{
+        height: 40vh;
+        article{
+            margin: 1em;
+        }
+    }
+
+    #sectionPartners{
+        article{
+            padding: 2em;
+        }
+    }
+
+    #sectionBlog{
+        height: 120vh;
+        gap: 1em;
+        padding: 2em;
+    }
+
+    .button-large{
+        font-size: 2em;
+        padding: 0.8rem 3rem;
+    }
+
+    .button{
+        font-size: 1em;
+        padding: 5px 15px;
+    }
+
+    .button-small{
+        padding: 5px 15px;
+        font-size: 0.8em;
+    }
+
+    #calendar{
+        @include flex($dir:column);
+        gap: 2em;
+    }
+
+    #statusArticles{
+        padding: 2em;
+    }
+
+    #legalMentions{
+        padding: 2em;
+    }
+
+    #globalContact{
+        height: 160vh;
+    }
+
+    #userProfile, #editUserProfile{
+        #userInfo{
+            width: 50%;
+        }
+    }
+}

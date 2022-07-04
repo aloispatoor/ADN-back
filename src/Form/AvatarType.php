@@ -13,16 +13,13 @@ class AvatarType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('image')
-            ->add('user')
+            // ->add('image')
             ->add('avatarFile', VichImageType::class, [
-                    'required' => false,
-                    'allow_delete' => true,
-                    'delete_label' => 'Supprimer l\'avatar',
-                    'asset_helper' => true,
-                ]
-                )
-        ;
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer l\'image',
+                'asset_helper' => true,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

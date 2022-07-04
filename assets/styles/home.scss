@@ -1,9 +1,10 @@
 #sectionAbout{
-    height: 60vh;
+    height: 40vh;
     @include flex;
     article{
         @include flex($dir:column);
         padding: 2em;
+        margin: 2em;
         @include glass;
         h2{
             padding-bottom: 2em;
@@ -18,13 +19,10 @@
     position: relative;
     color: white;
     background: $darkergrey;
-    padding: 5em 10em;
-    @include flex;
-    .button{
-        position: absolute;
-        left: 50%;
-        bottom: 5em;
-        transform: translate(-50%);
+    padding: 5em 7em;
+    @include flex($wrap: wrap);
+    .button-container{
+        @include flex;
     }
     article{
         padding: 5em;
@@ -44,10 +42,12 @@
     background-image: url(../../public/images/unicorn.jpeg);
     background-size: cover;
     background-position: center;
-    height: 60vh;
+    height: 80vh;
     padding: 5em 10em;
-    @include flex ($dir: row);
-    gap: 5em;
+    .flexbox{
+        @include flex($dir:row);
+        gap: 5em;
+    }
     article:first-child{
         padding: 2em;
         width: 60em;
@@ -73,6 +73,14 @@
     }
     .button-container{
         @include flex;
+    }
+
+    .firstBlogArticle{
+        @include glass;
+        align-self: center;
+        width: 40%;
+        padding: 2em;
+        margin: 3em;
     }
 }
 
@@ -110,6 +118,9 @@
         h2{
             font-size: 1.2em;
             padding-bottom: 1em;
+        }
+        h3{
+            font-size: 1em;
         }
         .button{
             margin-top : 1em;

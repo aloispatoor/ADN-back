@@ -1,0 +1,116 @@
+@media screen and (max-width: 550px){
+    h2{
+        font-size: 1.2em;
+    }
+    h3{
+        font-size: 1em;
+    }
+    h4{
+        font-size: 0.9em;
+    }
+    p{
+        font-size: 0.8em;
+    }
+    small{
+        font-size: 0.6em;
+    }
+    header .backgroundImg #title{
+        h1{
+            font-size: 1.1em;
+        }
+        .imgSize{
+            width: 50%;
+        }
+    }
+    
+    #articlesList{
+        .container{
+            padding: 2em;
+        }
+    }
+    #blogNav{
+        ul{
+            a{
+                font-size: 0.8em;
+            }
+        }
+    }
+    footer{
+        nav{
+            .footerSections{
+                a{
+                    font-size: 0.8em;
+                }
+            }
+        }
+    }
+
+    #userProfile{
+        padding: 2em;
+    }
+
+    #userProfile #userInfo{
+        padding: 1em;
+    }
+
+    #missions{
+        .flexbox{
+            padding: 1em;
+            article{
+                width: 90%;
+                padding: 2em;
+                height: 20em;
+                .icons{
+                    font-size: 5em;
+                }
+            }
+        }  
+    }
+    #story{
+        .textAndPicture{
+            p{
+                padding-left: none;
+            }
+            img{
+                width:20em;
+            }
+        }
+    }
+
+    .button-large{
+        font-size: 1.2em;
+        padding: 0.3rem 1.5rem;
+    }
+
+    #clickMe{
+        height: 15rem;
+    }
+
+    #globalContact{
+        article{
+            width: 80%;
+        }
+    }
+
+    #sectionRDV{
+        gap: 5em;
+    }
+
+    #sectionBlog{
+        height: 120vh;
+        .flexbox{
+            gap: 2em;
+        }
+    }
+
+    #singleArticle{
+        margin: 2em;
+    }
+
+    #buttonsOnTheBottom{
+        article{
+            height: 30vh;
+            padding: 1em;
+        }
+    }
+}

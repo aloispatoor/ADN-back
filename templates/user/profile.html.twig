@@ -5,36 +5,43 @@
 {% block body %}
     <section id="userProfile">
         <h2>Bonjour {{ user.username }}</h2>
+        {% for message in app.flashes('successEditProfile') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('deleteArticle') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
         <article id="userInfo">
             <h3>Vos informations</h3>
             <div class="flexbox">
                 {{ include('avatar/show.html.twig') }}
-                <div class="user-text">
-                    <p><span class="bold">Votre adresse e-mail : </span>{{ user.email }}</p>
                     {% if app.user %}
                         <a href="{{path('app_user_edit', {id: user.id})}}" class="button">Modifier vos informations</a>
                     {% endif %}
+                <div class="user-text">
+                    <p><span class="bold">Votre adresse e-mail : </span>{{ user.email }}</p>
                 </div>
             </div>
         </article>
         {% if user.articles == null %}
-
-        {% else %}
-            {% if is_granted('ROLE_ADMIN') %}
-                <article id="user-articles">
-                    <h3>Vos articles</h3>
-                    {% for article in articles %}
-                        <div class="user-article">
-                            <p>{{ article.title }}</p>
-                            <div class="button-container">
-                                <a href="{{path('app_article_single', {id: article.id})}}" class="button">Voir</a>
-                                <a href="{{path('app_article_edit', {id: article.id})}}" class="button">Modifier</a>
-                                <a href="{{path('app_article_delete', {id: article.id})}}" class="button red">Supprimer</a>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </article>
-            {% endif %}
+            <p>Vous n'avez pas (encore) publié d'article</p>
         {% endif %}
+        <article id="user-articles">
+            <h3>Vos articles</h3>
+            {% for article in articles %}
+                <div class="user-article">
+                    <p>{{ article.title }}</p>
+                    <div class="button-container">
+                        <a href="{{path('app_article_single', {id: article.id})}}" class="button">Voir</a>
+                        <a href="{{path('app_article_edit', {id: article.id})}}" class="button">Modifier</a>
+                        <a href="{{path('app_article_delete', {id: article.id})}}" class="button red">Supprimer</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </article>
     </section>
 {% endblock %}

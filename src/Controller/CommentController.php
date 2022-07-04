@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
@@ -26,7 +27,7 @@ class CommentController extends AbstractController
 
     #[Route('/create', name: 'app_comment_create')]
     #[IsGranted('ROLE_USER', message: 'Vous devez être connecté en tant qu\'utilisateu-rice pour accéder à cette page')]
-    public function create(Request $request, EntityManagerInterface $em): Response
+    public function create(Request $request, Article $article, EntityManagerInterface $em): Response
     {
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
@@ -34,14 +35,29 @@ class CommentController extends AbstractController
         
         if($form->isSubmitted() && $form->isValid()){
             $comment->setAuthor($this->getUser());
+            $comment->setArticle($article);
             $em->persist($comment);
             $em->flush();
+            $this->addFlash('addComment', 'Le commentaire a été ajouté avec succès');
             
             return $this->redirectToRoute('app_article_single');
         }
         
         return $this->renderForm('comment/create.html.twig', [
             'commentform' => $form,
+        ]);
+    }
+
+    #[Route('/delete/{id<\d+>}', name: 'app_comment_delete')]
+    public function delete(Comment $comment, EntityManagerInterface $em): Response
+    {
+        $article = $comment->getArticle();
+        $em->remove($comment);
+        $em->flush();
+        $this->addFlash('deleteComment', 'Le commentaire a été supprimé avec succès');
+
+        return $this->redirectToRoute('app_article_single', [
+            'id' => $article->getId()
         ]);
     }
 }

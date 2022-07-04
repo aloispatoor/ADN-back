@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
-use App\Form\ContactType;
-use Symfony\Component\Mime\Email;
+use App\Entity\Message;
+use App\Form\MessageType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,27 +13,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ContactController extends AbstractController
 {
     #[Route('/contact', name: 'app_contact_index')]
-    public function index(Request $request, MailerInterface $mailer): Response
+    public function index(Request $request, Message $contact = null, EntityManagerInterface $em): Response
     {
-        $form = $this->createForm(ContactType::class);
+        $contact = new Message;
+         
+      
+        $form = $this->createForm(MessageType::class, $contact);
+
         $form->handleRequest($request);
-
-
-        if($form->isSubmitted() && $form->isValid()) {
-
-            $contactFormData = $form->getData();
-            
-            $message = (new Email())
-                ->from($contactFormData['email'])
-                ->to('palois89@vivaldi.net')
-                ->subject('vous avez reçu un email')
-                ->text('Sender : '.$contactFormData['email'].\PHP_EOL.
-                    $contactFormData['message'],
-                    'text/plain');
-            $mailer->send($message);
-
-            $this->addFlash('success', 'Vore message a été envoyé');
-
+        if($form->isSubmitted() && $form->isValid()){
+            $em->persist($contact);
+            $em->flush();
+            $this->addFlash('success', 'Votre message a été envoyé');
             return $this->redirectToRoute('app_contact_index');
         }
 
@@ -41,5 +32,6 @@ class ContactController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
 }
 

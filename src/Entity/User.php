@@ -43,7 +43,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     private $plainPassword;
 
-    #[ORM\OneToOne(mappedBy: 'user', targetEntity: Avatar::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Avatar::class, cascade: ['persist', 'remove'])]
     private $avatar;
 
     public function __construct()

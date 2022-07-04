@@ -1,6 +1,16 @@
 {% if app.user %}
 <div class="createComment">
     <h2>Écrire un commentaire</h2>
+    {% for message in app.flashes('successEditProfile') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('deleteComment') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
     {{form_start(commentform)}}
     {{form_row(commentform.content, {
         'label' : 'Commentaire : ',
@@ -10,5 +20,9 @@
         <button type="submit" class="button">Envoyer votre commentaire</button>
     </div>
     {{form_end(commentform)}}
+</div>
+{% else %}
+<div class="createComment">
+    <p>Vous voulez commenter ? <a href="/login">Connectez-vous ici</a><p>
 </div>
 {% endif %}

@@ -20,16 +20,24 @@
             <article class="requestArticle selected-div">
                 {{ form_start(form) }}
                     <div class="formLines">
-                        {{ form_row(form.prenom, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_row(form.firstname, {
+                            'label' : "Prénom",
+                            'attr': {'class': 'form-control'}}) }}
                     </div>
                     <div class="formLines">
-                        {{ form_row(form.nom, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_row(form.lastname, {
+                            'label' : "Nom",
+                            'attr': {'class': 'form-control'}}) }}
                     </div>
                     <div class="formLines">
-                        {{ form_row(form.email, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_row(form.email, {
+                            'label' : "E-mail",
+                            'attr': {'class': 'form-control'}}) }}
                     </div>
                     <div class="formLines">
-                        {{ form_row(form.message, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_row(form.message, {
+                            'label' : "Votre message",
+                            'attr': {'class': 'form-control'}}) }}
                     </div>
                     <div class="button-container">
                         <button type="submit" class="button">Envoyer</button>
@@ -44,9 +52,6 @@
                     <i class="fas fa-map-marker-alt"></i> 12 Cour Fénelon <br>
                     BaL n°134 <br>
                     24000 Périgueux
-                </p>
-                <p>
-                    <i class="fas fa-phone-square-alt"></i> 07 67 94 64 46
                 </p>
                 <p>
                     <i class="far fa-envelope"></i> adn.dordogne@protonmail.com

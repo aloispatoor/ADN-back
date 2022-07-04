@@ -1,0 +1,113 @@
+@media screen and (max-width: 750px){
+    h2{
+        font-size: 1.3em;
+    }
+    h3{
+        font-size: 1.2em;
+    }
+    h4{
+        font-size: 1em;
+    }
+    p{
+        font-size: 0.9em;
+    }
+    header .backgroundImg #title{
+        h1{
+            font-size: 1.2em;
+        }
+    }
+
+    #sectionPartners{
+        padding: 2em 5em;
+    }
+
+    #sectionBlog{
+        height: 130vh;
+        .flexbox{
+            @include flex($dir:column);
+        }
+        article:first-child{
+            padding: 2em;
+            width: 20em;
+        }
+        .firstBlogArticle{
+            margin: 1.5em;
+            padding: 1em;
+        }
+    }
+
+    #aboutFirstText{
+        article{
+            p{
+                margin: 2em;
+            }
+        }
+    }
+    #missions{
+        .flexbox{
+            article{
+                width: 70%;
+            }
+        }
+    }
+    #story{
+        margin: 2em;
+    }
+    .button-large{
+        font-size: 1.5em;
+        padding: 0.5rem 2rem;
+    }
+
+    .button{
+        font-size: 0.9em;
+        padding: 5px 15px;
+    }
+
+    .button-small{
+        padding: 5px 15px;
+        font-size: 0.7em;
+    }
+
+    #globalContact{
+        height: 140vh;
+    }
+
+    #articlesList{
+        padding: 1em;
+    }
+
+    #buttonsOnTheBottom{
+        article{
+            height: 40vh;
+        }
+    }
+
+    #globalContact{
+        height: 120vh;
+        article{
+            p{
+                font-size: 0.9em;
+            }
+        }
+    }
+
+    .loginFormPage{
+        .container{
+            margin: 1em;
+        }
+    }
+
+    #userProfile, #editUserProfile{
+        #userInfo{
+            width: 80%;
+        }
+    }
+
+    #singleArticle{
+        #comments{
+            #user-avatar{
+                width: 10%;
+            }
+        }
+    }
+}

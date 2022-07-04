@@ -16,9 +16,7 @@
     article{
         @include glass;
         padding: 3em;
-        .requestArticle{
-            width: 50%;
-        }
+        width: 30vw;
         .button-container{
             @include flex;
         }
