@@ -50,6 +50,7 @@ class UserController extends AbstractController
     #[IsGranted('ROLE_USER', message: 'Vous devez être connecté en tant qu\'utilisateu-rice pour accéder à cette page')]
     public function edit(User $user, AvatarRepository $avatarRepository, Request $request, EntityManagerInterface $em): Response
     {
+        $userAvatar = $avatarRepository->findBy(['user' => $user]);
         $avatar = new Avatar();
 
         $imageForm = $this->createForm(AvatarType::class, $avatar);
@@ -57,19 +58,19 @@ class UserController extends AbstractController
 
         if ($imageForm->isSubmitted() && $imageForm->isValid()) {
             $avatar = $imageForm->getData();
-            // $avatar->setImage();
             $avatar->setUser($user);
-            $avatar->setUpdatedAt();
             $em->persist($avatar);
             $em->flush();
         
             $this->addFlash('successEditProfile', 'Informations modifiées avec succès !');
 
             return $this->redirectToRoute('app_user_profile');
+        } elseif ($imageForm == null){
+            $avatar->setImage(null);
+            $avatar->setUser(null);
+            return $this->redirectToRoute('app_user_profile');
         }
 
-        $updatedAt = $avatar->getUpdatedAt();
-        $userAvatar = $avatarRepository->findBy(['user' => $user], [$updatedAt => 'DESC']);
 
         return $this->renderForm('user/edit.html.twig', [
             'imageForm' => $imageForm,

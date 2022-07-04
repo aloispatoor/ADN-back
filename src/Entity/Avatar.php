@@ -9,9 +9,9 @@ use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * @Vich\Uploadable
+ * @Vich\Uploadable()
  * @ORM\Entity
- */
+ * */
 #[ORM\HasLifecycleCallbacks()]
 #[ORM\Entity(repositoryClass: AvatarRepository::class)]
 class Avatar
@@ -26,13 +26,11 @@ class Avatar
 
     /**
      * @Vich\UploadableField(mapping="avatars", fileNameProperty="image")
+     * @var File
      */
     private $avatarFile;
 
-    /**
-     * @ORM\Column(type="datetime")
-     * @var \DateTime
-     */
+    #[ORM\Column(type: 'datetime')]
     private $updatedAt;
 
     #[ORM\ManyToOne(inversedBy: 'avatar', targetEntity: User::class, cascade: ['persist', 'remove'])]

@@ -49,11 +49,12 @@
             @include flex($just: flex-start);
         }
         #user-avatar{
-            width: 5%;
             margin-bottom: 1em;
             img{
-                width:100%;
+                width: 80px;
+                height: 80px;
                 object-fit: cover;
+                object-position: center;
             }
         }
     }

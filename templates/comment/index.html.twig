@@ -5,7 +5,7 @@
         <div id="comments">
             <p>
                 <div id="user-avatar">
-                {% for avatar in avatars | slice(0,1) %}
+                {% for avatar in avatars %}
                     {% if avatar.user.id == comment.author.id %}
                         <img src={{ vich_uploader_asset(avatar) }} alt={{avatar.user}}>
                     {% endif %}
