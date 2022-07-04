@@ -63,9 +63,9 @@
         font-size: 0.7em;
     }
 
-    #globalContact{
-        height: 130vh;
-    }
+    // #globalContact{
+    //     height: 130vh;
+    // }
 
     #editUserProfile{
         padding: 1em;
@@ -80,6 +80,24 @@
         .button-container{
             @include flex ($just: flex-start, $dir: column);
             gap: 1em;
+        }
+    }
+
+    #statusArticles{
+        article{
+            ul li{
+                font-size: 0.7em;
+            }
+        }
+    }
+
+    #legalMentions{
+        padding: 1em;
+        section{
+            padding: 1em;
+            ul li{
+                font-size: 0.7em;
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
     @include flex;
     background-color: $darkergrey;
     height: 4em;
+    text-align: center;
     ul{
         @include flex;
         gap: 2em;

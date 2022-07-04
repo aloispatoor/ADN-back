@@ -9,8 +9,8 @@ use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * @ORM\Entity
  * @Vich\Uploadable
+ * @ORM\Entity
  */
 #[ORM\HasLifecycleCallbacks()]
 #[ORM\Entity(repositoryClass: AvatarRepository::class)]

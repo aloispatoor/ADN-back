@@ -113,4 +113,32 @@
             padding: 1em;
         }
     }
+
+    .booking{
+        margin: 0.2em;
+        font-size: 0.7em;
+        a{
+            font-size: 0.7em;
+        }
+    }
+
+    #statusArticles{
+        article{
+            ul li{
+                font-size: 0.8em;
+            }
+        }
+    }
+
+    #legalMentions{
+        section{
+            padding: 2em;
+            ul li{
+                font-size: 0.8em;
+            }
+            article{
+                margin: 2em 0;
+            }
+        }
+    }
 }

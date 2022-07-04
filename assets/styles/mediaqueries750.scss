@@ -83,7 +83,7 @@
     }
 
     #globalContact{
-        height: 120vh;
+        height: 150vh;
         article{
             p{
                 font-size: 0.9em;
@@ -108,6 +108,21 @@
             #user-avatar{
                 width: 10%;
             }
+        }
+    }
+
+    #calendar{
+        #calendrier{
+            width: 80vw;
+        }
+    }
+
+    .booking{
+        margin: 0.5em;
+        font-size: 0.7em;
+        overflow-x: auto;
+        a{
+            font-size: 0.8em;
         }
     }
 }

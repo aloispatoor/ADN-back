@@ -1,5 +1,5 @@
 #sectionAbout{
-    height: 40vh;
+    height: 60vh;
     @include flex;
     article{
         @include flex($dir:column);
@@ -19,7 +19,7 @@
     position: relative;
     color: white;
     background: $darkergrey;
-    padding: 5em 7em;
+    padding: 5em;
     @include flex($wrap: wrap);
     .button-container{
         @include flex;
@@ -42,7 +42,7 @@
     background-image: url(../../public/images/unicorn.jpeg);
     background-size: cover;
     background-position: center;
-    height: 80vh;
+    height: 120vh;
     padding: 5em 10em;
     .flexbox{
         @include flex($dir:row);
