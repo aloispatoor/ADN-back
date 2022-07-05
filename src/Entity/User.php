@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -15,6 +16,8 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
  * @ORM\Entity
  * @Vich\Uploadable
  */
+#[Vich\Uploadable]
+#[ORM\HasLifecycleCallbacks()]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -43,8 +46,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     private $plainPassword;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Avatar::class, cascade: ['persist', 'remove'])]
-    private $avatar;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $avatarFileName;
+
+    /**
+     * @Vich\UploadableField(mapping="avatars", fileNameProperty="avatarFileName")
+     */
+    private $avatarFile;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private $updatedAt;
 
     public function __construct()
     {
@@ -204,24 +215,50 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getAvatar(): ?Avatar
+
+    public function getAvatarFileName(): ?string
     {
-        return $this->avatar;
+        return $this->avatarFileName;
     }
 
-    public function setAvatar(?Avatar $avatar): self
+    public function setAvatarFileName(?string $avatarFileName): self
     {
-        // unset the owning side of the relation if necessary
-        if ($avatar === null && $this->avatar !== null) {
-            $this->avatar->setUser(null);
-        }
+        $this->avatarFileName = $avatarFileName;
 
-        // set the owning side of the relation if necessary
-        if ($avatar !== null && $avatar->getUser() !== $this) {
-            $avatar->setUser($this);
-        }
+        return $this;
+    }
 
-        $this->avatar = $avatar;
+    public function getAvatarFile(): ?File
+    {
+        return $this->avatarFile;
+    }
+
+    public function setAvatarFile(?File $avatarFile = null)
+    {
+        $this->avatarFile = $avatarFile;
+        if (null !== $avatarFile) {
+            $this->updatedAt = new \DateTime();
+        }
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
+    public function defaultUpdatedAt(): self
+    {
+        $this->updatedAt = new \DateTime();
 
         return $this;
     }

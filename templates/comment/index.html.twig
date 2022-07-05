@@ -5,13 +5,11 @@
         <div id="comments">
             <p>
                 <div id="user-avatar">
-                {% for avatar in avatars %}
-                    {% if avatar.user.id == comment.author.id %}
-                        <img src={{ vich_uploader_asset(avatar) }} alt={{avatar.user}}>
-                    {% endif %}
+                {% if comment.author.avatarFile %}
+                    <img src={{ vich_uploader_asset(comment.author.avatarFile) }} alt={{comment.author.username}}>
                 {% else %}
                     <img src={{ asset('images/avatar_generic.png') }} alt="Avatar générique">
-                {% endfor %}
+                {% endif %}
                 </div>
                 <a href="{{ path('app_user_usersprofile', {id: comment.author.id})}}">
                     {{ comment.author.username }}

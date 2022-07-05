@@ -8,7 +8,13 @@
         <article id="userInfo">
             <h3>informations</h3>
             <div class="flexbox">
-                {{ include('avatar/show.html.twig') }}
+                <div id="user-avatar">
+                    {% if user.avatarFile %}
+                        <img src={{ vich_uploader_asset(avatar) }} alt={{user.username}}>
+                    {% else %}
+                        <img src={{ asset('images/avatar_generic.png') }} alt="Avatar générique">
+                    {% endif %}
+                </div>
                 <div class="user-text">
                     
                 </div>

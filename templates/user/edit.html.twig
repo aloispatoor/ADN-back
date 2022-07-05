@@ -7,13 +7,23 @@
         <h2>Bonjour {{ user.username }}</h2>
         <article id="userInfo" class="container-fluid">
             <div class="flexbox">
-                {{ include('avatar/show.html.twig') }}
-            </div>
+                {# <div id="user-avatar">
+                    {% if user.avatarFile is empty %}
+                        <img src={{ asset('images/avatar_generic.png') }} alt="Avatar générique">
+                    {% else %}
+                        <img src={{ vich_uploader_asset(avatar) }} alt={{user.username}}>
+                    {% endif %}
+                </div> #}
             {{ form_start(imageForm) }}
-                {{ include('avatar/edit.html.twig') }}
-                
+                {{ form_row(imageForm.avatarFile, { 
+                    'label' : "Ajouter / Modifier votre avatar",
+                    'delete_label' : "Supprimer l'avatar",
+                    'attr': {'class': 'form-control form-control-file',}
+                    })
+                }}
                 <button type="submit" class="button">Enregistrer</button>
             {{ form_end(imageForm) }}
+            </div>
         </article>
     </section> 
 {% endblock %}

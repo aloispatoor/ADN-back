@@ -18,10 +18,15 @@
         <article id="userInfo">
             <h3>Vos informations</h3>
             <div class="flexbox">
-                {{ include('avatar/show.html.twig') }}
-                    {% if app.user %}
-                        <a href="{{path('app_user_edit', {id: user.id})}}" class="button">Modifier vos informations</a>
-                    {% endif %}
+                {% if user.avatarFile %}
+                    <img src={{ vich_uploader_asset(avatarFileName) }} alt={{user.username}}>
+                {% else %}
+                    <img src={{ asset('images/avatar_generic.png') }} alt="Avatar générique">
+                {% endif %}
+                
+                {% if app.user %}
+                    <a href="{{path('app_user_edit', {id: user.id})}}" class="button">Modifier vos informations</a>
+                {% endif %}
                 <div class="user-text">
                     <p><span class="bold">Votre adresse e-mail : </span>{{ user.email }}</p>
                 </div>

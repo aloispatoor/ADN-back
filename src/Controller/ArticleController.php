@@ -2,14 +2,13 @@
 
 namespace App\Controller;
 
-use App\Entity\Avatar;
 use App\Entity\Article;
 use App\Entity\Comment;
 use App\Form\ArticleType;
 use App\Form\CommentType;
-use App\Repository\AvatarRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,7 +33,7 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/{id}<\d+>}', name: 'app_article_single')]
-    public function single(Article $article, CommentRepository $commentRepository, Request $request, EntityManagerInterface $em, PaginatorInterface $paginator): Response
+    public function single(Article $article, UserRepository $userRepository, CommentRepository $commentRepository, Request $request, EntityManagerInterface $em, PaginatorInterface $paginator): Response
     {
         
         // Section Comments
@@ -57,13 +56,12 @@ class ArticleController extends AbstractController
         }
 
         //Show the users' avatar
-        $avatars = $em->getRepository(Avatar::class)->findAll();
+        
 
 
         return $this->render('article/single.html.twig', [
             'article' => $article,
             'user' => $user,
-            'avatars' => $avatars,
             'comments' => $comments,
             'commentform' => $form->createView()
         ]);
@@ -120,11 +118,11 @@ class ArticleController extends AbstractController
     public function delete(Article $article, EntityManagerInterface $em): Response
     {
         if ($this->getUser() === $article->getAuthor()) {
-                $em->remove($article);
-                $em->flush();
-                $this->addFlash('deleteArticle', 'L\'article a été supprimé avec succès');
+            $em->remove($article);
+            $em->flush();
+            $this->addFlash('deleteArticle', 'L\'article a été supprimé avec succès');
 
-                return $this->redirectToRoute('app_article_index');
+            return $this->redirectToRoute('app_article_index');
         }
         return $this->redirectToRoute('app_article_index');
     }
