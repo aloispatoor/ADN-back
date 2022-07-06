@@ -18,7 +18,7 @@ class UserType extends AbstractType
             ->add('avatarFile', VichImageType::class, [
                 'required' => false,
                 'allow_delete' => false,
-                // 'delete_label' => 'Supprimer l\'image',
+                'download_label' => false,
                 'asset_helper' => true,
             ]);
     }

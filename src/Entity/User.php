@@ -7,6 +7,7 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
+use Serializable;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -19,7 +20,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 #[Vich\Uploadable]
 #[ORM\HasLifecycleCallbacks()]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, Serializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -233,13 +234,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->avatarFile;
     }
 
-    public function setAvatarFile(?File $avatarFile = null)
+    public function setAvatarFile(?File $avatarFile = null): void
     {
         $this->avatarFile = $avatarFile;
         if (null !== $avatarFile) {
             $this->updatedAt = new \DateTime();
         }
-        return $this;
+        // return $this;
     }
 
     public function getUpdatedAt(): ?\DateTimeInterface
@@ -261,5 +262,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->updatedAt = new \DateTime();
 
         return $this;
+    }
+
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            $this->email,
+            // $this->salt,
+        ));
+    }
+
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            $this->email,
+            // $this->salt
+        ) = unserialize($serialized);
     }
 }
