@@ -11,6 +11,7 @@
     }
     .date-container{
         @include glass;
+        width: 50%;
         padding: 2em;
         p{
             position:relative;
