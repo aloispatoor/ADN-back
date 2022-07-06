@@ -45,9 +45,10 @@ header{
                 height: 100%;
                 top: 0;
                 left: 100vh;
+                transition: all .5s ease;
                 &.active {
                 left: 0;
-                transition: all .5s ease-out;
+                transition: all .5s ease;
                 }
                 div {
                     height: 100%;

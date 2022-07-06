@@ -45,12 +45,14 @@
     }
 
     #sectionRDV{
-        height: 80rem;
+        height: 200vh;
+        padding-top: 2em;
         padding-bottom: 2em;
-        @include flex ($dir: column);
+        @include flex ($dir: column-reverse);
         gap: 10em;
         article, #permanences{
             width: 70%;
+            height: 50em;
         }
         article h2{
             padding-bottom: 0.2em;

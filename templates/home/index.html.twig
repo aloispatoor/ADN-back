@@ -70,7 +70,7 @@
                     {% for booking in bookings | slice(0,2) %}
                     <div>
                         <h3>{{ booking.title }}</h3>
-                        <p>{{ booking.start ? booking.start|format_datetime(locale='fr',pattern="dd MMMM YYYY") : '' }}</p>
+                        <p>{{ booking.start ? booking.start|format_datetime("short", "none", locale='fr') : '' }}</p>
                     </div>
                     {% endfor %}
                     <a href="/calendar" class="button">Voir +</a>

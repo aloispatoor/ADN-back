@@ -5,8 +5,8 @@
         <div id="comments">
             <p>
                 <div id="user-avatar">
-                {% if comment.author.avatarFile %}
-                    <img src={{ vich_uploader_asset(comment.author.avatarFile) }} alt={{comment.author.username}}>
+                {% if comment.author.avatarFileName %}
+                    <img src={{ vich_uploader_asset(comment.author) }} alt={{comment.author.username}}>
                 {% else %}
                     <img src={{ asset('images/avatar_generic.png') }} alt="Avatar générique">
                 {% endif %}
@@ -16,7 +16,7 @@
                 </a>
             </p>
             <p>{{ comment.content }}</p>
-            <small>{{ comment.createdAt|format_datetime("full") }}</small>
+            <small>{{ comment.createdAt|format_datetime("full", locale="fr") }}</small>
             <div class="button-container">
                 {% if app.user == comment.author %}
                     <a href="{{path('app_comment_delete', {id: comment.id})}}" class="btn btn-danger">Supprimer</a>
