@@ -60,7 +60,7 @@
     }
     footer{
         nav{
-            @include flex ($dir:column);
+            @include flex ($dir:column, $just: center);
             gap: 2em;
             .footerSections{
                 text-align: center;
