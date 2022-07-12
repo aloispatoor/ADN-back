@@ -14,7 +14,7 @@
     }
 }
 #missions{
-    background-image: url(../../public/images/thetards2.jpg);
+    background-image: url(../../public/images/thetards2.webp);
     background-position: center;
     background-size: cover;
     @include flex($dir:column);
@@ -61,13 +61,13 @@
         height: 60vh;
     }
     .firstButton{
-        background-image: url(../../public/images/enveloppes.jpeg);
+        background-image: url(../../public/images/enveloppes_resultat.webp);
         background-position:center;
         background-size: cover;
         width: 100%;
     }
     .secondButton{
-        background-image: url(../../public/images/hands_in_the_air.jpg);
+        background-image: url(../../public/images/hands_in_the_air_resultat.webp);
         background-position:bottom;
         background-size: cover;
         width: 100%;

@@ -8,7 +8,6 @@ use App\Form\ArticleType;
 use App\Form\CommentType;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,7 +32,7 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/{id}<\d+>}', name: 'app_article_single')]
-    public function single(Article $article, UserRepository $userRepository, CommentRepository $commentRepository, Request $request, EntityManagerInterface $em, PaginatorInterface $paginator): Response
+    public function single(Article $article, CommentRepository $commentRepository, Request $request, EntityManagerInterface $em, PaginatorInterface $paginator): Response
     {
         
         // Section Comments
@@ -54,10 +53,6 @@ class ArticleController extends AbstractController
                 'id' => $article->getId()
             ]);
         }
-
-        //Show the users' avatar
-        
-
 
         return $this->render('article/single.html.twig', [
             'article' => $article,
