@@ -1,0 +1,28 @@
+#superAdmin{
+    @include flex ($just: space-between);
+    height: 100vh;
+    background-color: $grey;
+    aside{
+        height: 100%;
+        padding: 5em;
+        background-color: $darkergrey;
+        li{
+            margin-top: 3em;
+        }
+        a{
+            color: white;
+        }
+    }
+    section{
+        margin: 0 auto;
+        h1, h2{
+            margin-bottom: 2em;
+        }
+        thead{
+            font-weight: bold;
+        }
+        td{
+            padding: 1em;
+        }
+    }
+}

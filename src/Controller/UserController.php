@@ -67,4 +67,20 @@ class UserController extends AbstractController
             'user' => $user,
             ]);
     }
+
+    #[Route('/delete/{id<\d+>}', name: 'app_user_delete')]
+    #[IsGranted('ROLE_USER', message: 'Vous devez être connecté en tant qu\'utilisateu-rice pour accéder à cette page')]
+    public function delete(User $user, EntityManagerInterface $em): Response
+    {
+        $user = $this->getUser();
+        if ($user) {
+            $em->remove($user);
+            $em->flush();
+            $this->addFlash('deleteAccount', 'Votre compte a été supprimé avec succès');
+
+            return $this->redirectToRoute('app_article_index');
+        }
+        return $this->redirectToRoute('app_user_profile');
+    }
+
 }

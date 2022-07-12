@@ -23,9 +23,7 @@
     transition: all .5s ease-in;
 }
 
-.red{
-    background-color: $red;
-}
+
 .button-small{
     font-family: walkway_rounded, sans-serif;
     border:none;
@@ -43,4 +41,8 @@
     background-color: $orange;
     box-shadow: 0 100px 100px -100px $yellow inset; 
     color: $violet;
+}
+
+.red{
+    background-color: $red;
 }

@@ -7,7 +7,14 @@
         <div class="article-container">
             <article id="blogArticle">
                 <h1>{{ article.title }}</h1>
-                <small>Publié le {{ article.createdAt | format_datetime("full", locale="fr")}} par <a href="{{ path('app_user_usersprofile', {id: article.author.id}) }}">{{ article.author.username }}</a></small>
+                <small>Publié le {{ article.createdAt | format_datetime("full", locale="fr")}} par <a href="{{ path('app_user_usersprofile', {id: article.author.id}) }}">
+                    {{ article.author.username }}
+                    {% if article.author.roles == 'ROLE_ADMIN' %}
+                        <i class="fa-solid fa-circle-star"></i>
+                    {% elseif article.author.roles == 'ROLE_SUPERADMIN' %}
+                        <i class="fa-solid fa-crown"></i>
+                    {% endif %}
+                </a></small>
                 <p>{{ article.content|raw }}</p>
             </article>
         </div>

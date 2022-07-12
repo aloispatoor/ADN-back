@@ -31,6 +31,11 @@
                 <div class="user-text">
                     <p><span class="bold">Votre adresse e-mail : </span>{{ user.email }}</p>
                 </div>
+                <div>
+                    {% if app.user %}
+                        <a href="{{path('app_user_delete', {id: user.id})}}" class="button-small red">Supprimer votre compte</a>
+                    {% endif %}
+                </div>
             </div>
         </article>
         {% if user.articles == null %}
