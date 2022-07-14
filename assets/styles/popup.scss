@@ -1,0 +1,22 @@
+#popup{
+    @include glass;
+    padding: 2em;
+    width: 50%;
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: popup .5s;
+    .button-container{
+        gap: 1em;
+    }
+}
+
+@keyframes popup{
+    from{
+        filter:blur(2rem);
+    }
+    to{
+        filter:blur(0);
+    }
+}

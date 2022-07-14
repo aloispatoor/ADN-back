@@ -13,12 +13,16 @@
                 </div>
                 <a href="{{ path('app_user_usersprofile', {id: comment.author.id})}}">
                     {{ comment.author.username }}
-                    {% if comment.author.roles == 'ROLE_ADMIN' %}
-                        <i class="fa-solid fa-circle-star"></i>
-                    {% elseif comment.author.roles == 'ROLE_SUPERADMIN' %}
-                        <i class="fa-solid fa-crown"></i>
-                    {% endif %}
                 </a>
+                <p>
+                    {% if comment.author.roles == ['ROLE_ADMIN'] %}
+                        <i class="fa-solid fa-circle-star"></i>
+                    {% elseif comment.author.roles == ['ROLE_SUPERADMIN'] %}
+                        <i class="fa-solid fa-crown"></i>
+                    {% else %}
+
+                    {% endif %}
+                </p>
             </p>
             <p>{{ comment.content }}</p>
             <small>{{ comment.createdAt|format_datetime("full", locale="fr") }}</small>

@@ -78,7 +78,7 @@ class UserController extends AbstractController
             $em->flush();
             $this->addFlash('deleteAccount', 'Votre compte a été supprimé avec succès');
 
-            return $this->redirectToRoute('app_article_index');
+            return $this->redirectToRoute('app_login');
         }
         return $this->redirectToRoute('app_user_profile');
     }

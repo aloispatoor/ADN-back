@@ -17,6 +17,8 @@
 /public/build/
 npm-debug.log
 yarn-error.log
+package.json
+package-lock.json
 ###< symfony/webpack-encore-bundle ###
 
 ###> symfony/phpunit-bridge ###

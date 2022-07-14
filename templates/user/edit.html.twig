@@ -7,13 +7,8 @@
         <h2>Bonjour {{ user.username }}</h2>
         <article id="userInfo" class="container-fluid">
             <div class="flexbox">
-                {# <div id="user-avatar">
-                    {% if user.avatarFile is empty %}
-                        <img src={{ asset('images/avatar_generic.png') }} alt="Avatar générique">
-                    {% else %}
-                        <img src={{ vich_uploader_asset(avatar) }} alt={{user.username}}>
-                    {% endif %}
-                </div> #}
+                
+                
             {{ form_start(imageForm) }}
                 {{ form_row(imageForm.avatarFile, { 
                     'label' : "Ajouter / Modifier votre avatar",
@@ -23,6 +18,18 @@
                 }}
                 <button type="submit" class="button">Enregistrer</button>
             {{ form_end(imageForm) }}
+                <div class="button-container">
+                    {% if app.user %}
+                        <a class="button-small red" id="deleteButton">Supprimer votre compte</a>
+                    {% endif %}
+                </div>
+            </div>
+        </article>
+        <article id="popup" class="displayNone">
+            <p>Êtes-vous sûr-e de vouloir supprimer votre compte ?</p>
+            <div class="button-container">
+                <a href="{{path('app_user_delete', {id: user.id})}}" class="button red" id="yes">Oui</a>
+                <a class="button" id="no">Non</a>
             </div>
         </article>
     </section> 

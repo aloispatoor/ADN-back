@@ -54,6 +54,10 @@
 }
 
 #editUserProfile #userInfo{
+    .flexbox{
+        @include flex($dir:column);
+        gap: 2em;
+    }
     form{
         width: 100%;
         img{
