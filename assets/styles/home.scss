@@ -32,7 +32,7 @@
             color: white;
         }
         img{
-            width: 100%;
+            width: 50%;
         }
     }
 }
@@ -51,7 +51,7 @@
     }
     article:first-child{
         padding: 2em;
-        width: 60em;
+        width: 20em;
         @include glass;
         h2{
             text-align: right;
