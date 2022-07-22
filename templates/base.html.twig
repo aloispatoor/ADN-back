@@ -24,6 +24,12 @@
     <body>
         {% include "_header.html.twig" %}
         {% include "_navbar.html.twig" %}
+        {% if app.user and app.user.isVerified == false %}
+            <div class="alert alert-warning">
+                <p><strong>Votre compte n'est pas (encore) activé.</strong> 
+                <a href="{{ path('retoken') }}">Renvoyer le lien d'activation</a></p>
+            </div>
+        {% endif %}
         {% block body %}{% endblock %}
         {% include "_footer.html.twig" %}
     </body>

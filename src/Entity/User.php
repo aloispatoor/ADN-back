@@ -58,6 +58,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     #[ORM\Column(type: 'datetime', nullable: true)]
     private $updatedAt;
 
+    #[ORM\Column(type: 'boolean')]
+    private $is_verified = false;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -271,7 +274,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
             $this->username,
             $this->password,
             $this->email,
-            // $this->salt,
+            
         ));
     }
 
@@ -282,7 +285,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
             $this->username,
             $this->password,
             $this->email,
-            // $this->salt
+            
         ) = unserialize($serialized);
+    }
+
+    public function getIsVerified(): ?bool
+    {
+        return $this->is_verified;
+    }
+
+    public function setIsVerified(bool $is_verified): self
+    {
+        $this->is_verified = $is_verified;
+
+        return $this;
     }
 }
