@@ -48,17 +48,18 @@ class JWTService
         ) === 1;
     }
 
+    // GET PAYLOAD AND HEADER
     public function getPayload(string $token): array
     {
         $array = explode('.', $token);
-        $payload = json_decode(base64_decode($array[1], true));
+        $payload = json_decode(base64_decode($array[1]), true);
 
         return $payload;
     }
     public function getHeader(string $token): array
     {
         $array = explode('.', $token);
-        $header = json_decode(base64_decode($array[0], true));
+        $header = json_decode(base64_decode($array[0]), true);
 
         return $header;
     }

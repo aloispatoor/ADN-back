@@ -53,7 +53,7 @@ class RegistrationController extends AbstractController
 
             //Sending Mail
             $mail->send(
-                'no-reply@adn.org',
+                'no-reply@mailhog.local',
                 $user->getEmail(),
                 'Activation de votre compte sur le site ADN',
                 'register',
