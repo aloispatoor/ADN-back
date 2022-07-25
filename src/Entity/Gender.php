@@ -16,7 +16,7 @@ class Gender
     #[ORM\Column(type: 'string', nullable: true)]
     private $label;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'genders')]
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'genders')]
     private $user;
 
     public function getId(): ?int
