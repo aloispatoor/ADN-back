@@ -5,21 +5,29 @@
 {% block body %}
     <section id="userProfile">
         <h2>{{ user.username }}</h2>
-        <article id="userInfo">
-            <h3>informations</h3>
-            <div class="flexbox">
-                <div id="user-avatar">
-                    {% if user.avatarFileName %}
-                        <img src={{ vich_uploader_asset(user) }} alt={{user.username}}>
-                    {% else %}
-                        <img src={{ asset('images/avatar_generic.png') }} alt="Avatar générique">
-                    {% endif %}
+        <div class="flexbox">
+            <article id="userInfo">
+                <h3>informations</h3>
+                <div class="flexbox">
+                    <div id="user-avatar">
+                        {% if user.avatarFileName %}
+                            <img src={{ vich_uploader_asset(user) }} alt={{user.username}}>
+                        {% else %}
+                            <img src={{ asset('images/avatar_generic.png') }} alt="Avatar générique">
+                        {% endif %}
+                    </div>
+                    <div class="user-text">
+                        
+                    </div>
                 </div>
-                <div class="user-text">
-                    
-                </div>
-            </div>
-        </article>
+            </article>
+            <article id="userInfoBis">
+                <p><span class="bold">Prénom : {{ user.name }}</span></p>
+                <p><span class="bold">Ville : {{ user.city }}</span></p>
+                <p><span class="bold">Genre : {{ user.gender }}</span></p>
+                <p><span class="bold">Pronoms : {{ user.pronouns }}</span></p>
+            </article>
+        </div>
         {% if user.articles is empty %}
 
         {% else %}

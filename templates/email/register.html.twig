@@ -1,5 +1,31 @@
-<h1>Activer votre compte</h1>
-<p>Bonjour {{user.username}},</p>
-<p>Votre inscription est à valider sur le lien ci-dessous :</p>
-<p><a href="{{ absolute_url(path('verify_user', {token: token})) }}">Lien</a></p>
-<p>Ce lien expirera dans 3 heures</p>
+<div id="sendMail">
+    <h1>Activer votre compte</h1>
+    <p>Bonjour {{user.username}},</p>
+    <p>Pour activer votre compte, il vous suffit de cliquer sur le bouton ci-dessous : </p>
+    <div class="flexbox">
+        <p><a href="{{ absolute_url(path('verify_user', {token: token})) }}" class="button">Activer votre compte</a></p>
+    </div>
+    <small>Ce lien expirera dans 3 heures</small>
+</div>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap');
+    #sendMail{
+        font-family: 'Fira Sans', sans-serif;
+    }
+    .flexbox{
+        display:flex;
+        justify-content:center;
+        align-items: center;
+        padding: 3em;
+    }
+    .button{
+        text-decoration: none;
+        border:none;
+        text-align:center;
+        color: white;
+        background-color: black;
+        padding: 5px 20px;
+        border-radius: 30px;
+    }
+</style>

@@ -1,9 +1,13 @@
 #userProfile, #editUserProfile{
     padding: 5em;
+    .flexbox{
+        @include flex($just: space-evenly);
+        gap: 2em;
+    }
     h2{
         margin-bottom: 3em;
     }
-    #userInfo{
+    #userInfo, #userInfoBis{
         @include glass;
         padding: 3em;
         width: 40%;

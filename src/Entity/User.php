@@ -61,10 +61,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     #[ORM\Column(type: 'boolean')]
     private $is_verified = false;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $name;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $city;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $pronouns;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Gender::class)]
+    private $genders;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->genders = new ArrayCollection();
     }
 
     public function __toString()
@@ -159,6 +172,153 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
         return $this;
     }
 
+    public function getAvatarFileName(): ?string
+    {
+        return $this->avatarFileName;
+    }
+
+    public function setAvatarFileName(?string $avatarFileName): self
+    {
+        $this->avatarFileName = $avatarFileName;
+
+        return $this;
+    }
+
+    public function getAvatarFile(): ?File
+    {
+        return $this->avatarFile;
+    }
+
+    public function setAvatarFile(?File $avatarFile = null): void
+    {
+        $this->avatarFile = $avatarFile;
+        if (null !== $avatarFile) {
+            $this->updatedAt = new \DateTime();
+        }
+        // return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
+    public function defaultUpdatedAt(): self
+    {
+        $this->updatedAt = new \DateTime();
+
+        return $this;
+    }
+
+    public function getIsVerified(): ?bool
+    {
+        return $this->is_verified;
+    }
+
+    public function setIsVerified(bool $is_verified): self
+    {
+        $this->is_verified = $is_verified;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(?string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getPronouns(): ?string
+    {
+        return $this->pronouns;
+    }
+
+    public function setPronouns(?string $pronouns): self
+    {
+        $this->pronouns = $pronouns;
+
+        return $this;
+    }
+
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            $this->email,
+            
+        ));
+    }
+
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            $this->email,
+            
+        ) = unserialize($serialized);
+    }
+
+    /**
+     * @return Collection<int, Gender>
+     */
+    public function getGenders(): Collection
+    {
+        return $this->genders;
+    }
+
+    public function addGender(Gender $gender): self
+    {
+        if (!$this->genders->contains($gender)) {
+            $this->genders[] = $gender;
+            $gender->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGender(Gender $gender): self
+    {
+        if ($this->genders->removeElement($gender)) {
+            // set the owning side to null (unless already changed)
+            if ($gender->getUser() === $this) {
+                $gender->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Article>
      */
@@ -219,85 +379,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
         return $this;
     }
 
-
-    public function getAvatarFileName(): ?string
-    {
-        return $this->avatarFileName;
-    }
-
-    public function setAvatarFileName(?string $avatarFileName): self
-    {
-        $this->avatarFileName = $avatarFileName;
-
-        return $this;
-    }
-
-    public function getAvatarFile(): ?File
-    {
-        return $this->avatarFile;
-    }
-
-    public function setAvatarFile(?File $avatarFile = null): void
-    {
-        $this->avatarFile = $avatarFile;
-        if (null !== $avatarFile) {
-            $this->updatedAt = new \DateTime();
-        }
-        // return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    #[ORM\PrePersist]
-    #[ORM\PreUpdate]
-    public function defaultUpdatedAt(): self
-    {
-        $this->updatedAt = new \DateTime();
-
-        return $this;
-    }
-
-    public function serialize()
-    {
-        return serialize(array(
-            $this->id,
-            $this->username,
-            $this->password,
-            $this->email,
-            
-        ));
-    }
-
-    public function unserialize($serialized)
-    {
-        list (
-            $this->id,
-            $this->username,
-            $this->password,
-            $this->email,
-            
-        ) = unserialize($serialized);
-    }
-
-    public function getIsVerified(): ?bool
-    {
-        return $this->is_verified;
-    }
-
-    public function setIsVerified(bool $is_verified): self
-    {
-        $this->is_verified = $is_verified;
-
-        return $this;
-    }
+  
 }

@@ -15,6 +15,27 @@
                     'attr': {'class': 'form-control'}
                     })
                 }}
+                {{ form_row(imageForm.name, {
+                    'label' : "Ajouter / Modifier votre prénom",
+                    'attr': {'class': 'form-control'}
+                    })
+                }}
+                {{ form_row(imageForm.city, {
+                    'label' : "Ajouter / Modifier votre ville",
+                    'attr': {'class': 'form-control'}
+                    })
+                }}
+                {{ form_row(imageForm.genders, {
+                    'label' : "Ajouter / Modifier votre genre",
+                    'attr': {'class': 'form-control'}
+                    })
+                }}
+                {{ form_row(imageForm.pronouns, {
+                    'label' : "Ajouter / Modifier vos pronoms",
+                    'attr': {'class': 'form-control'}
+                    })
+                }}
+                
                 {{ form_row(imageForm.avatarFile, { 
                     'label' : "Ajouter / Modifier votre avatar",
                     'delete_label' : "Supprimer l'avatar",

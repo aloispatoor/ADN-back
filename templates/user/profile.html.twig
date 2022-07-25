@@ -15,24 +15,32 @@
                 {{ message }}
             </div>
         {% endfor %}
-        <article id="userInfo">
-            <h3>Vos informations</h3>
-            <div class="flexbox">
-                <div id="user-avatar">
-                    {% if user.avatarFileName %}
-                        <img src={{ vich_uploader_asset(user) }} alt={{user.username}}>
-                    {% else %}
-                        <img src={{ asset('images/avatar_generic.png') }} alt="Avatar générique">
-                    {% endif %}
+        <div class="flexbox">
+            <article id="userInfo">
+                <h3>Vos informations</h3>
+                <div class="flexbox">
+                    <div id="user-avatar">
+                        {% if user.avatarFileName %}
+                            <img src={{ vich_uploader_asset(user) }} alt={{user.username}}>
+                        {% else %}
+                            <img src={{ asset('images/avatar_generic.png') }} alt="Avatar générique">
+                        {% endif %}
+                    </div>
+                        {% if app.user %}
+                            <a href="{{path('app_user_edit', {id: user.id})}}" class="button">Modifier vos informations</a>
+                        {% endif %}
+                    <div class="user-text">
+                        <p><span class="bold">Votre adresse e-mail : </span>{{ user.email }}</p>
+                    </div>
                 </div>
-                    {% if app.user %}
-                        <a href="{{path('app_user_edit', {id: user.id})}}" class="button">Modifier vos informations</a>
-                    {% endif %}
-                <div class="user-text">
-                    <p><span class="bold">Votre adresse e-mail : </span>{{ user.email }}</p>
-                </div>
-            </div>
-        </article>
+            </article>
+            <article id="userInfoBis">
+                <p><span class="bold">Votre prénom : {{ user.name }}</span></p>
+                <p><span class="bold">Votre ville : {{ user.city }}</span></p>
+                <p><span class="bold">Votre genre : {{ user.gender }}</span></p>
+                <p><span class="bold">Vos pronoms : {{ user.pronouns }}</span></p>
+            </article>
+        </div>
         {% if user.articles == null %}
             <p>Vous n'avez pas (encore) publié d'article</p>
         {% endif %}
