@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\GenderRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\GenderRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: GenderRepository::class)]
 class Gender
@@ -17,8 +19,13 @@ class Gender
     private $label;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'genders')]
-    private $user;
+    private $users;
 
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -41,14 +48,29 @@ class Gender
         return $this;
     }
 
-    public function getUser(): ?User
+    /**
+     * @return Collection<int, Gender>
+     */
+    public function getUsers(): Collection
     {
-        return $this->user;
+        return $this->users;
     }
 
-    public function setUser(?User $user): self
+    public function addUser(User $user): self
     {
-        $this->user = $user;
+        if ($this->users->contains($user)){
+            $this->users[] = $user;
+            $user->addGender($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)){
+            $user->removeGender($this);
+        }
 
         return $this;
     }

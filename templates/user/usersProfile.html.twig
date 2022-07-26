@@ -24,7 +24,12 @@
             <article id="userInfoBis">
                 <p><span class="bold">Prénom : {{ user.name }}</span></p>
                 <p><span class="bold">Ville : {{ user.city }}</span></p>
-                <p><span class="bold">Genre : {{ user.gender }}</span></p>
+                {% for gender in genders %}
+                    <p><span class="bold">Genre : {{ gender.label }}</span></p>
+                    {% if gender.id is null %}
+                        <p><span class="bold">Genre : --</span></p>
+                    {% endif %}
+                {% endfor %}
                 <p><span class="bold">Pronoms : {{ user.pronouns }}</span></p>
             </article>
         </div>

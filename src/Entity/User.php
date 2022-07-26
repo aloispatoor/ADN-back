@@ -70,7 +70,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $pronouns;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Gender::class)]
+    #[ORM\ManyToMany(mappedBy: 'user', targetEntity: Gender::class)]
     private $genders;
 
     public function __construct()
@@ -195,7 +195,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
         if (null !== $avatarFile) {
             $this->updatedAt = new \DateTime();
         }
-        // return $this;
     }
 
     public function getUpdatedAt(): ?\DateTimeInterface
@@ -289,6 +288,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
         ) = unserialize($serialized);
     }
 
+    // ---------COLLECTIONS
+
     /**
      * @return Collection<int, Gender>
      */
@@ -299,9 +300,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
 
     public function addGender(Gender $gender): self
     {
-        if (!$this->genders->contains($gender)) {
+        if ($this->genders->contains($gender)){
             $this->genders[] = $gender;
-            $gender->setUser($this);
+            $gender->addUser($this);
         }
 
         return $this;
@@ -309,11 +310,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
 
     public function removeGender(Gender $gender): self
     {
-        if ($this->genders->removeElement($gender)) {
-            // set the owning side to null (unless already changed)
-            if ($gender->getUser() === $this) {
-                $gender->setUser(null);
-            }
+        if ($this->genders->removeElement($gender)){
+            $gender->removeUser($this);
         }
 
         return $this;

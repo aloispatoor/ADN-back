@@ -26,19 +26,17 @@ class UserType extends AbstractType
                 'entry_options' => [
                     'choices' => [
                         'Non spécifié' => null,
-                        'Homme' => 'Homme',
-                        'Femme' => 'Femme',
-                        'Homme cis' => "Homme cis",
-                        'Femme cis' => "Femme cis",
-                        'Homme trans' => 'Homme trans',
-                        'Femme trans' => 'Femme trans',
-                        'Non Binaire' => 'Non Binaire',
-                        'Non Binaire Transféminine' => 'Non Binaire Transféminine',
-                        'Non Binaire Transmasculin' => 'Non Binaire Transmasculin',
-                        'Genre Fluide' => 'Genre Fluide',
-                        'Genre Neutre' => 'Genre Neutre',
-                        'Agenre' => 'Agenre',
-                        'Genre Queer' => 'Genre Queer'
+                        'Homme' => 'm',
+                        'Femme' => 'f',
+                        'Cisgenre' => "cis",
+                        'Transgenre' => 'trans',
+                        'Non Binaire' => 'nb',
+                        'Transféminine' => 'transfem',
+                        'Transmasculin' => 'transmasc',
+                        'Genre Fluide' => 'genderfluid',
+                        'Genre Neutre' => 'neutre',
+                        'Agenre' => 'agender',
+                        'Genre Queer' => 'genderqueer'
                     ],
                 ],
             ])
