@@ -36,27 +36,25 @@
             </article>
             <article id="userInfoBis">
                 {% if user.name is null %}
-                    <p><span class="bold">Votre prénom : </span></p>
+                    <p><span class="bold">Votre prénom : --</span></p>
                 {% else %}
                     <p><span class="bold">Votre prénom : {{ user.name }}</span></p>
                 {% endif %}
 
                 {% if user.city is null %}
-                    <p><span class="bold">Votre ville : </span></p>
+                    <p><span class="bold">Votre ville : --</span></p>
                 {% else %}
                     <p><span class="bold">Votre ville : {{ user.city }}</span></p>
                 {% endif %}
 
-                {# {% for gender in genders %}
+                {% for gender in genders %}
                     <p><span class="bold">Votre genre : {{ gender.label }}</span></p>
                 {% else %}
-                    {% if gender.id is null %}
-                        <p><span class="bold">Votre genre : --</span></p>
-                    {% endif %}
-                {% endfor %} #}
+                    <p><span class="bold">Votre genre : --</span></p>
+                {% endfor %}
 
                 {% if user.pronouns is null %}
-                    <p><span class="bold">Vos pronoms : </span></p>
+                    <p><span class="bold">Vos pronoms : --</span></p>
                 {% else %}
                     <p><span class="bold">Vos pronoms : {{ user.pronouns }}</span></p>
                 {% endif %}

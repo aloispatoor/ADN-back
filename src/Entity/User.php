@@ -70,7 +70,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $pronouns;
 
-    #[ORM\ManyToMany(mappedBy: 'user', targetEntity: Gender::class)]
+    #[ORM\ManyToMany(targetEntity: Gender::class, inversedBy: 'users')]
+    #[ORM\JoinTable(name:"gender_user")]
+    #[ORM\JoinColumn(name:"user_id", referencedColumnName:"id")]
+    #[ORM\InverseJoinColumn(name:"gender_id", referencedColumnName:"id")]
     private $genders;
 
     public function __construct()

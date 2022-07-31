@@ -20,7 +20,7 @@ class UserController extends AbstractController
     public function usersProfile(ArticleRepository $articleRepository, GenderRepository $genderRepository, User $user): Response
     {
         $articles = $articleRepository->findBy(['author' => $user], ['createdAt' => 'DESC']);
-        $genders = $genderRepository->findBy(['users' => $user]);
+        $genders = $genderRepository->findBy(['users' => $user], ['id' => 'ASC']);
         return $this->render('user/usersProfile.html.twig', [
             'articles' => $articles,
             'user' => $user,
@@ -36,7 +36,11 @@ class UserController extends AbstractController
         $user = $this->getUser();
 
         $articles = $articleRepository->findBy(['author' => $user], ['createdAt' => 'DESC']);
-        $genders = $genderRepository->findBy(['users' => $user]);
+        $genders = $genderRepository->findBy(array('users' => array($user)));
+
+        if(!$genders){
+            return $this->redirectToRoute('app_user_profile');
+        }
 
         return $this->render('user/profile.html.twig', [
             'articles' => $articles,

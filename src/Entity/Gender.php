@@ -18,7 +18,7 @@ class Gender
     #[ORM\Column(type: 'string', nullable: true)]
     private $label;
 
-    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'genders')]
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'genders')]
     private $users;
 
     public function __construct()
