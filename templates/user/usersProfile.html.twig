@@ -22,15 +22,16 @@
                 </div>
             </article>
             <article id="userInfoBis">
-                <p><span class="bold">Prénom : {{ user.name }}</span></p>
-                <p><span class="bold">Ville : {{ user.city }}</span></p>
+                <p><span class="bold">Prénom :</span> {{ user.name }}</p>
+                <p><span class="bold">Ville :</span> {{ user.city }}</p>
+                <p><span class="bold">Genre : </span>
                 {% for gender in genders %}
-                    <p><span class="bold">Genre : {{ gender.label }}</span></p>
+                    {{ gender.label }}</p>
                     {% if gender.id is null %}
                         <p><span class="bold">Genre : --</span></p>
                     {% endif %}
                 {% endfor %}
-                <p><span class="bold">Pronoms : {{ user.pronouns }}</span></p>
+                <p><span class="bold">Pronoms :</span> {{ user.pronouns }}</p>
             </article>
         </div>
         {% if user.articles is empty %}

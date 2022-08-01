@@ -38,17 +38,18 @@
                 {% if user.name is null %}
                     <p><span class="bold">Votre prénom : --</span></p>
                 {% else %}
-                    <p><span class="bold">Votre prénom : {{ user.name }}</span></p>
+                    <p><span class="bold">Votre prénom :</span> {{ user.name }}</p>
                 {% endif %}
 
                 {% if user.city is null %}
                     <p><span class="bold">Votre ville : --</span></p>
                 {% else %}
-                    <p><span class="bold">Votre ville : {{ user.city }}</span></p>
+                    <p><span class="bold">Votre ville :</span> {{ user.city }}</p>
                 {% endif %}
 
+                    <p><span class="bold">Votre genre :
                 {% for gender in genders %}
-                    <p><span class="bold">Votre genre : {{ gender.label }}</span></p>
+                    </span> {{ gender.label }}</p>
                 {% else %}
                     <p><span class="bold">Votre genre : --</span></p>
                 {% endfor %}
@@ -56,7 +57,7 @@
                 {% if user.pronouns is null %}
                     <p><span class="bold">Vos pronoms : --</span></p>
                 {% else %}
-                    <p><span class="bold">Vos pronoms : {{ user.pronouns }}</span></p>
+                    <p><span class="bold">Vos pronoms :</span> {{ user.pronouns }}</p>
                 {% endif %}
             </article>
         </div>

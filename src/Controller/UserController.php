@@ -36,11 +36,7 @@ class UserController extends AbstractController
         $user = $this->getUser();
 
         $articles = $articleRepository->findBy(['author' => $user], ['createdAt' => 'DESC']);
-        $genders = $genderRepository->findBy(array('users' => array($user)));
-
-        if(!$genders){
-            return $this->redirectToRoute('app_user_profile');
-        }
+        $genders = $genderRepository->findBy(['users' => $user], ['id' => 'ASC']);
 
         return $this->render('user/profile.html.twig', [
             'articles' => $articles,
