@@ -36,7 +36,12 @@ class UserController extends AbstractController
         $user = $this->getUser();
 
         $articles = $articleRepository->findBy(['author' => $user], ['createdAt' => 'DESC']);
-        $genders = $genderRepository->findBy(['users' => $user], ['id' => 'ASC']);
+        $genders = $genderRepository->findOneBy(['users' => $user], ['id' => 'ASC']);
+
+        if(!$genders)
+        {
+        throw $this->createNotFoundException("The genders has not been found or you are not allowed to access it.");
+        }
 
         return $this->render('user/profile.html.twig', [
             'articles' => $articles,

@@ -301,14 +301,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
         return $this->genders;
     }
 
-    public function addGender(Gender $gender): self
+    public function addGender(Gender $gender)
     {
-        if ($this->genders->contains($gender)){
-            $this->genders[] = $gender;
-            $gender->addUser($this);
-        }
-
-        return $this;
+        $gender->addUser($this); // synchronously updating inverse side
+        $this->genders[] = $gender;
     }
 
     public function removeGender(Gender $gender): self

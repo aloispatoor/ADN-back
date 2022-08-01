@@ -56,14 +56,9 @@ class Gender
         return $this->users;
     }
 
-    public function addUser(User $user): self
+    public function addUser(User $user)
     {
-        if ($this->users->contains($user)){
-            $this->users[] = $user;
-            $user->addGender($this);
-        }
-
-        return $this;
+        $this->users[] = $user;
     }
 
     public function removeUser(User $user): self
