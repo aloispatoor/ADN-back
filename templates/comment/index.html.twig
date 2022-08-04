@@ -28,7 +28,10 @@
             <small>{{ comment.createdAt|format_datetime("full", locale="fr") }}</small>
             <div class="button-container">
                 {% if app.user == comment.author %}
-                    <a href="{{path('app_comment_delete', {id: comment.id})}}" class="button red">Supprimer</a>
+                <form action="{{ url('app_comment_delete', { id: comment.id }) }}" method="post">
+                    <input type="hidden" name="token" value="{{ csrf_token('delete-comment') }}"/>
+                    <button type="submit" class="button red">Supprimer</button>
+                </form>
                 {% endif %}
             </div>
         </div>

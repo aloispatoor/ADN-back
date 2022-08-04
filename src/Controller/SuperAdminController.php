@@ -9,6 +9,7 @@ use App\Repository\UserRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -54,11 +55,12 @@ class SuperAdminController extends AbstractController
 
     #[Route('/superadminUserDelete/{id<\d+>}', name: 'app_super_admin_user_delete')]
     #[IsGranted('ROLE_SUPERADMIN', message: 'Vous devez être administrateur-rice pour accéder à cette page')]
-    public function deleteUser(User $user, EntityManagerInterface $em): Response
+    public function deleteUser(User $user, EntityManagerInterface $em, Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_SUPERADMIN');
         $user = $user->getId();
-        if ($user) {
+        $submittedToken = $request->request->get('token');
+        if ($user && $this->isCsrfTokenValid('delete-user', $submittedToken)) {
             $em->remove($user);
             $em->flush();
             $this->addFlash('deleteUser', 'L\'utilisateur-rice a été supprimé-e avec succès');
@@ -70,11 +72,12 @@ class SuperAdminController extends AbstractController
 
     #[Route('/superadminArticleDelete/{id<\d+>}', name: 'app_super_admin_article_delete')]
     #[IsGranted('ROLE_SUPERADMIN', message: 'Vous devez être administrateur-rice pour accéder à cette page')]
-    public function deleteArticle(Article $article, EntityManagerInterface $em): Response
+    public function deleteArticle(Article $article, EntityManagerInterface $em, Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_SUPERADMIN');
         $article = $article->getId();
-        if ($article) {
+        $submittedToken = $request->request->get('token');
+        if ($article && $this->isCsrfTokenValid('delete-article', $submittedToken)) {
             $em->remove($article);
             $em->flush();
             $this->addFlash('deleteArticle', 'L\'article a été supprimé avec succès');
@@ -86,11 +89,12 @@ class SuperAdminController extends AbstractController
 
     #[Route('/superadminCommentDelete/{id<\d+>}', name: 'app_super_admin_comment_delete')]
     #[IsGranted('ROLE_SUPERADMIN', message: 'Vous devez être administrateur-rice pour accéder à cette page')]
-    public function deleteComment(Comment $comment, EntityManagerInterface $em): Response
+    public function deleteComment(Comment $comment, EntityManagerInterface $em, Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_SUPERADMIN');
         $comment = $comment->getId();
-        if ($comment) {
+        $submittedToken = $request->request->get('token');
+        if ($comment && $this->isCsrfTokenValid('delete-comment', $submittedToken)) {
             $em->remove($comment);
             $em->flush();
             $this->addFlash('deleteComment', 'Le commentaire a été supprimé avec succès');

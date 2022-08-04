@@ -110,9 +110,10 @@ class ArticleController extends AbstractController
 
     #[Route('/delete/{id<\d+>}', name: 'app_article_delete')]
     #[IsGranted('ROLE_ADMIN', message: 'Vous devez être connecté en tant que membre de l\'association pour accéder à cette page')]
-    public function delete(Article $article, EntityManagerInterface $em): Response
+    public function delete(Article $article, EntityManagerInterface $em, Request $request): Response
     {
-        if ($this->getUser() === $article->getAuthor()) {
+        $submittedToken = $request->request->get('token');
+        if ($this->getUser() === $article->getAuthor() && $this->isCsrfTokenValid('delete-article', $submittedToken)) {
             $em->remove($article);
             $em->flush();
             $this->addFlash('deleteArticle', 'L\'article a été supprimé avec succès');

@@ -49,12 +49,16 @@ class CommentController extends AbstractController
     }
 
     #[Route('/delete/{id<\d+>}', name: 'app_comment_delete')]
-    public function delete(Comment $comment, EntityManagerInterface $em): Response
+    public function delete(Comment $comment, EntityManagerInterface $em, Request $request): Response
     {
         $article = $comment->getArticle();
-        $em->remove($comment);
-        $em->flush();
-        $this->addFlash('deleteComment', 'Le commentaire a été supprimé avec succès');
+        $submittedToken = $request->request->get('token');
+
+        if($this->isCsrfTokenValid('delete-comment', $submittedToken)){
+            $em->remove($comment);
+            $em->flush();
+            $this->addFlash('deleteComment', 'Le commentaire a été supprimé avec succès');
+        }
 
         return $this->redirectToRoute('app_article_single', [
             'id' => $article->getId()

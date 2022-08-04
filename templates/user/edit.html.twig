@@ -55,7 +55,10 @@
         <article id="popup" class="displayNone">
             <p>Êtes-vous sûr-e de vouloir supprimer votre compte ?</p>
             <div class="button-container">
-                <a href="{{path('app_user_delete', {id: user.id})}}" class="button red" id="yes">Oui</a>
+                <form action="{{ url('app_user_delete', { id: user.id }) }}" method="post">
+                    <input type="hidden" name="token" value="{{ csrf_token('delete-user') }}"/>
+                    <button type="submit" class="button red" id="yes">Oui</button>
+                </form>
                 <a class="button" id="no">Non</a>
             </div>
         </article>
