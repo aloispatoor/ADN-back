@@ -70,17 +70,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $pronouns;
 
-    #[ORM\ManyToMany(targetEntity: Gender::class, inversedBy: 'users')]
-    #[ORM\JoinTable(name:"gender_user")]
-    #[ORM\JoinColumn(name:"user_id", referencedColumnName:"id")]
-    #[ORM\InverseJoinColumn(name:"gender_id", referencedColumnName:"id")]
-    private $genders;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $gender;
 
     public function __construct()
     {
         $this->articles = new ArrayCollection();
         $this->comments = new ArrayCollection();
-        $this->genders = new ArrayCollection();
     }
 
     public function __toString()
@@ -294,29 +290,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     // ---------COLLECTIONS
 
     /**
-     * @return Collection<int, Gender>
-     */
-    public function getGenders(): Collection
-    {
-        return $this->genders;
-    }
-
-    public function addGender(Gender $gender)
-    {
-        $gender->addUser($this); // synchronously updating inverse side
-        $this->genders[] = $gender;
-    }
-
-    public function removeGender(Gender $gender): self
-    {
-        if ($this->genders->removeElement($gender)){
-            $gender->removeUser($this);
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Article>
      */
     public function getArticles(): Collection
@@ -372,6 +345,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
                 $comment->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getGender(): ?string
+    {
+        return $this->gender;
+    }
+
+    public function setGender(?string $gender): self
+    {
+        $this->gender = $gender;
 
         return $this;
     }

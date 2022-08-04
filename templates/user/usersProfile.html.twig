@@ -25,12 +25,12 @@
                 <p><span class="bold">Prénom :</span> {{ user.name }}</p>
                 <p><span class="bold">Ville :</span> {{ user.city }}</p>
                 <p><span class="bold">Genre : </span>
-                {% for gender in genders %}
-                    {{ gender.label }}</p>
-                    {% if gender.id is null %}
-                        <p><span class="bold">Genre : --</span></p>
-                    {% endif %}
-                {% endfor %}
+                {% if user.gender in null %}
+                    <p><span class="bold">Votre genre : --</span></p>
+                {% else %}
+                    <p><span class="bold">Votre genre :
+                    </span> {{ user.gender }}</p>
+                {% endif %}
                 <p><span class="bold">Pronoms :</span> {{ user.pronouns }}</p>
             </article>
         </div>

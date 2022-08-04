@@ -47,12 +47,12 @@
                     <p><span class="bold">Votre ville :</span> {{ user.city }}</p>
                 {% endif %}
 
-                    <p><span class="bold">Votre genre :
-                {% for gender in genders %}
-                    </span> {{ gender.label }}</p>
-                {% else %}
+                {% if user.gender in null %}
                     <p><span class="bold">Votre genre : --</span></p>
-                {% endfor %}
+                {% else %}
+                    <p><span class="bold">Votre genre :
+                    </span> {{ user.gender }}</p>
+                {% endif %}
 
                 {% if user.pronouns is null %}
                     <p><span class="bold">Vos pronoms : --</span></p>
@@ -74,7 +74,7 @@
                         <a href="{{path('app_article_edit', {id: article.id})}}" class="button">Modifier</a>
                         <form action="{{ url('app_article_delete', { id: article.id }) }}" method="post">
                             <input type="hidden" name="token" value="{{ csrf_token('delete-article') }}"/>
-                            <button type="submit">Supprimer</button>
+                            <button type="submit" class="button red">Supprimer</button>
                         <from>
                     </div>
                 </div>

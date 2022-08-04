@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\ArticleRepository;
-use App\Repository\GenderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,36 +16,27 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class UserController extends AbstractController
 {
     #[Route('/usersProfile/{id<\d+>}', name: 'app_user_usersprofile', methods: ['GET'])]
-    public function usersProfile(ArticleRepository $articleRepository, GenderRepository $genderRepository, User $user): Response
+    public function usersProfile(ArticleRepository $articleRepository, User $user): Response
     {
         $articles = $articleRepository->findBy(['author' => $user], ['createdAt' => 'DESC']);
-        $genders = $genderRepository->findBy(['users' => $user], ['id' => 'ASC']);
         return $this->render('user/usersProfile.html.twig', [
             'articles' => $articles,
             'user' => $user,
             'id' => $user->getId(),
-            'genders' => $genders
         ]);
     }
 
     #[Route('/profile', name: 'app_user_profile', methods: ['GET'])]
     #[IsGranted('ROLE_USER', message: 'Vous devez être connecté en tant qu\'utilisateu-rice pour accéder à cette page')]
-    public function profile(ArticleRepository $articleRepository, GenderRepository $genderRepository): Response
+    public function profile(ArticleRepository $articleRepository): Response
     {
         $user = $this->getUser();
 
         $articles = $articleRepository->findBy(['author' => $user], ['createdAt' => 'DESC']);
-        $genders = $genderRepository->findOneBy(['users' => $user], ['id' => 'ASC']);
-
-        if(!$genders)
-        {
-        throw $this->createNotFoundException("The genders has not been found or you are not allowed to access it.");
-        }
 
         return $this->render('user/profile.html.twig', [
             'articles' => $articles,
             'user' => $user,
-            'genders' => $genders
         ]);  
     }
 
