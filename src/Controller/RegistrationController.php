@@ -52,7 +52,7 @@ class RegistrationController extends AbstractController
             $token = $jwt->generate($header, $payload, $this->getParameter('app.jwtsecret'));
 
             //Sending Mail
-            $mail->send(
+            $mail->sendEmail(
                 'no-reply@mailhog.local',
                 $user->getEmail(),
                 'Activation de votre compte sur le site ADN',
@@ -118,7 +118,7 @@ class RegistrationController extends AbstractController
         $token = $jwt->generate($header, $payload, $this->getParameter('app.jwtsecret'));
 
         //Sending Mail
-        $mail->send(
+        $mail->sendEmail(
             'no-reply@adn.org',
             $user->getEmail(),
             'Activation de votre compte sur le site ADN - Au-delà des Normes',

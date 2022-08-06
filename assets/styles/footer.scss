@@ -50,5 +50,14 @@ footer{
             }
         }
     }
+
+    .allRightsReserved{
+        @include flex;
+        p{
+            a{
+                color: $yellow;
+            }
+        }
+    }
     
 }

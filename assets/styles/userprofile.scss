@@ -39,6 +39,9 @@
         .button-container{
             @include flex ($just: flex-start);
             gap: 2%;
+            form{
+                @include flex;
+            }
         }
     }
     form{

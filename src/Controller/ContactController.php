@@ -2,9 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Message;
 use App\Form\MessageType;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\SendMailService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,17 +12,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ContactController extends AbstractController
 {
     #[Route('/contact', name: 'app_contact_index')]
-    public function index(Request $request, Message $contact = null, EntityManagerInterface $em): Response
+    public function index(Request $request, SendMailService $mailer): Response
     {
-        $contact = new Message;
-         
       
-        $form = $this->createForm(MessageType::class, $contact);
+        $form = $this->createForm(MessageType::class);
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
-            $em->persist($contact);
-            $em->flush();
+            $contactFormData = $form->getData();
+            $subject = 'Demande de contact sur votre site de ' . $contactFormData['email'];
+            $content = $contactFormData['firstname'] . $contactFormData['lastname'] . ' vous a envoyé le message suivant: ' . $contactFormData['message'];
+            $mailer->receiveEmail(to: 'siteadmin@mailhog.local',from: $contactFormData['email'],subject: $subject, content: $content);
+
             $this->addFlash('success', 'Votre message a été envoyé');
             return $this->redirectToRoute('app_contact_index');
         }
@@ -32,6 +32,5 @@ class ContactController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-
 }
 

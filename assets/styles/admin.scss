@@ -11,6 +11,10 @@
         }
         a{
             color: white;
+            transition: all .3s ease-out;
+        }
+        a:hover{
+            color: $yellow;
         }
     }
     section{
@@ -23,6 +27,15 @@
         }
         td{
             padding: 1em;
+            a, button{
+                padding: 0.2em;
+                margin-left: 1rem;
+                transition: all .3s ease-out;
+            }
+            button:hover{
+                color: red;
+                border-color: red;
+            }
         }
     }
 }
