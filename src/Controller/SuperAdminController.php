@@ -103,4 +103,16 @@ class SuperAdminController extends AbstractController
         }
         return $this->redirectToRoute('app_super_admin_comments');
     }
+
+    #[Route('/superadminReports', name: 'app_super_admin_reports')]
+    #[IsGranted('ROLE_SUPERADMIN', message: 'Vous devez être administrateur-rice pour accéder à cette page')]
+    public function reports(CommentRepository $commentRepository): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_SUPERADMIN');
+        $comments = $commentRepository->findAll();
+
+        return $this->render('super_admin/reports.html.twig', [
+            'comments' => $comments,
+        ]);
+    }
 }

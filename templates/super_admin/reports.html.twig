@@ -1,0 +1,41 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+<main id="superAdmin">
+    {{ include('super_admin/sidebar.html.twig')}}
+    <section id="adminArticles">
+        <h1>Votre espace Admin</h1>
+        <h2>Signalements</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Contenu</td>
+                    <td>Auteur-rice</td>
+                    <td>Actions</td>
+                </tr>
+            </thead>
+            <tbody>
+            {% for comment in comments %}
+                {% if comment.isReported == true %}
+                    <tr>
+                        <td>{{ comment.content }}</td>
+                        <td>{{ comment.author.username }}</td>
+                        <td>
+                            <form action="{{ url('app_super_admin_comment_delete', { id: comment.id }) }}" method="post">
+                                <input type="hidden" name="token" value="{{ csrf_token('delete-comment') }}"/>
+                                <button type="submit">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+                    <tr>
+                        <td colspan="2">Pas de commentaire signalé</td>
+                    </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+{% endblock %}

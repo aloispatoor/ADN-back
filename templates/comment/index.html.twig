@@ -32,6 +32,8 @@
                     <input type="hidden" name="token" value="{{ csrf_token('delete-comment') }}"/>
                     <button type="submit" class="button red">Supprimer</button>
                 </form>
+                {% else %}
+                    <a href="{{ path('app_comment_report')}}">Signaler un abus</a>
                 {% endif %}
             </div>
         </div>

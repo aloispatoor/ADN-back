@@ -21,7 +21,7 @@ class ContactController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $contactFormData = $form->getData();
             $subject = 'Demande de contact sur votre site de ' . $contactFormData['email'];
-            $content = $contactFormData['firstname'] . $contactFormData['lastname'] . ' vous a envoyé le message suivant: ' . $contactFormData['message'];
+            $content = $contactFormData['firstname'] . "" . $contactFormData['lastname'] . ' vous a envoyé le message suivant: ' . $contactFormData['message'];
             $mailer->receiveEmail(to: 'siteadmin@mailhog.local',from: $contactFormData['email'],subject: $subject, content: $content);
 
             $this->addFlash('success', 'Votre message a été envoyé');

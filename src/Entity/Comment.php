@@ -26,6 +26,9 @@ class Comment
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
+    #[ORM\Column(type: 'boolean')]
+    private $is_reported = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -83,6 +86,18 @@ class Comment
     public function defaultCreatedAt(): self
     {
         $this->createdAt = new \DateTime();
+
+        return $this;
+    }
+
+    public function isIsReported(): ?bool
+    {
+        return $this->is_reported;
+    }
+
+    public function setIsReported(bool $is_reported): self
+    {
+        $this->is_reported = $is_reported;
 
         return $this;
     }
