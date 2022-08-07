@@ -67,20 +67,11 @@ class CommentController extends AbstractController
     }
 
     #[Route('/report', name : 'app_comment_report')]
-    public function report(Comment $comment, SendMailService $mailer): Response
+    public function report(Comment $comment): Response
     {
-        $thisComment = $comment->getContent();
-        $author = $comment->getAuthor();
-
-        $subject = "Commentaire signalé";
-        $content = "<p>Un-e utilisateur-rice a signalé le commentaire suivant : </p>
-                    <p>" . $thisComment . "</p>
-                    <p>publié par" . $author . "</p>
-                    <p>Pour le modérer, rendez-vous dans la section /superadmin du site, section Signalements</p>";
         $comment->setIsReported(true);
-        $mailer->receiveEmail(to: 'siteadmin@mailhog.local',from: 'no-reply@adn.org',subject: $subject, content: $content);
 
-        $this->addFlash('signalComment', 'Un email a été envoyé à l\'administrateur-rice pour régler le problème. Merci de votre attention');
+        $this->addFlash('reportComment', 'Un signalement a été envoyé à l\'administrateur-rice pour régler le problème. Merci de votre attention');
         return $this->redirectToRoute('app_article_single');
     }
 }
