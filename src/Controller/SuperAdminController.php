@@ -138,4 +138,20 @@ class SuperAdminController extends AbstractController
             'comments' => $comments,
         ]);
     }
+
+    #[Route('/superadminCommentSpare/{id<\d+>}', name: 'app_super_admin_comment_spare')]
+    #[IsGranted('ROLE_SUPERADMIN', message: 'Vous devez être administrateur-rice pour accéder à cette page')]
+    public function spareComment(Comment $comment, EntityManagerInterface $em, Request $request): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_SUPERADMIN');
+        $submittedToken = $request->request->get('token');
+        if ($comment && $this->isCsrfTokenValid('spare-comment', $submittedToken)) {
+            $comment->setIsReported(false);
+            $em->flush();
+            $this->addFlash('spareComment', 'Le commentaire a été laissé');
+
+            return $this->redirectToRoute('app_super_admin_reports');
+        }
+        return $this->redirectToRoute('app_super_admin_reports');
+    }
 }

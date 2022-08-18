@@ -25,15 +25,20 @@
                         <td>
                             <form action="{{ url('app_super_admin_comment_delete', { id: comment.id }) }}" method="post">
                                 <input type="hidden" name="token" value="{{ csrf_token('delete-comment') }}"/>
-                                <button type="submit">Supprimer</button>
+                                <button type="submit" class="btn">Supprimer</button>
+                            </form>
+                            <form action="{{ url('app_super_admin_comment_spare', { id: comment.id }) }}" method="post">
+                                <input type="hidden" name="token" value="{{ csrf_token('spare-comment') }}"/>
+                                <button type="submit" class="btn">Laisser</button>
                             </form>
                         </td>
                     </tr>
                 {% endif %}
-            {% endfor %}
+            {% else %}
                     <tr>
                         <td colspan="2">Pas de commentaire signalé</td>
                     </tr>
+            {% endfor %}
             </tbody>
         </table>
     </section>

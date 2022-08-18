@@ -66,12 +66,22 @@ class CommentController extends AbstractController
         ]);
     }
 
-    #[Route('/report', name : 'app_comment_report')]
-    public function report(Comment $comment): Response
+    #[Route('/report/{id<\d+>}', name : 'app_comment_report')]
+    public function report(Comment $comment, EntityManagerInterface $em, Request $request): Response
     {
-        $comment->setIsReported(true);
+        $article = $comment->getArticle();
+        $submittedToken = $request->request->get('token');
 
-        $this->addFlash('reportComment', 'Un signalement a été envoyé à l\'administrateur-rice pour régler le problème. Merci de votre attention');
-        return $this->redirectToRoute('app_article_single');
+        if($this->isCsrfTokenValid('report-comment', $submittedToken)){
+            $comment->setIsReported(true);
+            $em->persist($comment);
+            $em->flush();
+            $this->addFlash('reportComment', 'Un signalement a été envoyé à l\'administrateur-rice pour régler le problème. Merci de votre attention');
+        }
+
+        
+        return $this->redirectToRoute('app_article_single', [
+            'id' => $article->getId()
+        ]);
     }
 }

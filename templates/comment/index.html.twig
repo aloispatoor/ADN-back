@@ -33,7 +33,11 @@
                     <button type="submit" class="button red">Supprimer</button>
                 </form>
                 {% else %}
-                    <small><a href="{{ path('app_comment_report')}}">Signaler un abus</a></small>
+                <form action="{{ url('app_comment_report', { id: comment.id }) }}" method="post">
+                    <input type="hidden" name="token" value="{{ csrf_token('report-comment') }}"/>
+                    <button type="submit" class="btn btn-sm">Signaler</button>
+                </form>
+                {# <small><a href="{{ path('app_comment_report', { id:comment.id })}}">Signaler un abus</a></small> #}
                 {% endif %}
             </div>
         </div>

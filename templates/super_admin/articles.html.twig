@@ -24,7 +24,7 @@
                         <a href="">Modifier</a>
                         <form action="{{ url('app_super_admin_article_delete', { id: article.id }) }}" method="post">
                             <input type="hidden" name="token" value="{{ csrf_token('delete-article') }}"/>
-                            <button type="submit">Supprimer</button>
+                            <button type="submit" class="btn">Supprimer</button>
                         </form>
                     </td>
                 </tr>
