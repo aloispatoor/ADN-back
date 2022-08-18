@@ -13,29 +13,25 @@
                 <tr>
                     <td>Email</td>
                     <td>Pseudonyme</td>
-                    <td>Actions</td>
+                    <td>Rôle</td>
                 </tr>
             </thead>
             <tbody>
-            {% for user in users %}
                 <tr>
                     <td>{{ user.email }}</td>
                     <td>{{ user.username }}</td>
                     <td>
-                        <form action="{{ url('app_super_admin_user_delete', { id: user.id }) }}" method="post">
-                            <input type="hidden" name="token" value="{{ csrf_token('delete-user') }}"/>
-                            <button type="submit" class="btn">Supprimer</button>
-                        </form>
-                        <a href="{{ path('app_super_admin_user_edit', {id: user.id})}}">Modifier le rôle</a>
+                        {{ form_start(form) }}
+                            {{ form_row(form.roles, {
+                                'attr': {'class': 'form-select'}
+                                })
+                            }}
+                        <button type="submit" class="btn">Modifier</button>
+                        {{ form_end(form) }}
                     </td>
                 </tr>
-            {% else %}
-                <tr>
-                    <td colspan="3">Pas d'utilisateur-rice trouvé-e</td>
-                </tr>
-            {% endfor %}
             </tbody>
-        </table>
     </section>
 </main>
+
 {% endblock %}

@@ -20,7 +20,7 @@
                 <tr>
                     <td>{{ article.title }}</td>
                     <td>
-                        <a href="">Voir</a>
+                        <a href="{{ path('app_article_single', {id: article.id})}}">Voir</a>
                         <a href="">Modifier</a>
                         <form action="{{ url('app_super_admin_article_delete', { id: article.id }) }}" method="post">
                             <input type="hidden" name="token" value="{{ csrf_token('delete-article') }}"/>

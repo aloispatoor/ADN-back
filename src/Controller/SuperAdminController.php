@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\RoleType;
 use App\Entity\Article;
 use App\Entity\Comment;
+use Doctrine\ORM\EntityManager;
 use App\Repository\UserRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
@@ -38,6 +40,27 @@ class SuperAdminController extends AbstractController
 
         return $this->render('super_admin/users.html.twig', [
             'users' => $users,
+        ]);
+    }
+
+    #[Route('/superadminUserEdit/{id<\d+>}', name: 'app_super_admin_user_edit')]
+    #[IsGranted('ROLE_SUPERADMIN', message: 'Vous devez être administrateur-rice pour accéder à cette page')]
+    public function editUsers(User $user, Request $request, EntityManagerInterface $em): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_SUPERADMIN');
+        $form = $this->createform(RoleType::class, $user);
+
+        $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em->flush();
+                $this->addFlash('editRole', 'Rôle modifié avec succès !');
+
+                return $this->redirectToRoute('app_super_admin_users');
+            }
+
+        return $this->render('super_admin/edituser.html.twig', [
+            'form' => $form->createView(),
+            'user' => $user,
         ]);
     }
 
