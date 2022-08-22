@@ -28,7 +28,7 @@ class SendMailService
         $this->mailer->send($email);
     }
 
-    public function receiveEmail($to = 'aloisp774@gmail.com', string $from, string $subject, string $content = '', string $text = ''): void
+    public function receiveEmail($to = 'palois89@vivaldi.net', string $from, string $subject, string $content = '', string $text = ''): void
     {
         $email = (new Email())
             ->from($from)
