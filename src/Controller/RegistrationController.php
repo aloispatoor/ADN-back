@@ -9,7 +9,6 @@ use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 use App\Service\JWTService;
 use App\Service\SendMailService;
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
