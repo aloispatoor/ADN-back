@@ -52,7 +52,7 @@ class RegistrationController extends AbstractController
 
             //Sending Mail
             $mail->sendEmail(
-                'no-reply@mailhog.local',
+                'apatoor@xyfl3645.odns.fr',
                 $user->getEmail(),
                 'Activation de votre compte sur le site ADN',
                 'register',
@@ -118,7 +118,7 @@ class RegistrationController extends AbstractController
 
         //Sending Mail
         $mail->sendEmail(
-            'no-reply@adn.org',
+            'apatoor@xyfl3645.odns.fr',
             $user->getEmail(),
             'Activation de votre compte sur le site ADN - Au-delà des Normes',
             'register',

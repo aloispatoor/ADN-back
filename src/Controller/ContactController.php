@@ -22,7 +22,7 @@ class ContactController extends AbstractController
             $contactFormData = $form->getData();
             $subject = 'Demande de contact sur votre site de ' . $contactFormData['email'];
             $content = $contactFormData['firstname'] . "" . $contactFormData['lastname'] . ' vous a envoyé le message suivant: ' . $contactFormData['message'];
-            $mailer->receiveEmail(to: 'admin@adn.com',from: $contactFormData['email'],subject: $subject, content: $content);
+            $mailer->receiveEmail(to: 'apatoor@xyfl3645.odns.fr',from: $contactFormData['email'],subject: $subject, content: $content);
 
             $this->addFlash('success', 'Votre message a été envoyé');
             return $this->redirectToRoute('app_contact_index');
