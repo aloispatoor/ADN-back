@@ -15,4 +15,3 @@ import './bootstrap';
 import './carousel/carousel.js';
 import './special-anim/special-anim.js';
 import './MenuBurger/menuburger.js';
-import './popup/popup.js';
