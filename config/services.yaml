@@ -6,6 +6,8 @@
 parameters:
     app.path.avatars: /uploads/images/uploads
     app.jwtsecret: '%env(JWT_SECRET)%'
+    app.apikey: '%env(API_KEY)%'
+    app.serverprefix : '%env(SERVER_PREFIX)%'
 
 services:
     App\EventSubscriber\CalendarSubscriber:
