@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d888a966-c00a-46b4-90c1-8f1d97bae0c7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/MailchimpService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/MailchimpService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/MailchimpService.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -232,7 +233,7 @@
       <workItem from="1670252369599" duration="8000" />
       <workItem from="1670586902315" duration="10000" />
       <workItem from="1675591278809" duration="2969000" />
-      <workItem from="1675677505431" duration="2001000" />
+      <workItem from="1675677505431" duration="4959000" />
     </task>
     <servers />
   </component>

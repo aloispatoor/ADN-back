@@ -8,6 +8,7 @@ parameters:
     app.jwtsecret: '%env(JWT_SECRET)%'
     app.apikey: '%env(API_KEY)%'
     app.serverprefix : '%env(SERVER_PREFIX)%'
+    app.mailchimpurl : 'https://server.api.mailchimp.com/3.0'
 
 services:
     App\EventSubscriber\CalendarSubscriber:
