@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d888a966-c00a-46b4-90c1-8f1d97bae0c7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/ADN_back.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ADN_back.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/_header.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/_header.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/MailchimpService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/MailchimpService.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +27,9 @@
         <option value="$PROJECT_DIR$/src/Service/SendMailService.php" />
       </list>
     </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -210,6 +211,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -229,7 +231,8 @@
       <workItem from="1669362172665" duration="921000" />
       <workItem from="1670252369599" duration="8000" />
       <workItem from="1670586902315" duration="10000" />
-      <workItem from="1675591278809" duration="2018000" />
+      <workItem from="1675591278809" duration="2969000" />
+      <workItem from="1675677505431" duration="2001000" />
     </task>
     <servers />
   </component>
