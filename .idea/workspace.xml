@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d888a966-c00a-46b4-90c1-8f1d97bae0c7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/templates/_footer.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/_footer.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -201,6 +201,8 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;last_opened_file_path&quot;: &quot;F:/DOCUMENTS/Projets Développement/ADN_back&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -227,6 +229,8 @@
       <workItem from="1670252369599" duration="8000" />
       <workItem from="1670586902315" duration="10000" />
       <workItem from="1675591278809" duration="2018000" />
+      <workItem from="1675847841297" duration="505000" />
+      <workItem from="1675848376550" duration="656000" />
     </task>
     <servers />
   </component>
