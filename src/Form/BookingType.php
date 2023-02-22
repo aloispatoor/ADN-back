@@ -17,17 +17,17 @@ class BookingType extends AbstractType
             ->add('title')
             ->add('start', DateType::class, [
                 'placeholder' => [
-                  'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
+                  'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour', 'hour' => 'Heure', 'minute' => 'Minute',
                 ],
-                  'format' => 'dd MM yyyy',
-                  'years' => range(2022,2052)
+                  'format' => 'dd MM yyyy H:i:s',
+                  'years' => range(2023,2055)
                 ])
             ->add('end', DateType::class, [
                 'placeholder' => [
-                  'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
+                    'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour', 'hour' => 'Heure', 'minute' => 'Minute',
                 ],
-                  'format' => 'dd MM yyyy',
-                  'years' => range(2022,2052)
+                  'format' => 'dd MM yyyy H:i:s',
+                  'years' => range(2023,2055)
                 ])
             ->add('description')
             ->add('all_day')
